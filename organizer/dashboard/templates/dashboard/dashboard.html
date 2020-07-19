@@ -1,0 +1,286 @@
+{% extends "app_base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block app_content %}
+<div class="py-10">
+    <header>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl font-bold leading-tight text-gray-900">
+          Dashboard
+        </h1>
+      </div>
+    </header>
+    <main>
+      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<!-- Materials Card -->
+          <div class="mt-16">
+              <div class="bg-white shadow overflow-hidden sm:rounded-md">
+  <ul>
+    <li>
+      <div class="bg-white px-4 py-5 sm:px-6">
+              <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+                <div class="ml-4 mt-2">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    E-Learning Materials
+                  </h3>
+                </div>
+                <div class="ml-4 mt-2 flex-shrink-0">
+                  <span class="inline-flex rounded-md shadow-sm">
+                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                      Add New Resource
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+    </li>
+    <li class="border-t border-gray-200">
+      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="min-w-0 flex-1 flex items-center">
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <div class="text-sm leading-5 font-medium text-indigo-600 truncate">Design For Developers</div>
+                <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <span class="truncate">Online Video Course</span>
+                </div>
+              </div>
+              <div class="hidden md:block">
+                <div>
+                  <div class="text-sm leading-5 text-gray-900">
+                    Started on
+                    <time datetime="2020-01-07">January 7, 2020</time>
+                  </div>
+                  <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Completed
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </li>
+      <li class="border-t border-gray-200">
+      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="min-w-0 flex-1 flex items-center">
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <div class="text-sm leading-5 font-medium text-indigo-600 truncate">100 Landing Page Tips</div>
+                <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>                  <span class="truncate">Newsletter</span>
+                </div>
+              </div>
+              <div class="hidden md:block">
+                <div>
+                  <div class="text-sm leading-5 text-gray-900">
+                    Started on
+                    <time datetime="2020-01-07">January 7, 2020</time>
+                  </div>
+                  <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                      <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-indigo-400"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    In progress
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li class="border-t border-gray-200">
+      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="min-w-0 flex-1 flex items-center">
+
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <div class="text-sm leading-5 font-medium text-indigo-600 truncate">Start Freelancing Now</div>
+                <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                  <span class="truncate">eBook</span>
+                </div>
+              </div>
+              <div class="hidden md:block">
+                <div>
+                  <div class="text-sm leading-5 text-gray-900">
+                    Started on
+                    <time datetime="2020-01-07">January 7, 2020</time>
+                  </div>
+                  <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                      <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Not Started/On Hold
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+        </div>
+      </div>
+        <!-- Tasks Area -->
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div class="mt-16">
+              <div class="bg-white shadow overflow-hidden sm:rounded-md">
+  <ul>
+    <li>
+      <div class="bg-white px-4 py-5 sm:px-6">
+              <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+                <div class="ml-4 mt-2">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Tasks
+                  </h3>
+                </div>
+                <div class="ml-4 mt-2 flex-shrink-0">
+                  <span class="inline-flex rounded-md shadow-sm">
+                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                      Add New Task
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+    </li>
+    <li class="border-t border-gray-200">
+      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="min-w-0 flex-1 flex items-center">
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <div class="text-sm leading-5 font-medium text-indigo-600 truncate">Finish Design For Developers Chapter 5</div>
+                <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                  <span class="truncate">Design For Developers</span>
+                </div>
+              </div>
+              <div class="">
+                <div class="float-right">
+                  <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                    <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    Completed
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+</div>
+
+
+        </div>
+      </div>
+
+        <!-- Goals Area -->
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div class="mt-16">
+              <div class="bg-white shadow overflow-hidden sm:rounded-md">
+  <ul>
+    <li>
+      <div class="bg-white px-4 py-5 sm:px-6">
+              <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+                <div class="ml-4 mt-2">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Goals
+                  </h3>
+                </div>
+                <div class="ml-4 mt-2 flex-shrink-0">
+                  <span class="inline-flex rounded-md shadow-sm">
+                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                      Add New Goal
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+    </li>
+    <li class="border-t border-gray-200">
+      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="min-w-0 flex-1 flex items-center">
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <div class="text-sm leading-5 font-medium text-indigo-600">Learn Vue.JS in 2020</div>
+
+              </div>
+              <div class="">
+                <div class="float-right">
+                  <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                      <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"  fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                    Yey! Goal Achieved
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+      <li class="border-t border-gray-200">
+      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+        <div class="flex items-center px-4 py-4 sm:px-6">
+          <div class="min-w-0 flex-1 flex items-center">
+            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
+              <div>
+                <div class="text-sm leading-5 font-medium text-indigo-600">Learn Design</div>
+
+              </div>
+              <div class="">
+                <div class="float-right">
+                  <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
+                      <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                    Keep Going!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
+
+  </ul>
+</div>
+
+
+        </div>
+      </div>
+
+    </main>
+</div>
+{% endblock %}
