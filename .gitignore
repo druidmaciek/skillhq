@@ -141,5 +141,4 @@ cython_debug/
 static_src/
 .idea/
 .DS_STORE/
-marketing_site/
 migrations/
