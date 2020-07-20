@@ -7,11 +7,12 @@ Dashboard
 
 
 {% block app_content %}
-    <div class="hidden">
-      {% include "dashboard/slideover.html" %}
-    </div>
 
-    <main>
+
+
+
+    <main x-data="{ showSlideover: false }">
+      {% include "dashboard/slideover.html" %}
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 <!-- Materials Card -->
           <div class="mt-16">
@@ -27,7 +28,7 @@ Dashboard
                 </div>
                 <div class="ml-4 mt-2 flex-shrink-0">
                   <span class="inline-flex rounded-md shadow-sm">
-                    <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
+                    <button @click="showSlideover = !showSlideover" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
                       Add New Resource
                     </button>
                   </span>
@@ -117,7 +118,7 @@ Dashboard
           <div class="min-w-0 flex-1 flex items-center">
             <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
               <div>
-                <div class="text-sm leading-5 font-medium text-pink-600 truncate">100 Landing Page Tips</div>
+                <div class="text-sm leading-5 font-medium text-pink-600 truncate">Marketing for Developers</div>
                 <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
                     <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>                  <span class="truncate">Newsletter</span>
                 </div>
@@ -151,7 +152,7 @@ Dashboard
 
             <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
               <div>
-                <div class="text-sm leading-5 font-medium text-pink-600 truncate">Start Freelancing Now</div>
+                <div class="text-sm leading-5 font-medium text-pink-600 truncate"> Fluent Python</div>
                 <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
                     <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                   <span class="truncate">eBook</span>
