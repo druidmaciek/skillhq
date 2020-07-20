@@ -33,33 +33,41 @@
             </div>
           </header>
           <div class="relative flex-1 py-6 px-4 sm:px-6">
-
+          <form id="add-resource-form" method="POST">
+                {% csrf_token %}
             <div>
               <label for="name" class="block text-sm font-medium leading-5 text-gray-700">Resource Name</label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input id="name" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design Course by Joe Smith">
+                <input required name="title" id="name" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design Course by Joe Smith">
               </div>
             </div>
 
             <div class="mt-4">
               <label for="subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input id="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+                <input required id="subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <label for="url" class="block text-sm font-medium leading-5 text-gray-700">URL <span class="text-gray-500">(if applies)</span></label>
+              <div class="mt-1 relative rounded-md shadow-sm">
+                <input name="url" id="url" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g https://www.udemy.com/somecourse">
               </div>
             </div>
 
 
               <div class="mt-4">
                   <label for="resource_type" class="block text-sm leading-5 font-medium text-gray-700">Type</label>
-                  <select id="resource_type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                    <option>Video Course</option>
-                    <option>Text Course</option>
-                    <option>Tutorial Article</option>
-                      <option>YouTube Video</option>
-                      <option>eBook</option>
-                      <option>Other</option>
+                  <select required name="resource_type" id="resource_type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                    <option selected disabled>Resource Type...</option>
+                    {% for tup in form.resource_type.field.choices %}
+                    <option value="{{ tup.0 }}"> {{ tup.1 }}</option>
+                    {% endfor %}
                   </select>
                 </div>
+            </form>
+
 
                 <div class="mt-16">
                     <p class="block text-xl leading-5 font-bold text-gray-700">Resource ToDos</p>
@@ -89,7 +97,7 @@
                     </div>
 
                     <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
-                      <p class="truncate mr-8">Watch Chapter 4 videos & opening skulls of my sworn enemies</p>
+                      <p class="truncate mr-8">Watch Chapter 4 Videos</p>
                       <div class="rounded-full p-1 bg-gray-400">
                         <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
                       </div>
@@ -109,7 +117,7 @@
 
                 <div class="mt-32 static">
                   <span class="rounded-md shadow-sm w-full relative bottom-0 inset-0">
-                    <button type="button" class="w-full px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
+                    <button form="add-resource-form" formaction="/addResource/" class="w-full px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
                       Add Resource & Tasks
                     </button>
                   </span>
@@ -124,3 +132,4 @@
     </section>
   </div>
 </div>
+</form>

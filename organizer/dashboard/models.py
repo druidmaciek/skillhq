@@ -4,9 +4,9 @@ from django.db import models
 
 class Resource(models.Model):
     STATUS_CHOICES = (
-        ('completed', 'Completed'),
-        ('in_progress', 'In Progress'),
-        ('paused', "Not Started/On Hold")
+        ('Completed', 'Completed'),
+        ('In Progress', 'In Progress'),
+        ('Not Started/On Hold', "Not Started/On Hold")
     )
     TYPE_CHOICES = (
         ('video_course', "Video Course"),

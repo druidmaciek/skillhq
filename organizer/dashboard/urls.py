@@ -5,4 +5,5 @@ from . import views
 app_name = 'dashboard'
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
+    path('addResource/', views.add_resource, name='add_resource')
 ]
