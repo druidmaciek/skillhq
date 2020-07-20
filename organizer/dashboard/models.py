@@ -22,7 +22,7 @@ class Resource(models.Model):
     resource_type = models.CharField(max_length=100,
                                      choices=TYPE_CHOICES,
                                      default='other')
-    resource_url = models.URLField(max_length=255,
+    url = models.URLField(max_length=255,
                                    null=True,
                                    default=None)
     user = models.ForeignKey(User,
