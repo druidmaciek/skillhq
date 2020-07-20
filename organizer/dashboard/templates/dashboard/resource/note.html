@@ -1,0 +1,31 @@
+{% extends "app_base.html" %}
+
+{% block title %}
+{{ resource.title }}
+{% endblock %}
+
+{% load dashboard_tags %}
+
+{% block app_content %}
+
+
+
+<div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
+  <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+        {{ resource.title|title }}
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+        {{ resource.resource_type }}
+    </p>
+  </div>
+  <div class="px-4 py-5 sm:px-6">
+    <div class="prose">
+        {{ note.content|markdown }}
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

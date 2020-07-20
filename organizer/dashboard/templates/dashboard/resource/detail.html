@@ -7,4 +7,103 @@
 
 {% block app_content %}
 
+<div class="hidden">
+      {% include "dashboard/resource/notepad.html" %}
+</div>
+
+
+<div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
+  <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+    <h3 class="text-lg leading-6 font-medium text-gray-900">
+        {{ resource.title|title }}
+    </h3>
+    <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+        {{ resource.resource_type }}
+    </p>
+  </div>
+  <div class="px-4 py-5 sm:px-6">
+    <dl class="grid grid-cols-1 col-gap-4 row-gap-8 sm:grid-cols-2">
+      <div class="sm:col-span-1">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+          Subject
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900">
+            {{ resource.subject }}
+        </dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+          Created at
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900">
+            {{ resource.created }}
+        </dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+          Tasks
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900">
+          5/7
+        </dd>
+      </div>
+      <div class="sm:col-span-1">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+          Last Updated
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900">
+            {{ resource.updated }}
+        </dd>
+      </div>
+      <div class="sm:col-span-2">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+          About
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900">
+          {{ resource.description|linebreaks }}
+        </dd>
+      </div>
+      <div class="sm:col-span-2">
+        <dt class="text-sm leading-5 font-medium text-gray-500">
+          Notes
+        </dt>
+        <dd class="mt-1 text-sm leading-5 text-gray-900">
+          <ul class="border border-gray-200 rounded-md">
+            {% for note in resource.notes.all %}
+            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
+              <div class="w-0 flex-1 flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <span class="ml-2 flex-1 w-0 truncate">
+                  {{ note.title }}
+                </span>
+              </div>
+              <div class="ml-4 flex-shrink-0">
+                <a href="{% url 'dashboard:note_detail' note.id  %}" class="font-medium text-pink-600 hover:text-pink-500 transition duration-150 ease-in-out">
+                  Edit
+                </a>
+              </div>
+            </li>
+            {% endfor %}
+            <li class="border-t border-gray-200 pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
+              <div class="w-0 flex-1 flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <span class="ml-2 flex-1 w-0 truncate">
+                  Rules of Web Design
+                </span>
+              </div>
+              <div class="ml-4 flex-shrink-0">
+                <a href="#" class="font-medium text-pink-600 hover:text-pink-500 transition duration-150 ease-in-out">
+                  Edit
+                </a>
+              </div>
+            </li>
+          </ul>
+        </dd>
+      </div>
+    </dl>
+  </div>
+</div>
+
+
+
 {% endblock %}
