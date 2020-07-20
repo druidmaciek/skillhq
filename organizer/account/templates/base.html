@@ -8,8 +8,7 @@
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
     {% if "skillhq.io" in request.hostname %}
     <!-- Fathom - beautiful, simple website analytics -->
@@ -21,20 +20,9 @@
 </head>
 <body>
 
-<div id="app">
 {% block content %}
 {% endblock %}
-</div>
 
-<script type="text/javascript">
-    var app = new Vue({
-        delimiters: ["[[", "]]"],
-        el: "#app",
-        data:{},
-        methods:{},
-        computed:{},
-    })
-</script>
 
 </body>
 </html>
