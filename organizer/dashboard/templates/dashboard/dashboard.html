@@ -29,7 +29,7 @@ Dashboard
                 </div>
                 <div class="ml-4 mt-2 flex-shrink-0">
                   <span class="inline-flex rounded-md shadow-sm">
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
                       Add New Resource
                     </button>
                   </span>
@@ -39,7 +39,7 @@ Dashboard
     </li>
     {% for r in resources %}
     <li class="border-t border-gray-200">
-      <a href="#" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
+      <a href="{% url 'dashboard:resource_details' request.user.id r.id %}" class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
         <div class="flex items-center px-4 py-4 sm:px-6">
           <div class="min-w-0 flex-1 flex items-center">
             <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
@@ -202,7 +202,7 @@ Dashboard
                 </div>
                 <div class="ml-4 mt-2 flex-shrink-0">
                   <span class="inline-flex rounded-md shadow-sm">
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
                       Add New Task
                     </button>
                   </span>
@@ -260,7 +260,7 @@ Dashboard
                 </div>
                 <div class="ml-4 mt-2 flex-shrink-0">
                   <span class="inline-flex rounded-md shadow-sm">
-                    <button type="button" class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
+                    <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
                       Add New Goal
                     </button>
                   </span>

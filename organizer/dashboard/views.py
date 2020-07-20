@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from .forms import AddResourceForm
@@ -27,3 +27,14 @@ def add_resource(request):
         resource.save()
     print(form.errors)
     return redirect('/')
+
+
+@login_required()
+def resource_detail(request, rid):
+    resource = get_object_or_404(Resource, pk=rid)
+    if request.user.id != resource.user.id:
+        redirect('/')
+    return render(request, 'dashboard/resource/detail.html', {
+        'section': 'detail',
+        'resource': resource
+    })
