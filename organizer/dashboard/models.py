@@ -13,7 +13,7 @@ class Resource(models.Model):
     resource_url = models.URLField(max_length=255,
                                    null=True,
                                    default=None)
-    author = models.ForeignKey(User,
+    user = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='resources')
     created = models.DateTimeField(auto_now_add=True)
