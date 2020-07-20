@@ -41,6 +41,13 @@
               </div>
             </div>
 
+            <div class="mt-4">
+              <label for="subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
+              <div class="mt-1 relative rounded-md shadow-sm">
+                <input id="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+              </div>
+            </div>
+
 
               <div class="mt-4">
                   <label for="resource_type" class="block text-sm leading-5 font-medium text-gray-700">Type</label>
@@ -71,17 +78,39 @@
                     </div>
                   </div>
 
+
                   <div class="mt-8">
-                    <div class="text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
-                      <p>Design Homework</p>
+
+                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
+                      <p class="truncate mr-8">Design Homework</p>
+                      <div class="rounded-full p-1 bg-green-400">
+                        <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+                      </div>
                     </div>
+
+                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
+                      <p class="truncate mr-8">Watch Chapter 4 videos & opening skulls of my sworn enemies</p>
+                      <div class="rounded-full p-1 bg-gray-400">
+                        <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+                      </div>
+                    </div>
+
+                    <!-- Show this by default if there is no tasks -->
+                    <div class="border-dashed border-4 border-gray-400 rounded h-24 mt-8 text-center bg-gray-100">
+                      <p class="mt-8 text-gray-400">No Tasks. Add something.</p>
+                    </div>
+
+
+
+
+
                   </div>
                 </div>
 
                 <div class="mt-32 static">
                   <span class="rounded-md shadow-sm w-full relative bottom-0 inset-0">
                     <button type="button" class="w-full px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
-                      Button text
+                      Add Resource & Tasks
                     </button>
                   </span>
                 </div>
@@ -95,4 +124,3 @@
     </section>
   </div>
 </div>
-
