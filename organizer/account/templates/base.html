@@ -7,6 +7,14 @@
     <title>{% block title %} {% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    {% if "skillhq.io" in request.hostname %}
+    <!-- Fathom - beautiful, simple website analytics -->
+    <script src="https://cdn.usefathom.com/script.js" site="NVXEAPUY" defer></script>
+    <!-- / Fathom -->
+    {% endif %}
+
+
 </head>
 <body>
 

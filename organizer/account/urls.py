@@ -31,4 +31,6 @@ urlpatterns = [
          name='password_reset_complete'),
     # Register
     path('register/', views.register, name='register'),
+    # Edit
+    path('edit/', views.edit, name='edit'),
 ]
