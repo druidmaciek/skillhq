@@ -77,17 +77,17 @@
             </form>
 
 
-                <div class="mt-16">
+                <div x-data="{ items: [] }" x-init="$refs.ok.disabled = true" class="mt-16">
                     <p class="block text-xl leading-5 font-bold text-gray-700">Resource ToDos</p>
                   <div class="mt-2">
                     <label for="task" class="block text-sm font-medium leading-5 text-gray-700">Resource Name</label>
                     <div>
 
                       <div class="mt-1 relative rounded-md shadow-sm inline-flex w-3/5">
-                        <input id="task" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Watch chapter 1 video">
+                        <input x-model="name" @keyup="$refs.ok.disabled = name.length === 0" id="task" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Watch chapter 1 video">
                       </div>
                       <span class="inline-flex rounded-md shadow-sm w-1/5 ml-8">
-                      <button type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
+                      <button @click="items.push(name); name=''; $refs.ok.disabled = true" x-ref="ok" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
                         Add Task
                       </button>
                     </span>
@@ -96,23 +96,40 @@
 
 
                   <div class="mt-8">
+                    <template x-for="item in items" :key="item">
+                      <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
 
-                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
-                      <p class="truncate mr-8">Design Homework</p>
-                      <div class="rounded-full p-1 bg-green-400">
-                        <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
-                      </div>
-                    </div>
+                        <div class="flex">
+                              <button @click="items = items.filter(i => i !== item)" class="rounded-full p-1 bg-gray-400 hover:bg-red-400 active:bg-red-600 text-gray-100 hover:text-red-200 active:text-red-400 cursor-pointer mr-2">
+                                <svg class="h-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                              </button>
+                          <p class="truncate mr-8" x-text="item"></p>
+                        </div>
 
-                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
-                      <p class="truncate mr-8">Watch Chapter 4 Videos</p>
-                      <div class="rounded-full p-1 bg-gray-400">
-                        <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+                        <div x-data="{ clicked: false }"
+                             @click="clicked = !clicked"
+                             :class="{ 'bg-gray-400 hover:bg-green-200': !clicked, 'bg-green-400 hover:bg-gray-200': clicked}" class="rounded-full p-1 cursor-pointer">
+                          <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+                        </div>
                       </div>
-                    </div>
+                    </template>
+
+<!--                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">-->
+<!--                      <p class="truncate mr-8">Design Homework</p>-->
+<!--                      <div class="rounded-full p-1 bg-green-400 hover:bg-gray-200 cursor-pointer">-->
+<!--                        <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>-->
+<!--                      </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">-->
+<!--                      <p class="truncate mr-8">Watch Chapter 4 Videos</p>-->
+<!--                      <div class="rounded-full p-1 bg-gray-400 hover:bg-green-200 cursor-pointer">-->
+<!--                        <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>-->
+<!--                      </div>-->
+<!--                    </div>-->
 
                     <!-- Show this by default if there is no tasks -->
-                    <div class="border-dashed border-4 border-gray-400 rounded h-24 mt-8 text-center bg-gray-100">
+                    <div x-show="items.length == 0" class="border-dashed border-4 border-gray-400 rounded h-24 mt-8 text-center bg-gray-100">
                       <p class="mt-8 text-gray-400">No Tasks. Add something.</p>
                     </div>
 
