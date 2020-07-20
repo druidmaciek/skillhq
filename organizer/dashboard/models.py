@@ -32,6 +32,7 @@ class Resource(models.Model):
     status = models.CharField(max_length=30,
                               choices=STATUS_CHOICES,
                               default='paused')
+    description = models.TextField(max_length=455, null=True)
 
     class Meta:
         ordering = ('-created',)
@@ -44,4 +45,7 @@ class Note(models.Model):
     resource = models.ForeignKey(Resource,
                                  on_delete=models.CASCADE,
                                  related_name='notes')
+    title = models.CharField(max_length=250)
     content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
