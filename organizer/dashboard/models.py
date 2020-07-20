@@ -10,6 +10,9 @@ class Resource(models.Model):
     )
     title = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
+    resource_url = models.URLField(max_length=255,
+                                   null=True,
+                                   default=None)
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='resources')
