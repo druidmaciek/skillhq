@@ -38,7 +38,7 @@
           <div class="ml-3 relative">
             <div>
               <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out" id="user-menu" aria-label="User menu" aria-haspopup="true">
-                <img class="h-8 w-8 rounded-full" src="{% static 'profile.png' %}" alt="">
+                <img class="h-8 w-8 rounded-full object-cover object-center" src="{% if not request.user.profile.photo %}{% static 'profile.png' %}{% else %} {{ request.user.profile.photo.url }}{% endif %}" alt="{{ request.user.username}} profile photo">
               </button>
             </div>
             <!--
