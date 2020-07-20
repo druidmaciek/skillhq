@@ -25,4 +25,5 @@ def add_resource(request):
         resource = form.save(commit=False)
         resource.user = request.user
         resource.save()
+    print(form.errors)
     return redirect('/')

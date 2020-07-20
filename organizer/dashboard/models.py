@@ -9,13 +9,13 @@ class Resource(models.Model):
         ('Not Started/On Hold', "Not Started/On Hold")
     )
     TYPE_CHOICES = (
-        ('video_course', "Video Course"),
-        ('text_course', 'Text Course'),
-        ('text_tutorial', 'Text Tutorial'),
-        ('video_tutorial', 'Video Tutorial'),
-        ('ebook', 'eBook'),
-        ('book', 'Book'),
-        ('other', 'Other'),
+        ('Video Course', "Video Course"),
+        ('Text Course', 'Text Course'),
+        ('Text Tutorial', 'Text Tutorial'),
+        ('Video Tutorial', 'Video Tutorial'),
+        ('eBook', 'eBook'),
+        ('Book', 'Book'),
+        ('Other', 'Other'),
     )
     title = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
@@ -23,8 +23,7 @@ class Resource(models.Model):
                                      choices=TYPE_CHOICES,
                                      default='other')
     url = models.URLField(max_length=255,
-                                   null=True,
-                                   default=None)
+                                   null=True)
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
                              related_name='resources')
