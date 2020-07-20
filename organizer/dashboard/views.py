@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from .forms import AddResourceForm
-from .models import Resource
+from .models import Resource, Note
 
 
 @login_required
@@ -16,7 +16,7 @@ def dashboard(request):
 
 
 @require_POST
-@login_required()
+@login_required
 def add_resource(request):
     # TODO implement in front-end and delete this
     # TEMPORARY, ultimately it should be called by Vue.js axios in front end
@@ -29,7 +29,7 @@ def add_resource(request):
     return redirect('/')
 
 
-@login_required()
+@login_required
 def resource_detail(request, rid):
     resource = get_object_or_404(Resource, pk=rid)
     if request.user.id != resource.user.id:
@@ -37,4 +37,15 @@ def resource_detail(request, rid):
     return render(request, 'dashboard/resource/detail.html', {
         'section': 'detail',
         'resource': resource
+    })
+
+
+@login_required
+def note_detail(request, note_id):
+    note = get_object_or_404(Note, pk=note_id)
+    if request.user.id != note.resource.user.id:
+        redirect('/')
+    return render(request, 'dashboard/resource/note.html', {
+        'section': 'note',
+        'note': note
     })
