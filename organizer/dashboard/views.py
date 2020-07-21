@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -25,8 +26,8 @@ def add_resource(request):
         resource = form.save(commit=False)
         resource.user = request.user
         resource.save()
-    print(form.errors)
-    return redirect('/')
+        return JsonResponse(data={'msg': 'success'}, status=201)
+    return JsonResponse(data={'msg': 'fail'}, status=400)
 
 
 @login_required

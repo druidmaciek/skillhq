@@ -44,30 +44,30 @@
           <form id="add-resource-form" method="POST">
                 {% csrf_token %}
             <div>
-              <label for="name" class="block text-sm font-medium leading-5 text-gray-700">Resource Name</label>
+              <label for="new-res__title" class="block text-sm font-medium leading-5 text-gray-700">Resource Name</label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input required name="title" id="name" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design Course by Joe Smith">
+                <input required name="title" id="new-res__title" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design Course by Joe Smith">
               </div>
             </div>
 
             <div class="mt-4">
-              <label for="subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
+              <label for="new-res__subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input required id="subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+                <input required id="new-res__subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
               </div>
             </div>
 
             <div class="mt-4">
-              <label for="url" class="block text-sm font-medium leading-5 text-gray-700">URL <span class="text-gray-500">(if applies)</span></label>
+              <label for="new-res__url" class="block text-sm font-medium leading-5 text-gray-700">URL <span class="text-gray-500">(if applies)</span></label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input name="url" id="url" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g https://www.udemy.com/somecourse">
+                <input name="url" id="new-res__url" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g https://www.udemy.com/somecourse">
               </div>
             </div>
 
 
               <div class="mt-4">
-                  <label for="resource_type" class="block text-sm leading-5 font-medium text-gray-700">Type</label>
-                  <select required name="resource_type" id="resource_type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                  <label for="new-res__type" class="block text-sm leading-5 font-medium text-gray-700">Type</label>
+                  <select required name="resource_type" id="new-res__type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
                     <option selected disabled>Resource Type...</option>
                     {% for tup in form.resource_type.field.choices %}
                     <option value="{{ tup.0 }}"> {{ tup.1 }}</option>
@@ -81,17 +81,17 @@
                     <p class="block text-xl leading-5 font-bold text-gray-700">Resource ToDos</p>
                   <div class="mt-2">
                     <label for="task" class="block text-sm font-medium leading-5 text-gray-700">Resource Name</label>
-                    <div>
+                    <form>
 
                       <div class="mt-1 relative rounded-md shadow-sm inline-flex w-3/5">
                         <input x-model="name" @keyup="$refs.ok.disabled = name.length === 0" id="task" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Watch chapter 1 video">
                       </div>
                       <span class="inline-flex rounded-md shadow-sm w-1/5 ml-8">
-                      <button @click="items.push(name); name=''; $refs.ok.disabled = true" x-ref="ok" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
+                      <button @click="getTodos();items.push(name); name=''; $refs.ok.disabled = true" x-ref="ok" type="submit" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
                         Add Task
                       </button>
                     </span>
-                    </div>
+                    </form>
                   </div>
 
 
@@ -137,7 +137,7 @@
 
                 <div class="mt-32 static">
                   <span class="rounded-md shadow-sm w-full relative bottom-0 inset-0">
-                    <button form="add-resource-form" formaction="/addResource/" class="w-full px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
+                    <button form="add-resource-form" class="w-full px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
                       Add Resource & Tasks
                     </button>
                   </span>
