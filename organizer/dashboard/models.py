@@ -23,7 +23,7 @@ class Resource(models.Model):
                                      choices=TYPE_CHOICES,
                                      default='other')
     url = models.URLField(max_length=255,
-                                   null=True)
+                          null=True)
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
                              related_name='resources')
@@ -41,6 +41,28 @@ class Resource(models.Model):
         return self.title
 
 
+class Task(models.Model):
+    STATUS_CHOICE = [
+        ("completed", "Completed"),
+        ("todo", 'Todo')
+    ]
+    resource = models.ForeignKey(Resource,
+                                 on_delete=models.CASCADE,
+                                 related_name='tasks')
+    title = models.CharField(max_length=150)
+    status = models.CharField(max_length=10,
+                              choices=STATUS_CHOICE,
+                              default='todo')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.title
+
+
 class Note(models.Model):
     resource = models.ForeignKey(Resource,
                                  on_delete=models.CASCADE,
@@ -49,3 +71,9 @@ class Note(models.Model):
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return self.title
