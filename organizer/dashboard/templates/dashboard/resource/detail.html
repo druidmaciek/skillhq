@@ -4,6 +4,13 @@
 {{ resource.title }}
 {% endblock %}
 
+{% load static %}}
+
+
+{% block js %}
+  <script src="{% static 'js/resource.js' %}"></script>
+{% endblock %}
+
 
 {% block app_content %}
 
@@ -12,14 +19,56 @@
 </div>
 
 
-<div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
+<div x-data="{ deleteConfirm: false }" class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
   <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+
+
+    <div x-show="deleteConfirm" class="bg-white sm:rounded-lg mt-2 mb-8">
+      <div class="">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+          Delete "{{ resource.title }}"?
+        </h3>
+        <div class="mt-2 max-w-xl text-sm leading-5 text-gray-500">
+          <p>
+            You are about to permanently delete this resource.
+          </p>
+        </div>
+        <div class="mt-5">
+          <button @click="deleteResource({{resource.id}})" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:bg-red-200 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            Delete account
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
     <h3 class="text-lg leading-6 font-medium text-gray-900">
         {{ resource.title|title }}
     </h3>
     <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
         {{ resource.resource_type }}
     </p>
+    <div class="float-right">
+      <span class="relative z-0 inline-flex shadow-sm rounded-md">
+
+  <form id="details-form" class="hidden">
+    {% csrf_token %}
+  </form>
+    <button type="button" class="relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+
+    Edit
+  </button>
+  <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+    Note
+    <svg class="h-5 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+  </button>
+  <button @click="deleteConfirm = !deleteConfirm" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+    <svg class="h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+  </button>
+</span>
+
+    </div>
   </div>
   <div class="px-4 py-5 sm:px-6">
     <dl class="grid grid-cols-1 col-gap-4 row-gap-8 sm:grid-cols-2">
@@ -41,10 +90,10 @@
       </div>
       <div class="sm:col-span-1">
         <dt class="text-sm leading-5 font-medium text-gray-500">
-          Tasks
+          URL
         </dt>
         <dd class="mt-1 text-sm leading-5 text-gray-900">
-          5/7
+          <a href="{{ resource.url }}">{{ resource.url.hostname }}</a>
         </dd>
       </div>
       <div class="sm:col-span-1">
