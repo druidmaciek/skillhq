@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'rest_framework',
 
     'dashboard',
 ]
@@ -135,3 +135,10 @@ LOGOUT_URL = "account:logout"
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.djangoModelPermissionsOrAnonReadOnly'
+    ]
+}
