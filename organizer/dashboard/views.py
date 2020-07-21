@@ -4,15 +4,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
 from .forms import AddResourceForm
-from .models import Resource, Note
+from .models import Resource, Note, Task
 
 
 @login_required
 def dashboard(request):
     resources = Resource.objects.filter(user=request.user)
+    tasks = Task.objects.filter(resource__user=request.user)
     return render(request, 'dashboard/dashboard.html',
                   {'section': 'dashboard',
                    'resources': resources,
+                   'tasks': tasks,
                    'form': AddResourceForm()})
 
 
@@ -32,12 +34,14 @@ def add_resource(request):
 
 @login_required
 def resource_detail(request, rid):
+
     resource = get_object_or_404(Resource, pk=rid)
     if request.user.id != resource.user.id:
         redirect('/')
     return render(request, 'dashboard/resource/detail.html', {
         'section': 'detail',
-        'resource': resource
+        'resource': resource,
+        'form': AddResourceForm()
     })
 
 

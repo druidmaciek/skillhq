@@ -46,28 +46,28 @@
             <div>
               <label for="new-res__title" class="block text-sm font-medium leading-5 text-gray-700">Resource Name</label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input  required name="title" id="new-res__title" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design Course by Joe Smith">
+                <input x-model="title" required name="title" id="new-res__title" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design Course by Joe Smith">
               </div>
             </div>
 
             <div class="mt-4">
               <label for="new-res__subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input required id="new-res__subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+                <input x-model="subject" required id="new-res__subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
               </div>
             </div>
 
             <div class="mt-4">
               <label for="new-res__url" class="block text-sm font-medium leading-5 text-gray-700">URL <span class="text-gray-500">(if applies)</span></label>
               <div class="mt-1 relative rounded-md shadow-sm">
-                <input name="url" id="new-res__url" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g https://www.udemy.com/somecourse">
+                <input x-model="url" name="url" id="new-res__url" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g https://www.udemy.com/somecourse">
               </div>
             </div>
 
 
               <div class="mt-4">
                   <label for="new-res__type" class="block text-sm leading-5 font-medium text-gray-700">Type</label>
-                  <select  required name="resource_type" id="new-res__type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                  <select x-model="resource_type" required name="resource_type" id="new-res__type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
                     <option selected>Resource Type...</option>
                     {% for tup in form.resource_type.field.choices %}
                     <option value="{{ tup.0 }}"> {{ tup.1 }}</option>
