@@ -15,6 +15,7 @@ class Resource(models.Model):
         ('Video Tutorial', 'Video Tutorial'),
         ('eBook', 'eBook'),
         ('Book', 'Book'),
+        ("Newsletter", "Newsletter"),
         ('Other', 'Other'),
     )
     title = models.CharField(max_length=100)
@@ -23,7 +24,7 @@ class Resource(models.Model):
                                      choices=TYPE_CHOICES,
                                      default='Other')
     url = models.URLField(max_length=255,
-                          null=True)
+                          null=True, blank=True)
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
                              related_name='resources')
