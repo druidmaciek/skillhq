@@ -1,21 +1,21 @@
 
 
 // example GET request
-const BASE_URL = 'https://jsonplaceholder.typicode.com';
-const getTodos = async () => {
-    try {
-        const res = await axios.get(`${BASE_URL}/todos`);
-
-        const todos = res.data;
-
-        console.log("GET: Here's the list of todos", todos);
-
-        return todos;
-
-    } catch (e) {
-        console.error(e);
-    }
-};
+// const BASE_URL = 'https://jsonplaceholder.typicode.com';
+// const getTodos = async () => {
+//     try {
+//         const res = await axios.get(`${BASE_URL}/todos`);
+//
+//         const todos = res.data;
+//
+//         console.log("GET: Here's the list of todos", todos);
+//
+//         return todos;
+//
+//     } catch (e) {
+//         console.error(e);
+//     }
+// };
 
 // Add Resource Form Submit
 
@@ -28,7 +28,24 @@ const formEvent = resourceForm.addEventListener('submit', async event => {
   const subject = document.getElementById('new-res__subject').value;
   const url = document.getElementById('new-res__url').value;
   const resource_type = document.getElementById('new-res__type').value;
-  const tasks = [];
+  let tasks = [];
+
+  var taskElements = document.getElementsByClassName("mtask-item");
+    for (var i = 0; i < taskElements.length; i++) {
+       const taskElem = taskElements.item(i);
+        const title = taskElem.getElementsByClassName('task-title')[0].value;
+        let status = taskElem.getElementsByClassName('task-status')[0].value;
+        if (status == "true") {
+            status = "completed";
+        } else {
+            status = "todo";
+        }
+        const task = {
+            title,
+            status
+        }
+        tasks.push(task)
+    }
 
   const resource = {
     title,
@@ -37,7 +54,6 @@ const formEvent = resourceForm.addEventListener('submit', async event => {
     resource_type,
     tasks
   };
-  console.log(resource);
 
   const addedResource = await addResource(resource);
 });
@@ -51,7 +67,7 @@ const addResource = async resource => {
     const addedResource = res.data;
     console.log(`Added a new Resource!`, addedResource);
     // TODO replace refresh with adding dynamically
-      location.reload();
+    location.reload();
     return addedResource;
   } catch (e) {
 

@@ -87,7 +87,7 @@
                         <input x-model="name" @keyup="$refs.ok.disabled = name.length === 0" id="task" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Watch chapter 1 video">
                       </div>
                       <span class="inline-flex rounded-md shadow-sm w-1/5 ml-8">
-                      <button @click="getTodos();items.push(name); name=''; $refs.ok.disabled = true" x-ref="ok" type="submit" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
+                      <button @click="items.push(name); name=''; $refs.ok.disabled = true" x-ref="ok" type="submit" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink active:bg-pink-700 transition ease-in-out duration-150">
                         Add Task
                       </button>
                     </span>
@@ -97,11 +97,13 @@
 
                   <div class="mt-8">
                     <template x-for="item in items" :key="item">
-                      <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
 
+                      <div class="mtask-item flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">
                         <div class="flex">
                               <button @click="items = items.filter(i => i !== item)" class="rounded-full p-1 bg-gray-400 hover:bg-red-400 active:bg-red-600 text-gray-100 hover:text-red-200 active:text-red-400 cursor-pointer mr-2">
                                 <svg class="h-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                <input type="hidden" x-bind:value="item" class="task-title">
+
                               </button>
                           <p class="truncate mr-8" x-text="item"></p>
                         </div>
@@ -110,8 +112,10 @@
                              @click="clicked = !clicked"
                              :class="{ 'bg-gray-400 hover:bg-green-200': !clicked, 'bg-green-400 hover:bg-gray-200': clicked}" class="rounded-full p-1 cursor-pointer">
                           <svg class="h-4 text-gray-100" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+                          <input type="hidden" x-bind:value="clicked" class="task-status">
                         </div>
                       </div>
+
                     </template>
 
 <!--                    <div class="flex justify-between text-gray-500 font-medium p-2 mt-2 border rounded shadow border-1 border-pink-100">-->
