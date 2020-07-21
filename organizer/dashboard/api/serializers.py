@@ -10,9 +10,9 @@ class TaskSerializer(serializers.ModelSerializer):
 
 
 class ResourceSerializer(serializers.ModelSerializer):
-    tasks = TaskSerializer(required=False)
+    tasks = TaskSerializer(many=True, read_only=True)
 
     class Meta:
         model = Resource
-        fields = ('title', 'subject', 'resource_type', 'url',
-                  'status')
+        fields = ('id', 'title', 'subject', 'resource_type', 'url',
+                  'status', 'tasks')

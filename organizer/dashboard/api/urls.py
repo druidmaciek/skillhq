@@ -10,10 +10,10 @@ urlpatterns = [
     path('resources/<pk>/',
          views.ResourceDetailView.as_view(),
          name='resource_detail'),
-    path('task/',
+    path('tasks/',
          views.TaskListView.as_view(),
          name='task_list'),
-    path('task/<pk>',
+    path('tasks/<pk>/',
          views.TaskDetailView.as_view(),
          name='task_detail'),
 ]

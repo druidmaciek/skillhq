@@ -21,7 +21,7 @@ class Resource(models.Model):
     subject = models.CharField(max_length=100)
     resource_type = models.CharField(max_length=100,
                                      choices=TYPE_CHOICES,
-                                     default='other')
+                                     default='Other')
     url = models.URLField(max_length=255,
                           null=True)
     user = models.ForeignKey(User,
@@ -31,7 +31,7 @@ class Resource(models.Model):
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=30,
                               choices=STATUS_CHOICES,
-                              default='paused')
+                              default='Not Started/On Hold')
     description = models.TextField(max_length=455, null=True)
 
     class Meta:
