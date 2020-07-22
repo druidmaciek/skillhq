@@ -28,6 +28,7 @@ const formEvent = resourceForm.addEventListener('submit', async event => {
   const subject = document.getElementById('new-res__subject').value;
   const url = document.getElementById('new-res__url').value;
   const resource_type = document.getElementById('new-res__type').value;
+  const description = document.getElementById('new-res__description').value;
   let tasks = [];
 
   var taskElements = document.getElementsByClassName("mtask-item");
@@ -52,7 +53,8 @@ const formEvent = resourceForm.addEventListener('submit', async event => {
     subject,
     url,
     resource_type,
-    tasks
+    tasks,
+    description
   };
 
   const addedResource = await addResource(resource);

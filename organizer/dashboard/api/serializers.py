@@ -15,4 +15,4 @@ class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = ('id', 'title', 'subject', 'resource_type', 'url',
-                  'status', 'tasks')
+                  'status', 'tasks', 'description')
