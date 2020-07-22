@@ -133,39 +133,36 @@ Dashboard
               </div>
             </div>
     </li>
-    {% for task in tasks %}
-    <li class="border-t border-gray-200">
-      <a class="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out">
-        <div class="flex items-center px-4 py-4 sm:px-6">
-          <div class="min-w-0 flex-1 flex items-center">
-            <div class="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-              <div>
-                <div class="text-sm leading-5 font-medium text-pink-600 truncate">{{ task.title }}</div>
-                <div class="mt-2 flex items-center text-sm leading-5 text-gray-500">
-                  <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                  <span class="truncate">{{ task.resource.title }}</span>
-                </div>
-              </div>
-              <div x-data="{ status: '{{ task.status|title }}' }" class="">
-                <div class="float-right">
-                  <div @click="if (status == 'Todo'){ status = 'Completed'; } else { status = 'Todo' }" class="cursor-pointer mt-2 flex items-center text-sm leading-5 text-gray-500">
-                    <svg :class="{ 'text-green-400 hover:text-gray-400': status == 'Completed',
-                                    'text-gray-400 hover:text-green-400': status == 'Todo' }" class="flex-shrink-0 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                    </svg>
-                    <span x-text="status"></span>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </a>
-    </li>
-    {% endfor %}
 
   </ul>
+
+
+  <div class="py-2 mb-4 px-16">
+
+    {% for task in tasks %}
+    <div x-data="{ status: '{{ task.status|title }}', title: '{{ task.title }}' }" class="border-b border-gray-200">
+      <div class="">
+
+        <div @click="if (status == 'Todo'){ status = 'Completed'; } else { status = 'Todo' }" class="mt-2 flex justify-between leading-5 text-gray-500">
+          <div class="inline-flex">
+            <span class="text-base text-pink-500" x-text="title"></span>
+          </div>
+          <div class="inline-flex cursor-pointer group">
+            <span class="w-48 text-sm">({{ task.updated }})</span>
+            <svg :class="{ 'text-green-400 group-hover:text-gray-400': status == 'Completed',
+                          'text-gray-400 group-hover:text-green-400': status == 'Todo' }" class="flex-shrink-0 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
 </div>
 
 
@@ -173,7 +170,7 @@ Dashboard
       </div>
 
         <!-- Goals Area -->
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="hidden max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div class="mt-16">
               <div class="bg-white shadow overflow-hidden sm:rounded-md">
   <ul>
