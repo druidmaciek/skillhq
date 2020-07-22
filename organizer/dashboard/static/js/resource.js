@@ -33,6 +33,22 @@ const addTask = async (title, resource) => {
       }
 };
 
+// Delete Task
+const deleteTask = async (taskId) => {
+    const csrftoken = getToken();
+    try {
+        const res = await axios.delete('/api/tasks/'+ String(taskId) + '/',
+            { headers: { 'X-CSRFToken': csrftoken }}
+            );
+        const response = res.data;
+        // Todo remove from dom
+        location.reload();
+        return response;
+    } catch (e) {
+        console.error(e);
+    }
+};
+
 
 // send post request to update resource
 const updateResourcePost = async (payload, resourceId) => {
