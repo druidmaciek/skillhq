@@ -6,7 +6,7 @@ from ..models import Resource, Task, Note
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('title', 'status', 'resource', 'updated', 'created')
+        fields = ('title', 'status', 'resource', 'updated', 'created', 'id')
 
 
 class NoteSerializer(serializers.ModelSerializer):
