@@ -18,8 +18,9 @@ LogIn
         </h2>
         <p class="mt-2 text-center text-sm leading-5 text-gray-600 max-w">
           Or
-          <a href="#" class="font-medium text-pink-600 hover:text-pink-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-            start your 7-day free trial
+          <a href="{% url 'account:register' %}" class="font-medium text-pink-600 hover:text-pink-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+            Create a new account
+            <!--            start your 7-day free trial-->
           </a>
         </p>
       </div>
@@ -55,7 +56,7 @@ LogIn
               </div>
 
               <div class="text-sm leading-5">
-                <a href="#" class="font-medium text-pink-600 hover:text-pink-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                <a href="{% url 'account:password_reset' %}" class="font-medium text-pink-600 hover:text-pink-500 focus:outline-none focus:underline transition ease-in-out duration-150">
                   Forgot your password?
                 </a>
               </div>
