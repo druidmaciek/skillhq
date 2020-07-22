@@ -7,3 +7,4 @@ markdown
 pytest-django
 pytest
 gunicorn
+whitenoise
