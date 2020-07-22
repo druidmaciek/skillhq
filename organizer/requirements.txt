@@ -1,7 +1,9 @@
 Django
+dj-database-url
 djangorestframework
 psycopg2-binary
 Pillow
 markdown
 pytest-django
 pytest
+gunicorn
