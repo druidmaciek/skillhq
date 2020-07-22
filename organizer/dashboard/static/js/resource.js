@@ -1,20 +1,22 @@
 
 
-// Update Resource Status
-const updateResourceStatus = async (resourceStatus, resourceId) => {
+
+// send post request
+const updateResourcePost = async (payload, resourceId) => {
     const csrftoken = document.querySelector('#details-form > input').value;
     try {
     const res = await axios.patch('/api/resources/' + resourceId + '/',
-        { status: resourceStatus },
+        payload,
         { headers: { 'X-CSRFToken': csrftoken }}
         );
-    const updated = res.data;
+    const response = res.data;
     // TODO (?) Alert that resource was updated
-    return updated;
+    return response;
       } catch (e) {
         console.error(e);
       }
 };
+
 
 // Delete Resource
 const deleteResource = async (resourceId) => {
@@ -32,3 +34,4 @@ const deleteResource = async (resourceId) => {
         console.error(e);
       }
 };
+
