@@ -1,4 +1,17 @@
 
+// toggle edit mode
+const toggleEditMode = () => {
+    var divs = document.getElementsByClassName('editDetailBtn');
+    for (var i = 0; i < divs.length; i++) {
+
+        let element = divs[i]
+        if ( element.classList.contains('hidden')) {
+            element.classList.remove('hidden')
+        } else {
+            element.classList.add('hidden')
+        }
+    }
+} ;
 
 
 // send post request

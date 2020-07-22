@@ -33,7 +33,7 @@ class Resource(models.Model):
     status = models.CharField(max_length=30,
                               choices=STATUS_CHOICES,
                               default='Not Started/On Hold')
-    description = models.TextField(max_length=455, null=True)
+    description = models.TextField(max_length=455, null=True, blank=True)
 
     class Meta:
         ordering = ('-created',)
