@@ -1,3 +1,4 @@
+black
 Django
 dj-database-url
 djangorestframework

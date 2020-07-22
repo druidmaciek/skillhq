@@ -9,5 +9,4 @@ class AddResourceForm(forms.ModelForm):
 
     class Meta:
         model = Resource
-        fields = ("title", "subject", "resource_type",
-                  "url", 'description')
+        fields = ("title", "subject", "resource_type", "url", "description")
