@@ -1,21 +1,20 @@
 
 
 // example GET request
-// const BASE_URL = 'https://jsonplaceholder.typicode.com';
-// const getTodos = async () => {
-//     try {
-//         const res = await axios.get(`${BASE_URL}/todos`);
-//
-//         const todos = res.data;
-//
-//         console.log("GET: Here's the list of todos", todos);
-//
-//         return todos;
-//
-//     } catch (e) {
-//         console.error(e);
-//     }
-// };
+const getTasks = async () => {
+    try {
+        const res = await axios.get('/api/tasks/');
+
+        const tasks = res.data;
+
+        console.log(tasks);
+
+        return tasks;
+
+    } catch (e) {
+        console.error(e);
+    }
+};
 
 // Add Resource Form Submit
 
@@ -69,7 +68,9 @@ const addResource = async resource => {
     const addedResource = res.data;
     console.log(`Added a new Resource!`, addedResource);
     // TODO replace refresh with adding dynamically
-    location.reload();
+    location.href = '/resource/'+String(addedResource.data.id)+"/";
+      //location.reload();
+
     return addedResource;
   } catch (e) {
 
