@@ -4,6 +4,7 @@ djangorestframework
 psycopg2-binary
 Pillow
 markdown
+pytest-cov
 pytest-django
 pytest
 gunicorn
