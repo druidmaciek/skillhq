@@ -4,14 +4,18 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from ..models import Resource
-from .serializers import ResourceSerializer, TaskSerializer
+from ..models import Resource, Note, Task
+from .serializers import ResourceSerializer, \
+    TaskSerializer, NoteSerializer
 
 
-class ResourceViewSet(viewsets.ModelViewSet):
-    queryset = Resource.objects.all()
+class BaseViewSet(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
+
+
+class ResourceViewSet(BaseViewSet):
+    queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
 
     def get_queryset(self):
@@ -35,3 +39,21 @@ class ResourceViewSet(viewsets.ModelViewSet):
 
             return Response(status=201, data={'msg': 'created'})
         return Response(status=400, data={'msg': serializer.error_messages})
+
+
+class TaskViewSet(BaseViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Task.objects.filter(user=user)
+
+
+class NotesViewSet(BaseViewSet):
+    queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Note.objects.filter(user=user)

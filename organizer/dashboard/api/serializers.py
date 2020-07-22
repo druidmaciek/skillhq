@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Resource, Task
+from ..models import Resource, Task, Note
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -9,10 +9,17 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = ('title', 'status', 'resource')
 
 
+class NoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('title', 'content', 'resource')
+
+
 class ResourceSerializer(serializers.ModelSerializer):
     tasks = TaskSerializer(many=True, read_only=True)
+    notes = NoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Resource
         fields = ('id', 'title', 'subject', 'resource_type', 'url',
-                  'status', 'tasks', 'description')
+                  'status', 'tasks', 'description', 'notes')
