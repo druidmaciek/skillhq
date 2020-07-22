@@ -27,10 +27,7 @@
                    subject: '{{ resource.subject }}',
                    }" class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
   <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
-<div class="z-50">
-    {% include "dashboard/update_slideover.html" %}
 
-</div>
     <div x-show="showNotepad">
       {% include "dashboard/resource/notepad.html" %}
     </div>
@@ -55,10 +52,29 @@
     </div>
 
 
+    <div class="flex items-center"
+         x-data="{ inputHidden: true,
+         title: '{{ resource.title|title }}'}">
+      <h3 x-show="inputHidden" x-text="title"
+          class="text-lg leading-6 font-medium text-gray-900">
+      </h3>
 
-    <h3 class="text-lg leading-6 font-medium text-gray-900">
-        {{ resource.title|title }}
-    </h3>
+      <div x-show="!inputHidden">
+        <input id="email" x-model="title" class="form-input block w-full border-blue-300 text-blue-900 placeholder-blue-300 focus:border-blue-300 focus:shadow-outline-blue sm:text-sm sm:leading-5" value="{{ resource.title }}">
+      </div>
+
+
+      <div class="flex flex-col">
+        <button @click="inputHidden = !inputHidden"  :class="{ 'mb-4': inputHidden, 'mb-1': !inputHidden }" class="ml-2 p-1 rounded-full hover:bg-gray-200 active:bg-gray-400 cursor-pointer">
+          <svg x-show="inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+          <svg x-show="!inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <button @click="updateResourcePost( { title }, {{ resource.id }});inputHidden = !inputHidden" x-show="!inputHidden" class="ml-2 p-1 rounded-full bg-green-100 hover:bg-green-200 active:bg-green-400 cursor-pointer">
+          <svg class="h-4 text-green-500 hover:text-gray-600" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+        </button>
+      </div>
+    </div>
+
     <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
         {{ resource.resource_type }}
     </p>
@@ -68,10 +84,7 @@
   <form id="details-form" class="hidden">
     {% csrf_token %}
   </form>
-    <button x-show="!showSlideover" @click="showSlideover = !showSlideover" type="button" class="inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-    Edit
-  </button>
-  <button x-show="!showNotepad" @click="showNotepad = !showNotepad" type="button" class="-ml-px  inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+  <button x-show="!showNotepad" @click="showNotepad = !showNotepad" type="button" class="inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
     Note
     <svg class="h-5 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
   </button>
@@ -84,14 +97,37 @@
   </div>
   <div class="px-4 py-5 sm:px-6">
     <dl class="grid grid-cols-1 col-gap-4 row-gap-8 sm:grid-cols-2">
-      <div class="sm:col-span-1">
-        <dt class="text-sm leading-5 font-medium text-gray-500">
+
+      <div x-data="{ inputHidden: true, subject: '{{ resource.subject }}' }" class="sm:col-span-1">
+        <dt class="text-sm leading-5 font-medium text-gray-500 flex items-center">
           Subject
+          <button @click="inputHidden = !inputHidden" class="ml-2 p-1 rounded-full hover:bg-gray-200 active:bg-gray-400 cursor-pointer">
+            <svg x-show="inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            <svg x-show="!inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
         </dt>
-        <dd class="mt-1 text-sm leading-5 text-gray-900">
-            {{ resource.subject }}
-        </dd>
+
+
+        <div x-show="!inputHidden" class="mr-32  md:mr-48">
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <div class="relative flex-grow focus-within:z-10">
+              <input  x-model="subject"
+                      x-bind:value="subject"
+                      class="form-input block w-full rounded-none rounded-l-md transition ease-in-out duration-150 text-sm sm:leading-5">
+            </div>
+            <button @click="updateResourcePost({ subject }, {{ resource.id }});inputHidden = !inputHidden" x-show="!inputHidden"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-r-md text-gray-700 bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+              <span class="ml-2">Update</span>
+            </button>
+          </div>
+        </div>
+
+
+
+
+        <dd x-show="inputHidden" x-text="subject" class="mt-1 text-sm leading-5 text-gray-900"></dd>
       </div>
+
       <div class="sm:col-span-1">
         <dt class="text-sm leading-5 font-medium text-gray-500">
           Status
@@ -100,21 +136,21 @@
             <div x-data="{ currentStatus: '{{ resource.status }}', resourceId: {{ resource.id }} }" class="group mt-2 flex items-center text-sm leading-5 cursor-pointer">
 
               <template x-if="currentStatus == 'Not Started/On Hold'">
-                <button @click="currentStatus == 'Updating...';updateResourceStatus('In Progress', resourceId);currentStatus = 'In Progress'" type="button" class="flex items-center">
+                <button @click="currentStatus == 'Updating...';updateResourcePost({ status: 'In Progress'}, resourceId);currentStatus = 'In Progress'" type="button" class="flex items-center">
                   <svg  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 group-hover:text-yellow-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                   <span class="group-hover:text-gray-500" x-text="currentStatus"></span>
                 </button>
               </template>
 
               <template x-if="currentStatus == 'In Progress'">
-                <button @click="currentStatus == 'Updating...';updateResourceStatus('Completed', resourceId);currentStatus = 'Completed'" type="button" class="flex items-center">
+                <button @click="currentStatus == 'Updating...';updateResourcePost({ status: 'Completed'}, resourceId);currentStatus = 'Completed'" type="button" class="flex items-center">
                 <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400 group-hover:text-green-400"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 <span class="group-hover:text-gray-500" x-text="currentStatus"></span>
                 </button>
               </template>
 
               <template x-if="currentStatus == 'Completed'">
-                <button @click="currentStatus == 'Updating...';updateResourceStatus('Not Started/On Hold', resourceId);currentStatus = 'Not Started/On Hold'" type="button" class="flex items-center">
+                <button @click="currentStatus == 'Updating...';updateResourcePost('Not Started/On Hold', resourceId);currentStatus = 'Not Started/On Hold'" type="button" class="flex items-center">
                 <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
@@ -136,18 +172,45 @@
             </div>
         </dd>
       </div>
-      <div class="sm:col-span-1">
+
+
+      <div x-data="{ inputHidden: true, url: '{{ resource.url }}' }" class="sm:col-span-1">
         <dt class="text-sm leading-5 font-medium text-gray-500">
           URL
+          <button @click="inputHidden = !inputHidden" class="ml-2 p-1 rounded-full hover:bg-gray-200 active:bg-gray-400 cursor-pointer">
+            <svg x-show="inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            <svg x-show="!inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
         </dt>
-        <dd class="mt-1 text-sm leading-5 text-gray-900">
+
+        <div x-show="!inputHidden" class="mr-32  md:mr-48">
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <div class="relative flex-grow focus-within:z-10">
+              <input  x-model="url"
+                      x-bind:value="url"
+                      class="form-input block w-full rounded-none rounded-l-md transition ease-in-out duration-150 text-sm sm:leading-5">
+            </div>
+            <button @click="updateResourcePost({ url }, {{ resource.id }});inputHidden = !inputHidden" x-show="!inputHidden"
+                    class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-r-md text-gray-700 bg-gray-50 hover:text-gray-500 hover:bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+              <span class="ml-2">Update</span>
+            </button>
+          </div>
+        </div>
+
+        <dd x-show="inputHidden" class="mt-1 text-sm leading-5 text-gray-900">
           {% if resource.url %}
-          <a class="text-pink-500 hover:text-pink-300" href="{{ resource.url }}">{{ resource.url }}</a>
+          <a class="text-pink-500 hover:text-pink-300 cursor-pointer"
+             x-bind:href="url"
+             target="_blank"
+             x-text="url"></a>
           {% else %}
           <p>No URL</p>
           {% endif %}
         </dd>
       </div>
+
+
+
       <div class="sm:col-span-1">
         <dt class="text-sm leading-5 font-medium text-gray-500">
           Last Updated
@@ -156,12 +219,22 @@
             {{ resource.updated }}
         </dd>
       </div>
-      <div class="sm:col-span-2">
+      <div x-data="{ inputHidden: true, description: '{{ resource.description }}' }" class="sm:col-span-2">
         <dt class="text-sm leading-5 font-medium text-gray-500">
           About
+          <button @click="inputHidden = !inputHidden" class="ml-2 p-1 rounded-full hover:bg-gray-200 active:bg-gray-400 cursor-pointer">
+            <svg x-show="inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+            <svg x-show="!inputHidden" class="h-4 text-gray-500 hover:text-gray-700" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+          <button @click="updateResourcePost( { description }, {{ resource.id }});inputHidden = !inputHidden" x-show="!inputHidden" class="ml-2 p-1 rounded-full bg-green-100 hover:bg-green-200 active:bg-green-400 cursor-pointer">
+            <svg class="h-4 text-green-500 hover:text-gray-600" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M5 13l4 4L19 7"></path></svg>
+          </button>
         </dt>
         <dd class="mt-1 text-sm leading-5 text-gray-900">
-          {{ resource.description|linebreaks }}
+          <div x-show="inputHidden" x-text="description"></div>
+          <div x-show="!inputHidden"  class="relative rounded-md shadow-sm">
+            <textarea x-model="description" id="new-res__description" rows="4" class="form-input block w-full sm:text-sm sm:leading-5 transition ease-in-out duration-150"></textarea>
+          </div>
         </dd>
       </div>
       <div class="sm:col-span-2">
