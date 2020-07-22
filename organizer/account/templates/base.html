@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    {% if "skillhq.io" in request.hostname %}
+    {% if "skillhq.io" in request.path %}
     <script async defer data-domain="app.skillhq.io" src="https://plausible.io/js/plausible.js"></script>
     <!-- Analytics Tag here -->
     {% endif %}
