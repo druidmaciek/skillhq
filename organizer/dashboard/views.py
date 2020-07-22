@@ -18,19 +18,6 @@ def dashboard(request):
                    'form': AddResourceForm()})
 
 
-@require_POST
-@login_required
-def add_resource(request):
-    # TODO implement in front-end and delete this
-    # TEMPORARY, ultimately it should be called by Vue.js axios in front end
-    form = AddResourceForm(request.POST)
-    if form.is_valid():
-        resource = form.save(commit=False)
-        resource.user = request.user
-        resource.save()
-        return JsonResponse(data={'msg': 'success'}, status=201)
-    return JsonResponse(data={'msg': 'fail'}, status=400)
-
 
 @login_required
 def resource_detail(request, rid):
