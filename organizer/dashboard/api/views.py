@@ -1,7 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from ..models import Resource, Note, Task
@@ -24,12 +23,9 @@ class ResourceViewSet(BaseViewSet):
 
     def create(self, request, *args, **kwargs):
         tasks = request.data['tasks']
-        #request.data['user'] = self.request.user.id
         serializer = ResourceSerializer(data=request.data)
         if serializer.is_valid():
             resource = serializer.save(user=request.user)
-
-            #response = super(ResourceViewSet, self).create(request, *args, **kwargs)
 
             for task in tasks:
                 task['resource'] = resource.id

@@ -1,6 +1,7 @@
 Django
 dj-database-url
 djangorestframework
+flake8
 psycopg2-binary
 Pillow
 markdown

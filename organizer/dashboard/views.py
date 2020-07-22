@@ -1,7 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.http import require_POST
 
 from .forms import AddResourceForm
 from .models import Resource, Note, Task
@@ -16,7 +14,6 @@ def dashboard(request):
                    'resources': resources,
                    'tasks': tasks,
                    'form': AddResourceForm()})
-
 
 
 @login_required
