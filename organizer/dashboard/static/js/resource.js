@@ -1,4 +1,3 @@
-
 // toggle edit mode
 const toggleEditMode = () => {
     var divs = document.getElementsByClassName('editDetailBtn');
@@ -13,10 +12,31 @@ const toggleEditMode = () => {
     }
 } ;
 
+const getToken = () => {
+  return document.querySelector('#details-form > input').value;
+};
 
-// send post request
+// Add Task
+const addTask = async (title, resource) => {
+    const csrftoken = getToken();
+    try {
+    const res = await axios.post('/api/tasks/',
+        { title, resource },
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    const response = res.data;
+    location.reload();
+    // TODO append new task to list
+    return response;
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+
+// send post request to update resource
 const updateResourcePost = async (payload, resourceId) => {
-    const csrftoken = document.querySelector('#details-form > input').value;
+    const csrftoken = getToken();
     try {
     const res = await axios.patch('/api/resources/' + resourceId + '/',
         payload,
@@ -33,7 +53,7 @@ const updateResourcePost = async (payload, resourceId) => {
 
 // Delete Resource
 const deleteResource = async (resourceId) => {
-    const csrftoken = document.querySelector('#details-form > input').value;
+    const csrftoken = getToken();
     try {
     const res = await axios.delete('/api/resources/' + resourceId + '/',
         { headers: { 'X-CSRFToken': csrftoken }}

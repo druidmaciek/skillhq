@@ -37,7 +37,8 @@ class ResourceViewSet(BaseViewSet):
                 if task_obj.is_valid():
                     task_obj.save()
 
-            return Response(status=201, data={'msg': 'created'})
+            return Response(status=201, data={'msg': 'created',
+                                              'data': serializer.data})
         return Response(status=400, data={'msg': serializer.error_messages})
 
 
@@ -47,7 +48,7 @@ class TaskViewSet(BaseViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Task.objects.filter(user=user)
+        return Task.objects.filter(resource__user=user)
 
 
 class NotesViewSet(BaseViewSet):
@@ -56,4 +57,4 @@ class NotesViewSet(BaseViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Note.objects.filter(user=user)
+        return Note.objects.filter(resource__user=user)
