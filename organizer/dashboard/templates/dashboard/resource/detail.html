@@ -75,8 +75,22 @@
       </div>
     </div>
 
-    <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
-        {{ resource.resource_type }}
+    <p x-data="{ typeHidden: true, resource_type: '{{ resource.resource_type }}' }" class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+      <span x-show="typeHidden" x-text="resource_type" @click="typeHidden = !typeHidden" class="cursor-pointer"></span>
+        <span class="inline-flex" x-show="!typeHidden">
+          <select x-model="resource_type" required name="resource_type" id="new-res__type" class="mt-1 form-select block pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+            <option>Resource Type...</option>
+            {% for tup in form.resource_type.field.choices %}
+            <option value="{{ tup.0 }}"> {{ tup.1 }}</option>
+            {% endfor %}
+          </select>
+          <span class="inline-flex rounded-md shadow-sm">
+          <button @click="updateResourcePost( { resource_type }, {{ resource.id }} );typeHidden = !typeHidden" type="button" class="inline-flex items-center px-2.5  border border-gray-300 text-xs font-medium rounded text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+            Update
+          </button>
+        </span>
+        </span>
+
     </p>
     <div class="float-right">
       <span class="z-0 inline-flex shadow-sm rounded-md">
@@ -88,6 +102,11 @@
     Note
     <svg class="h-5 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
   </button>
+
+  <button type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+      Edit
+  </button>
+
   <button @click="deleteConfirm = !deleteConfirm" type="button" class="-ml-px  inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
     <svg class="h-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
   </button>
