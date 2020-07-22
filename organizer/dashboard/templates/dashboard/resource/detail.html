@@ -48,7 +48,7 @@
         </div>
         <div class="mt-5">
           <button @click="deleteResource({{resource.id}})" type="button" class="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:bg-red-200 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-            Delete account
+            Delete
           </button>
         </div>
       </div>
@@ -94,10 +94,46 @@
       </div>
       <div class="sm:col-span-1">
         <dt class="text-sm leading-5 font-medium text-gray-500">
-          Created at
+          Status
         </dt>
         <dd class="mt-1 text-sm leading-5 text-gray-900">
-            {{ resource.created }}
+            <div x-data="{ currentStatus: '{{ resource.status }}', resourceId: {{ resource.id }} }" class="group mt-2 flex items-center text-sm leading-5 cursor-pointer">
+
+              <template x-if="currentStatus == 'Not Started/On Hold'">
+                <button @click="currentStatus == 'Updating...';updateResourceStatus('In Progress', resourceId);currentStatus = 'In Progress'" type="button" class="flex items-center">
+                  <svg  class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400 group-hover:text-yellow-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span class="group-hover:text-gray-500" x-text="currentStatus"></span>
+                </button>
+              </template>
+
+              <template x-if="currentStatus == 'In Progress'">
+                <button @click="currentStatus == 'Updating...';updateResourceStatus('Completed', resourceId);currentStatus = 'Completed'" type="button" class="flex items-center">
+                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-yellow-400 group-hover:text-green-400"  fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span class="group-hover:text-gray-500" x-text="currentStatus"></span>
+                </button>
+              </template>
+
+              <template x-if="currentStatus == 'Completed'">
+                <button @click="currentStatus == 'Updating...';updateResourceStatus('Not Started/On Hold', resourceId);currentStatus = 'Not Started/On Hold'" type="button" class="flex items-center">
+                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400 group-hover:text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="group-hover:text-gray-500" x-text="currentStatus"></span>
+                </button>
+              </template>
+
+              <template x-if="currentStatus == 'Updating...'">
+                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-blue-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M8 17a5 5 0 01-.916-9.916 5.002 5.002 0 019.832 0A5.002 5.002 0 0116 17m-7-5l3-3m0 0l3 3m-3-3v12"></path></svg>
+                <span class="text-gray-600" x-text="currentStatus"></span>
+              </template>
+
+
+
+
+
+
+
+            </div>
         </dd>
       </div>
       <div class="sm:col-span-1">
@@ -105,7 +141,11 @@
           URL
         </dt>
         <dd class="mt-1 text-sm leading-5 text-gray-900">
-          <a href="{{ resource.url }}">{{ resource.url.hostname }}</a>
+          {% if resource.url %}
+          <a class="text-pink-500 hover:text-pink-300" href="{{ resource.url }}">{{ resource.url }}</a>
+          {% else %}
+          <p>No URL</p>
+          {% endif %}
         </dd>
       </div>
       <div class="sm:col-span-1">
