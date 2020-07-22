@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import AddResourceForm
-from .models import Resource, Note, Task
+from .models import Note, Resource, Task
 
 
 @login_required
