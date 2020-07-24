@@ -39,7 +39,7 @@ class ResourceViewSet(BaseViewSet):
                 status=201, data={"msg": "created", "data": serializer.data}
             )
         # TODO show exact error message
-        messages.success(request, f'Error occurred.')
+        messages.error(request, f'Error occurred.')
         return Response(status=400, data={"msg": serializer.error_messages})
 
 

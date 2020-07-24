@@ -73,7 +73,7 @@ const addResource = async resource => {
 
     return addedResource;
   } catch (e) {
-
+      location.reload();
     console.error(e);
   }
 };
