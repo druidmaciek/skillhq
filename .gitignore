@@ -143,3 +143,4 @@ static_src/
 .DS_STORE/
 migrations/
 sendgrid.env
+.env.dev
