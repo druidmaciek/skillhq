@@ -9,4 +9,11 @@ register = template.Library()
 
 @register.filter(name="markdown")
 def markdown_format(text):
-    return mark_safe(markdown.markdown(text))
+    return mark_safe(markdown.markdown(
+        text,
+        safe_mode='escape',
+        extensions=[
+            'markdown.extensions.nl2br',
+            'markdown.extensions.fenced_code'
+        ]
+    ))
