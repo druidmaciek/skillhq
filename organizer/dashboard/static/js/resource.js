@@ -50,6 +50,22 @@ const deleteTask = async (taskId) => {
 };
 
 
+// update Task
+const updateTask = async (payload, taskId) => {
+    const csrftoken = getToken();
+    try {
+    const res = await axios.patch('/api/tasks/' + taskId + '/',
+        payload,
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    const response = res.data;
+    return response;
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+
 // send post request to update resource
 const updateResourcePost = async (payload, resourceId) => {
     const csrftoken = getToken();

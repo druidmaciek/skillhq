@@ -341,15 +341,20 @@
   <div class="py-2 mb-4 px-16">
 
     {% for task in resource.tasks.all %}
-    <div x-data="{ status: '{{ task.status|title }}', title: '{{ task.title }}' }" class="border-b border-gray-200">
+    <div x-data="{ status: '{{ task.status|title }}', title: '{{ task.title }}', editMode: false }" class="border-b border-gray-200">
       <div class="">
 
         <div class="mt-2 flex justify-between leading-5 text-gray-500 cursor-pointer">
           <div class="inline-flex">
             <svg @click="deleteTask({{task.id}})" class="text-gray-400 hover:text-red-500 active:text-red-700 flex-shrink-0 mr-1.5 h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="text-base text-pink-500" x-text="title"></span>
+            <span   @click="editMode = !editMode"
+                    x-show="!editMode" class="text-base text-pink-500" x-text="title"></span>
+            <span x-show="editMode" class="text-base text-pink-500 border border-pink-500">
+              <input  @click.away="editMode = !editMode;updateTask({ title }, {{ task.id }} )"
+                      x-model="title" type="text">
+            </span>
           </div>
-          <div @click="if (status == 'Todo'){ status = 'Completed'; } else { status = 'Todo' }" class="inline-flex cursor-pointer group">
+          <div @click="if (status == 'Todo'){ status = 'Completed'; } else { status = 'Todo' };updateTask( {status: status.toLowerCase() }, {{ task.id }} )" class="inline-flex cursor-pointer group">
             <span class="w-48 text-sm">({{ task.updated }})</span>
             <svg :class="{ 'text-green-400 group-hover:text-gray-400': status == 'Completed',
                           'text-gray-400 group-hover:text-green-400': status == 'Todo' }" class="flex-shrink-0 mr-1.5 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
