@@ -142,3 +142,4 @@ static_src/
 .idea/
 .DS_STORE/
 migrations/
+sendgrid.env
