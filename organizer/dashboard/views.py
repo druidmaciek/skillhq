@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import AddResourceForm
+from .forms import AddResourceForm, AddNoteForm
 from .models import Note, Resource, Task
 
 
@@ -23,7 +23,6 @@ def dashboard(request):
 
 @login_required
 def resource_detail(request, rid):
-
     resource = get_object_or_404(Resource, pk=rid)
     if request.user.id != resource.user.id:
         redirect("/")
@@ -35,10 +34,18 @@ def resource_detail(request, rid):
 
 
 @login_required
+def new_note(request):
+    return render(request, 'dashboard/resource/note.html',
+                  {'section': 'note',
+                   'note': None})
+
+
+@login_required
 def note_detail(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
     if request.user.id != note.resource.user.id:
         redirect("/")
     return render(
-        request, "dashboard/resource/note.html", {"section": "note", "note": note}
+        request, "dashboard/resource/note.html", {"section": "note",
+                                                  "note": note}
     )

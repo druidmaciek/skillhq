@@ -6,6 +6,7 @@ import markdown
 
 register = template.Library()
 
+# TODO check XSS security issue
 
 @register.filter(name="markdown")
 def markdown_format(text):

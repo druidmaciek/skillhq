@@ -19,8 +19,7 @@
 </div>
 
 
-<div x-data="{    showNotepad: false,
-                  deleteConfirm: false, showSlideover: false,
+<div x-data="{    deleteConfirm: false, showSlideover: false,
                   title: '{{ resource.title }}',
                    resource_type: '{{ resource.resource_type }}',
                    url: '{{ resource.url }}',
@@ -28,9 +27,6 @@
                    }" class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
   <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
 
-    <div x-show="showNotepad">
-      {% include "dashboard/resource/notepad.html" %}
-    </div>
 
 
     <div x-show="deleteConfirm" class="bg-white sm:rounded-lg mt-2 mb-8">
@@ -98,10 +94,12 @@
   <form id="details-form" class="hidden">
     {% csrf_token %}
   </form>
-  <button x-show="!showNotepad" @click="showNotepad = !showNotepad" type="button" class="inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-    Note
-    <svg class="h-5 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-  </button>
+  <a href="{% url 'dashboard:new_note' %}?resource={{ resource.id }}">
+    <button type="button" class="inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+      Note
+      <svg class="h-5 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+    </button>
+  </a>
 
   <button @click="toggleEditMode()" type="button" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
       Edit
@@ -274,19 +272,6 @@
               </div>
             </li>
             {% endfor %}
-            <li class="border-t border-gray-200 pl-3 pr-4 py-3 flex items-center justify-between text-sm leading-5">
-              <div class="w-0 flex-1 flex items-center">
-                <svg class="flex-shrink-0 h-5 w-5 text-gray-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                <span class="ml-2 flex-1 w-0 truncate">
-                  Rules of Web Design
-                </span>
-              </div>
-              <div class="ml-4 flex-shrink-0">
-                <a href="#" class="font-medium text-pink-600 hover:text-pink-500 transition duration-150 ease-in-out">
-                  Edit
-                </a>
-              </div>
-            </li>
           </ul>
         </dd>
       </div>

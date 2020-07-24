@@ -6,11 +6,21 @@
 
 {% load dashboard_tags %}
 
+{% load static %}
+
+{% block js %}
+  <script src="{% static 'js/notes.js' %}"></script>
+{% endblock %}
+
 {% block app_content %}
+<form id="details-form" class="hidden">
+    {% csrf_token %}
+  </form>
 
 
 
-<div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
+
+<div x-data="{ content: '', 'title': '' }" class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16">
   <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
     <h3 class="text-lg leading-6 font-medium text-gray-900">
         {{ resource.title|title }}
@@ -20,7 +30,17 @@
     </p>
   </div>
   <div class="px-4 py-5 sm:px-6">
-    <div class="prose">
+      <div class="border rounded">
+          <input  class="w-full" type="text" x-model="title">
+      </div>
+      <button @click="addNote(title, content)" class="px-2 py-1 bg-pink-600 text-white rounded">
+          Save
+      </button>
+
+      <textarea x-model="content" class="w-full" name="content" id="" rows="100">
+
+      </textarea>
+    <div class="prose lg:prose-xl">
         {{ note.content|markdown }}
     </div>
   </div>

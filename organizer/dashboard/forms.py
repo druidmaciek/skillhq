@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Resource
+from .models import Resource, Note
 
 
 class AddResourceForm(forms.ModelForm):

@@ -16,6 +16,8 @@ const getToken = () => {
   return document.querySelector('#details-form > input').value;
 };
 
+
+
 // Add Task
 const addTask = async (title, resource) => {
     const csrftoken = getToken();
