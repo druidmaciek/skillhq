@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -42,6 +42,15 @@ class ResourceViewSet(BaseViewSet):
         messages.error(request, f'Error occurred.')
         return Response(status=400, data={"msg": serializer.error_messages})
 
+    def destroy(self, request, *args, **kwargs):
+        response = super(ResourceViewSet, self).destroy(request, *args, **kwargs)
+        response.status_code
+        if response.status_code == status.HTTP_204_NO_CONTENT:
+            messages.success(request, 'Resource Deleted.')
+        else:
+            messages.error(request, 'There was a problem deleting this resource.')
+        return response
+
 
 class TaskViewSet(BaseViewSet):
     queryset = Task.objects.all()
@@ -59,3 +68,4 @@ class NotesViewSet(BaseViewSet):
     def get_queryset(self):
         user = self.request.user
         return Note.objects.filter(resource__user=user)
+
