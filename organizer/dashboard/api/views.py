@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from django.contrib import messages
 
 from ..models import Resource, Note, Task
 from .serializers import ResourceSerializer, TaskSerializer, NoteSerializer
@@ -32,9 +33,13 @@ class ResourceViewSet(BaseViewSet):
                 if task_obj.is_valid():
                     task_obj.save()
 
+            messages.success(request, f'"{resource.title}" added to your collection.')
+
             return Response(
                 status=201, data={"msg": "created", "data": serializer.data}
             )
+        # TODO show exact error message
+        messages.success(request, f'Error occurred.')
         return Response(status=400, data={"msg": serializer.error_messages})
 
 

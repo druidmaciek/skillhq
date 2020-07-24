@@ -68,8 +68,8 @@ const addResource = async resource => {
     const addedResource = res.data;
     console.log(`Added a new Resource!`, addedResource);
     // TODO replace refresh with adding dynamically
-    location.href = '/resource/'+String(addedResource.data.id)+"/";
-      //location.reload();
+    //location.href = '/resource/'+String(addedResource.data.id)+"/";
+      location.reload();
 
     return addedResource;
   } catch (e) {
