@@ -1,7 +1,9 @@
 black
+boto3
 Django
 dj-database-url
 djangorestframework
+django-storages
 flake8
 isort
 psycopg2-binary
