@@ -12,8 +12,7 @@ const addNote = async (title, content) => {
         { headers: { 'X-CSRFToken': csrftoken }}
         );
     const response = res.data;
-    location.reload();
-    // TODO append new task to list
+    location.href = "/notes/" + String(response.id) + "/"
     return response;
       } catch (e) {
         console.error(e);

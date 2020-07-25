@@ -30,19 +30,33 @@
     </p>
   </div>
   <div class="px-4 py-5 sm:px-6">
-      <div class="border rounded">
-          <input  class="w-full" type="text" x-model="title">
+      {% if not note %}
+      <div>
+          <div class="flex ">
+              <div class="w-4/5">
+                  <label for="title" class="sr-only">Title</label>
+                  <div class="relative rounded-md shadow-sm">
+                      <input x-model="title" id="title" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="Post Title">
+                  </div>
+              </div>
+              <button @click="addNote(title, content)" class="ml-2 w-1/5 px-2 py-1 bg-pink-600 text-white rounded">
+                  Add Note
+              </button>
+          </div>
+
+          <div class="border mt-4 w-full">
+            <textarea class="p-2 w-full" x-model="content"  name="content" id="" rows="100">
+            </textarea>
+          </div>
       </div>
-      <button @click="addNote(title, content)" class="px-2 py-1 bg-pink-600 text-white rounded">
-          Save
-      </button>
+      {% else %}
+        <div class="prose lg:prose-xl">
+            {{ note.content|markdown }}
+        </div>
+      {% endif %}
 
-      <textarea x-model="content" class="w-full" name="content" id="" rows="100">
 
-      </textarea>
-    <div class="prose lg:prose-xl">
-        {{ note.content|markdown }}
-    </div>
+
   </div>
 </div>
 

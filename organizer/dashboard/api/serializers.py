@@ -18,7 +18,7 @@ class TaskSerializer(serializers.ModelSerializer):
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ("title", "content", "resource", "updated", "created")
+        fields = ("title", "content", "resource", "updated", "created", 'id')
 
 
 class ResourceSerializer(serializers.ModelSerializer):
