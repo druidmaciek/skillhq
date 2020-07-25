@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 
 from .forms import AddResourceForm
 from .models import Note, Resource, Task
@@ -7,6 +8,12 @@ from .models import Note, Resource, Task
 
 @login_required
 def dashboard(request):
+    profile = request.user.profile
+    if profile.first_login:
+        profile.first_login = False
+        profile.save()
+        return redirect(reverse_lazy('account:edit'))
+
     resources = Resource.objects.filter(user=request.user)
     tasks = Task.objects.filter(resource__user=request.user)
     return render(
