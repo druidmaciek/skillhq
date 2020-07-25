@@ -7,10 +7,6 @@ Edit your Account
 
 {% block app_content %}
 
-<div class="hidden">
-      {% include "dashboard/resource/notepad.html" %}
-</div>
-
 
 <div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16 py-8 -mt-2">
     <form method="post" enctype="multipart/form-data">
@@ -80,14 +76,13 @@ Edit your Account
           </label>
           <div class="mt-2 sm:mt-0 sm:col-span-2">
             <div class="flex items-center">
-              {% if not profile_form.photo %}
+              {% if not profile_form.photo.value %}
               <span class="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
                 <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </span>
               {% else %}
-
                 <img class="h-12 w-12 rounded-full overflow-hidden bg-gray-100 object-center object-cover" src="{{ profile_form.photo.value.url }}" alt="">
               {% endif %}
               <span class="ml-5 rounded-md shadow-sm">
