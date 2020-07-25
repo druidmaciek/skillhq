@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register("resources", views.ResourceViewSet)
 router.register("tasks", views.TaskViewSet)
 router.register("notes", views.NotesViewSet)
+router.register("goals", views.GoalsViewSet)
 
 app_name = "dashboard"
 urlpatterns = [

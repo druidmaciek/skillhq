@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from ..models import Resource, Task, Note
+from ..models import Resource, Task, Note, Goal
+
+
+class GoalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Goal
+        fields = ("title", "subject")
 
 
 class TaskSerializer(serializers.ModelSerializer):

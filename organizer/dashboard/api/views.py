@@ -4,8 +4,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib import messages
 
-from ..models import Resource, Note, Task
-from .serializers import ResourceSerializer, TaskSerializer, NoteSerializer
+from ..models import Resource, Note, Task, Goal
+from .serializers import ResourceSerializer, \
+    TaskSerializer, NoteSerializer, GoalSerializer
 
 
 class BaseViewSet(viewsets.ModelViewSet):
@@ -69,3 +70,11 @@ class NotesViewSet(BaseViewSet):
         user = self.request.user
         return Note.objects.filter(resource__user=user)
 
+
+class GoalsViewSet(BaseViewSet):
+    queryset = Goal.objects.all()
+    serializer_class = GoalSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Goal.objects.filter(user=user)

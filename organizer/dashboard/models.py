@@ -70,3 +70,22 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Goal(models.Model):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name='goals')
+    title = models.CharField(max_length=250)
+    subject = models.CharField(max_length=100)
+    resources = models.ManyToManyField(Resource,
+                                       related_name='goals')
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("-created",)
+
+    def __str__(self):
+        return self.title
