@@ -77,7 +77,7 @@ class GoalsViewSet(BaseViewSet):
         return Goal.objects.filter(user=user)
 
 
-class PostViewSet(BaseViewSet):
+class PostsViewSet(BaseViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
@@ -86,7 +86,7 @@ class PostViewSet(BaseViewSet):
         return Post.objects.filter(user=user)
 
 
-class CommentViewSet(BaseViewSet):
+class CommentsViewSet(BaseViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
