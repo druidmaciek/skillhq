@@ -5,9 +5,9 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register("resources", views.ResourceViewSet, basename='resource')
-router.register("tasks", views.TaskViewSet)
-router.register("notes", views.NotesViewSet)
-router.register("goals", views.GoalsViewSet)
+router.register("tasks", views.TaskViewSet, basename='task')
+router.register("notes", views.NotesViewSet, basename='note')
+router.register("goals", views.GoalsViewSet, basename='goal')
 router.register("posts", views.PostViewSet)
 router.register("comments", views.CommentViewSet)
 
