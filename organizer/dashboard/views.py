@@ -56,3 +56,19 @@ def note_detail(request, note_id):
         request, "dashboard/resource/note.html", {"section": "note",
                                                   "note": note}
     )
+
+
+@login_required
+def resources_list(request):
+    resources = Resource.objects.filter(user=request.user)
+    tasks = Task.objects.filter(resource__user=request.user)
+    return render(
+        request,
+        "dashboard/dashboard_resources.html",
+        {
+            "section": "resources",
+            "resources": resources,
+            "tasks": tasks,
+            "form": AddResourceForm(),
+        },
+    )

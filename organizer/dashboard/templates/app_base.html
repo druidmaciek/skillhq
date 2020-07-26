@@ -13,7 +13,7 @@
             <img class="hidden lg:block h-8 w-auto" src="{% static 'logo.svg' %}" alt="SkillHQ logo">
           </div>
           <div class="hidden sm:ml-6 sm:flex">
-            <a href="{% url 'dashboard:dashboard' %}" class="inline-flex items-center px-1 pt-1 border-b-2 border-pink-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-pink-700 transition duration-150 ease-in-out">
+            <a href="{% url 'dashboard:dashboard' %}" class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
               Dashboard
             </a>
             <a href="#" class="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -91,7 +91,7 @@
     -->
     <div x-show="showMobileMenu" class="sm:hidden">
       <div class="pt-2 pb-3">
-        <a href="{% url 'dashboard:dashboard' %}" class="block pl-3 pr-4 py-2 border-l-4 border-pink-500 text-base font-medium text-pink-700 bg-pink-50 focus:outline-none focus:text-pink-800 focus:bg-pink-100 focus:border-pink-700 transition duration-150 ease-in-out">Dashboard</a>
+        <a href="{% url 'dashboard:dashboard' %}" class="block pl-3 pr-4 py-2 border-l-4 border-indigo-500 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out">Dashboard</a>
         <a href="#" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Notes</a>
         <a href="#" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Help</a>
         <a href="#" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Calendar</a>
@@ -209,30 +209,57 @@
             </div>
           {% endfor %}
         {% endif %}
-
-
-
-
-
-
-        <h1 class="text-3xl font-bold leading-tight text-gray-900">
-          {{ section|title }}
-        </h1>
-        {% if section != "dashboard" %}
-          <a href="/" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-pink-600 hover:bg-pink-500 focus:outline-none focus:shadow-outline-pink focus:border-pink-700 active:bg-pink-700">
-            <svg class="h-5 -ml-2 mr-2 " fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z"></path></svg>
-            Back
-          </a>
-        {% endif %}
       </div>
 
 
 
 
     </header>
-    {% block app_content %}
 
-    {% endblock %}
+
+
+    <div class="grid grid-cols-4 md:gap-2">
+      <div class="hidden sm:block col-span-1">
+
+        <div class="mx-auto sm:px-6 lg:px-8">
+          <div class="bg-white sm:rounded-md px-4 py-5 text-gray-900 leading-8">
+            <nav>
+              <ul>
+                <li class="sidebar-option {% if section == 'dashboard' %}sidebar-option-selected{% endif %} px-2">
+                  <a  href="{% url 'dashboard:dashboard' %}">Main Feed</a>
+                </li>
+                <li class="sidebar-option {% if section == 'resources' %}sidebar-option-selected{% endif %} px-2">
+                  <a class="" href="{% url 'dashboard:resource_list' %}">Resources</a>
+                </li>
+                <li class="sidebar-option px-2">
+                  <a class="" href="#">Notes</a>
+                </li>
+                <li class="sidebar-option px-2">
+                  <a class="" href="#">Tasks</a>
+                </li>
+                <li class="sidebar-option px-2">
+                  <a class="" href="#">Discussion</a>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="col-span-4 sm:col-span-3">
+        {% block app_content %}
+        {% endblock %}
+      </div>
+    </div>
+
+
+
+
+
+
     </div>
 </div>
 
