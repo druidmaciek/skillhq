@@ -122,7 +122,7 @@
 
         {% if messages %}
           {% for message in messages %}
-            <div x-data="{ showAlert: true }" x-show="showAlert" class="mb-4 shadow-sm">
+            <div id="alerts" x-data="{ showAlert: true }" x-show="showAlert" class="mb-4 shadow-sm">
               {% if message.tags == "success" %}
                 <div class="rounded-md bg-green-100 p-4">
                   <div class="flex">
