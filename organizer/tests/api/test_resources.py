@@ -6,7 +6,7 @@ from rest_framework.test import APIRequestFactory, force_authenticate
 from dashboard.api.views import ResourceViewSet
 from dashboard.models import Resource
 
-from ..utils import create_user, create_user_profile
+from ..utils import create_user, mock_messages
 
 factory = APIRequestFactory()
 resource_detail = ResourceViewSet.as_view(actions={'get': 'retrieve'})
@@ -26,10 +26,6 @@ RESOURCE_DATA = {
 }
 
 
-def mock_messages(request):
-    setattr(request, 'session', 'session')
-    messages = FallbackStorage(request)
-    setattr(request, '_messages', messages)
 
 
 @pytest.mark.django_db
