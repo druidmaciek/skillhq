@@ -3,11 +3,22 @@ import requests
 
 from account.forms import UserRegistrationForm
 from account.models import Profile
+from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 
 
-BASE_URL = 'http://127.0.0.1:8000'
+def create_user(username='user', email='email@email.com'):
+    user = User.objects.create_user(username=username,
+                                    email=email,
+                                    password='Password123!')
+    return user
+
+
+def create_user_profile(user, about=None):
+    profile = Profile.objects.create(user=user, about=about)
+    return profile
+
 
 @pytest.mark.django_db
 def test_register_form_success():
@@ -35,17 +46,6 @@ def test_register_form_wrong_pass():
     assert form.is_valid() is False
 
 
-def create_user(username='user', email='email@email.com'):
-    user = User.objects.create_user(username=username,
-                                    email=email)
-    return user
-
-
-def create_user_profile(user):
-    profile = Profile.objects.create(user=user)
-    return profile
-
-
 @pytest.mark.django_db
 def test_user_profile_creation():
     user = create_user()
@@ -55,23 +55,107 @@ def test_user_profile_creation():
     assert str(profile) == "Profile for user user"
 
 
-# @pytest.mark.django_db
-# def test_register_view_get(client):
-#     url = reverse("account:register")
-#     resp = client.get(url)
-#
-#     assert resp.status_code == 200
-#
-#
-# @pytest.mark.django_db
-# def test_register_view_post(client):
-#     url = reverse("account:register")
-#     resp = client.post(url,
-#                          data={
-#                              'username': 'johnny',
-#                              'email': 'email@email.com',
-#                              'password': 'hello199',
-#                              'password2': 'hello199'
-#                          })
-#
-#     assert resp.status_code == 200
+@pytest.mark.django_db
+def test_register_view_get(client):
+    url = reverse("account:register")
+    resp = client.get(url)
+
+    assert resp.status_code == 200
+
+
+@pytest.mark.django_db
+def test_register_view_post_success(client):
+    url = reverse("account:register")
+    resp = client.post(url,
+                       data={
+                           'username': 'johnny',
+                           'email': 'email@email.com',
+                           'password': 'hello199',
+                           'password2': 'hello199'
+                       })
+
+    soup = BeautifulSoup(resp.content, 'html.parser')
+    header = soup.find('h2').text
+
+    assert 'Welcome johnny!' in header
+    assert resp.status_code == 200
+
+
+@pytest.mark.django_db
+def test_register_view_post_form_invalid(client):
+    url = reverse("account:register")
+    resp = client.post(url,
+                       data={
+                           'username': 'johnny',
+                           'email': 'email@email.com',
+                           'password': 'hello199',
+                           'password2': 'diffpassword'
+                       })
+
+    soup = BeautifulSoup(resp.content, 'html.parser')
+    header = soup.find('ul', {'class': 'errorlist'}).text
+
+    assert "Passwords don't match." in header
+    assert resp.status_code == 200
+
+
+
+@pytest.mark.django_db
+def test_edit_profile_view_get(client):
+    user = create_user(username='bill')
+    profile = create_user_profile(user, about='I like tests')
+
+
+
+    client.login(username='bill', password='Password123!')
+
+    url = reverse("account:edit")
+    resp = client.get(url)
+    soup = BeautifulSoup(resp.content, 'html.parser')
+    textarea = soup.find('textarea', {'name': 'about'}).text
+    username = soup.find('input', {'id': 'username'})['value']
+
+    assert resp.status_code == 200
+    assert 'I like tests' in textarea
+    assert 'bill' == username
+
+
+@pytest.mark.django_db
+def test_edit_profile_view_post_success(client):
+    user = create_user(username='bill', email='different@email.com')
+    profile = create_user_profile(user)
+
+    client.login(username='bill', password='Password123!')
+    url = reverse("account:edit")
+    resp = client.post(url, data={
+        'username': user.username,
+        'email': user.email,
+        'about': "I like unittests",
+    })
+    soup = BeautifulSoup(resp.content, 'html.parser')
+    textarea = soup.find('textarea', {'name': 'about'}).text
+    username = soup.find('input', {'id': 'username'})['value']
+
+    assert resp.status_code == 200
+    assert 'I like unittests' in textarea
+    assert 'bill' == username
+
+
+@pytest.mark.django_db
+def test_edit_profile_view_post_form_invalid(client):
+    create_user_profile(create_user(username='bill'))
+    user = create_user()
+    profile = create_user_profile(user)
+
+    client.login(username=user.username, password='Password123!')
+    url = reverse("account:edit")
+    resp = client.post(url, data={
+        'username': 'bill',
+        'email': user.email,
+        'about': "I like unittests",
+    })
+    soup = BeautifulSoup(resp.content, 'html.parser')
+    alert = soup.find('div', {'id': 'alerts'}).text
+
+    assert resp.status_code == 200
+    assert 'Error updating profile...' in alert
