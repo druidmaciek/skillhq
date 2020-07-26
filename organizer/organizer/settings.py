@@ -142,9 +142,10 @@ if not DEBUG:
         "rest_framework.renderers.JSONRenderer",
     )
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 if not DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_BUCKET")
     AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
