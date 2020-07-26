@@ -26,8 +26,6 @@ RESOURCE_DATA = {
 }
 
 
-
-
 @pytest.mark.django_db
 def test_resource_view_set_can_retrieve_owned(client):
     user = create_user()
