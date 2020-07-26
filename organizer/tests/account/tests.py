@@ -7,17 +7,7 @@ from bs4 import BeautifulSoup
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-
-def create_user(username='user', email='email@email.com'):
-    user = User.objects.create_user(username=username,
-                                    email=email,
-                                    password='Password123!')
-    return user
-
-
-def create_user_profile(user, about=None):
-    profile = Profile.objects.create(user=user, about=about)
-    return profile
+from ..utils import create_user, create_user_profile
 
 
 @pytest.mark.django_db
@@ -99,13 +89,10 @@ def test_register_view_post_form_invalid(client):
     assert resp.status_code == 200
 
 
-
 @pytest.mark.django_db
 def test_edit_profile_view_get(client):
     user = create_user(username='bill')
     profile = create_user_profile(user, about='I like tests')
-
-
 
     client.login(username='bill', password='Password123!')
 
