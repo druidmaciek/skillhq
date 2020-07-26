@@ -46,11 +46,7 @@ class ResourceViewSet(BaseViewSet):
 
     def destroy(self, request, *args, **kwargs):
         response = super(ResourceViewSet, self).destroy(request, *args, **kwargs)
-        response.status_code
-        if response.status_code == status.HTTP_204_NO_CONTENT:
-            messages.success(request, 'Resource Deleted.')
-        else:
-            messages.error(request, 'There was a problem deleting this resource.')
+        messages.success(request, 'Resource Deleted.')
         return response
 
 
