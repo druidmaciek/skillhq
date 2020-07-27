@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.contrib import messages
 
-from ..models import Resource, Note, Task, Goal, Post, Comment
+from ..models import Resource, Note, Task, Goal, Post, Comment, Subject
 from .serializers import ResourceSerializer, \
     TaskSerializer, NoteSerializer, GoalSerializer, \
     PostSerializer, CommentSerializer
@@ -29,11 +29,21 @@ class ResourceViewSet(BaseViewSet):
         if serializer.is_valid():
             resource = serializer.save(user=request.user)
 
+
+            # Add valid tasks
             for task in tasks:
                 task["resource"] = resource.id
                 task_obj = TaskSerializer(data=task)
                 if task_obj.is_valid():
                     task_obj.save()
+
+            # Add subject
+            try:
+                subject = Subject.objects.get(name=resource.subject)
+            except Subject.DoesNotExist:
+                subject = Subject.objects.create(name=resource.subject)
+            subject.users.add(request.user)
+            subject.save()
 
             messages.success(request, f'"{resource.title}" added to your collection.')
 
