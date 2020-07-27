@@ -1,3 +1,22 @@
+// Subject Autocomplete
+function loadSubjects() {
+    return {
+      showOptions: false,
+      search: "",
+      myForData: sourceData,
+      get filteredSubjects() {
+        if (this.search === "") {
+          return this.myForData;
+        }
+        return this.myForData.filter((item) => {
+          return item
+            .toLowerCase()
+            .includes(this.search.toLowerCase());
+        });
+      },
+    };
+  }
+
 
 
 // example GET request

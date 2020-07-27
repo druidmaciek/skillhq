@@ -50,12 +50,47 @@
               </div>
             </div>
 
-            <div class="mt-4">
-              <label for="new-res__subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
-              <div class="mt-1 relative rounded-md shadow-sm">
-                <input required id="new-res__subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+            <div x-data="loadSubjects()">
+              <div class="mt-4">
+                <label for="new-res__subject" class="block text-sm font-medium leading-5 text-gray-700">Subject</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <input x-ref="searchField"
+                         x-model="search"
+                         x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
+                         @keydown="showOptions = true"
+                         @click.away="showOptions = false"
+                         type="search"
+                         autocomplete="off"
+                          required id="new-res__subject" name="subject" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="e.g Web Design">
+                </div>
               </div>
+
+              <div x-show="showOptions" class="relative z-50">
+                <div class="absolute mt-1 w-full rounded-md bg-white shadow-lg">
+                  <ul tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                    <!--
+                      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
+
+                      Highlighted: "text-white bg-indigo-600", Not Highlighted: "text-gray-900"
+                    -->
+                    <template x-for="item in filteredSubjects" :key="item">
+                    <li @click="search=item" id="listbox-option-0" role="option" class="cursor-pointer text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9">
+                      <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
+                      <span x-text="item" class="font-normal hover:font-semibold block truncate">
+                      </span>
+                    </li>
+                    </template>
+
+                    <!-- More options... -->
+                  </ul>
+                </div>
             </div>
+
+
+
+
+              </div>
+
 
             <div class="mt-4">
               <label for="new-res__url" class="block text-sm font-medium leading-5 text-gray-700">URL <span class="text-gray-500">(if applies)</span></label>

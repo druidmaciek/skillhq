@@ -16,6 +16,7 @@ def dashboard(request):
 
     resources = Resource.objects.filter(user=request.user)
     tasks = Task.objects.filter(resource__user=request.user)
+    subjects = Subject.objects.all()
     return render(
         request,
         "dashboard/dashboard.html",
@@ -24,6 +25,7 @@ def dashboard(request):
             "resources": resources,
             "tasks": tasks,
             "form": AddResourceForm(),
+            "all_subjects": subjects
         },
     )
 
@@ -81,5 +83,6 @@ def resources_list(request):
             "form": AddResourceForm(),
             'subjects': subjects,
             'selected_subject': subject.name if subject else None,
+            "all_subjects": Subject.objects.all()
         },
     )
