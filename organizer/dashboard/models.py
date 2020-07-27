@@ -19,7 +19,7 @@ class Resource(models.Model):
         ("Other", "Other"),
     )
     title = models.CharField(max_length=100)
-    subject = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100, db_index=True)
     resource_type = models.CharField(
         max_length=100, choices=TYPE_CHOICES, default="Other"
     )
@@ -37,6 +37,16 @@ class Resource(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Subject(models.Model):
+    name = models.CharField(max_length=75,
+                            unique=True)
+    users = models.ManyToManyField(User,
+                                   related_name='subjects')
+
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
