@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 
 from .forms import AddResourceForm
-from .models import Note, Resource, Task
+from .models import Note, Resource, Task, Subject
 
 
 @login_required
@@ -60,8 +60,17 @@ def note_detail(request, note_id):
 
 @login_required
 def resources_list(request):
-    resources = Resource.objects.filter(user=request.user)
     tasks = Task.objects.filter(resource__user=request.user)
+    resources = Resource.objects.filter(user=request.user)
+
+    subject_filter = request.GET.get('subject')
+    subject = None
+    if subject_filter:
+        subject = Subject.objects.get(name=subject_filter)
+        resources = resources.filter(subject=subject.name)
+
+    subjects = request.user.subjects.all()
+    print(subject.name if subject else None)
     return render(
         request,
         "dashboard/dashboard_resources.html",
@@ -70,5 +79,7 @@ def resources_list(request):
             "resources": resources,
             "tasks": tasks,
             "form": AddResourceForm(),
+            'subjects': subjects,
+            'selected_subject': subject.name if subject else None,
         },
     )

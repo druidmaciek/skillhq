@@ -11,6 +11,22 @@ Dashboard
 {% endblock %}
 
 
+{% block sidebar %}
+<div class="px-4 py-5 text-gray-900 leading-8 mt-4">
+  <nav>
+    <form method="GET" action="{% url 'dashboard:resource_list' %}">
+      <label for="subject_filter" class="block text-sm leading-5 font-medium text-gray-700">Sort by Subject:</label>
+      <select onchange="this.form.submit()" name="subject" id="subject_filter" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+        <option value="">Select Subject...</option>
+        {% for subject in subjects %}
+        <option {% if selected_subject == subject %} selected {% endif %} value="{{ subject }}">{{ subject }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </nav>
+</div>
+{% endblock %}
+
 
 {% block app_content %}
 
