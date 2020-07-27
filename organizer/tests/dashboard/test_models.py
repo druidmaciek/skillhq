@@ -1,7 +1,8 @@
 import pytest
 
 from ..utils import create_user
-from dashboard.models import Resource, Task, Note, Goal, Post, Comment
+from dashboard.models import Resource, Task, Note,\
+    Goal, Post, Comment, Subject
 
 
 @pytest.mark.django_db
@@ -75,3 +76,11 @@ def test_comment_creation():
 
     assert isinstance(comment, Comment)
     assert str(comment) == "Comment by user"
+
+
+@pytest.mark.django_db
+def test_subject_creation():
+    subject = Subject.objects.create(name='subject')
+
+    assert isinstance(subject, Subject)
+    assert str(subject) == "subject"
