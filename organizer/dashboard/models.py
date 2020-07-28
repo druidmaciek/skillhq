@@ -150,3 +150,17 @@ class CommentReply(models.Model):
     def __str__(self):
         return f'Comment reply by {self.user.username}'
 
+
+class LearningLog(models.Model):
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name='logs')
+    text = models.CharField(max_length=250)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("created",)
+
+    def __str__(self):
+        return self.text

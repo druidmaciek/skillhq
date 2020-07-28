@@ -4,9 +4,10 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
-from .forms import AddResourceForm, AddDiscussionForm, AddCommentForm, AddCommentReplyForm
-from .models import Note, Resource, Task, Subject, Post, Comment
+from .forms import AddResourceForm, AddDiscussionForm, AddCommentForm, AddCommentReplyForm, AddLearningLogForm
+from .models import Note, Resource, Task, Subject, Post, Comment, LearningLog
 from actions.models import Action
+from actions.utils import create_action
 
 @login_required
 def dashboard(request):
@@ -114,6 +115,7 @@ def add_discussion(request):
             post.user = request.user
             post.save()
             messages.success(request, f'"{post.title}" added.')
+            create_action(request.user, 'started', post)
             return redirect(reverse_lazy('dashboard:discussion_list'))
         else:
             error = "Error adding post"
@@ -161,3 +163,17 @@ def add_reply(request, comment_id):
     else:
         messages.error(request, "Can't add comment.")
     return redirect(reverse_lazy("dashboard:discussion_detail", args=(comment.post.id,)))
+
+
+@login_required
+@require_POST
+def add_learning_log(request):
+    form = AddLearningLogForm(data=request.POST)
+    if form.is_valid():
+        log = form.save(commit=False)
+        log.user = request.user
+        log.save()
+        messages.success(request, 'Learning achievement logged')
+    else:
+        messages.error(request, "Can't add to log")
+    return redirect(reverse_lazy('dashboard:dashboard'))

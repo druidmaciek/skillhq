@@ -18,8 +18,42 @@ Dashboard
 
 
 <main x-data="{ showSlideover: false }">
-  {% include "dashboard/slideover.html" %}
   <div class="mx-auto sm:px-6 lg:px-8">
+  <div class="bg-white overflow-hidden sm:rounded-md mb-4">
+      <ul>
+        <li>
+          <div class="bg-white px-4 py-5 sm:px-6">
+                  <div class="-ml-4 -mt-2">
+                    <div class="ml-4 mt-2">
+                      <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        What Did you learn Today?
+                      </h3>
+                        <p class="text-gray-400 text-sm font-medium">Learning Log - Share new things you learned</p>
+                    </div>
+                  </div>
+              <div class="mt-2">
+                  <form action="{% url 'dashboard:add_log' %}" method="POST">
+                      {% csrf_token %}
+                  <div class="mt-1 relative rounded-md shadow-sm">
+                    <input name="text" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="What did you learn today?">
+                  </div>
+                  <span class="inline-flex rounded-md shadow-sm">
+                        <button type="submit" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                          Submit
+                        </button>
+                      </span>
+                  </form>
+            </div>
+        </div>
+        </li>
+      </ul>
+      {% for log in request.user.logs.all %}
+      <p>{{ log.text }}</p>
+      {% endfor %}
+  </div>
+
+
+
   <div class="bg-white overflow-hidden sm:rounded-md h-64 mb-4">
       <ul>
         <li>
@@ -32,9 +66,9 @@ Dashboard
                     </div>
                     <div class="ml-4 mt-2 flex-shrink-0">
                       <span class="inline-flex rounded-md shadow-sm">
-                        <button @click="showSlideover = !showSlideover" type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                        <a href="{% url 'dashboard:new_discussion' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
                           Add Discussion Post
-                        </button>
+                        </a>
                       </span>
                     </div>
                   </div>
@@ -42,7 +76,7 @@ Dashboard
         </li>
       </ul>
       {% for action in actions %}
-      <p>{{ target.verb }}</p>
+      <p>{{ action.verb }} {% url 'dashboard:discussion_detail' action.target.id %}</p>
       {% endfor %}
   </div>
 </div>

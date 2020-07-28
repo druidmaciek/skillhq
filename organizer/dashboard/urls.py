@@ -16,7 +16,7 @@ urlpatterns = [
     path('discussion/<int:post_id>/newComment/', views.add_comment, name='add_comment'),
     path('discussion/<int:comment_id>/reply/', views.add_reply, name='add_reply'),
     path('discussion/<int:post_id>/', views.post_detail, name='discussion_detail'),
-
+    path('learningLog/new/', views.add_learning_log, name='add_log'),
 ]
 
 if settings.DEBUG:
