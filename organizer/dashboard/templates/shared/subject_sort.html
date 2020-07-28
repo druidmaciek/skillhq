@@ -1,0 +1,18 @@
+<div class="px-4 py-5 text-gray-900 leading-8 mt-4">
+  <nav>
+    <form method="GET" action="{{ endpoint }}">
+      {% if selected_subject %}
+
+      <label for="subject_filter" class="block text-sm leading-5 font-medium text-gray-700">Subject: <span class="text-gray-500">{{ selected_subject }}</span></label>
+      {% else %}
+      <label for="subject_filter" class="block text-sm leading-5 font-medium text-gray-700">Sort by Subject: </label>
+      {% endif %}
+      <select onchange="this.form.submit()" name="subject" id="subject_filter" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+        <option value="">All Subjects</option>
+        {% for subject in subjects %}
+        <option {% if selected_subject == subject.name %} selected {% endif %} value="{{ subject }}">{{ subject }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </nav>
+</div>
