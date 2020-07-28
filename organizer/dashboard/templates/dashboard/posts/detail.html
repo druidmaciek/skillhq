@@ -1,0 +1,112 @@
+{% extends "app_base.html" %}
+
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% load dashboard_tags %}
+
+{% block js %}
+
+{% endblock %}
+
+
+
+{% block app_content %}
+
+
+<main>
+  <div class="mx-auto sm:px-6 lg:px-8">
+  <div class="bg-white overflow-hidden sm:rounded-md mb-4">
+      <div class="px-4 py-5 sm:px-6">
+          <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+            <div class="ml-4 mt-2">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  {{ post.title }}
+              </h3>
+            </div>
+          </div>
+          <div>
+              <div class="mt-4 prose lg:prose-xl">
+                  {{ post.content|markdown }}
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+    <div class="mx-auto sm:px-6 lg:px-8 mt-4">
+  <div class="bg-white overflow-hidden sm:rounded-md mb-4">
+      <div class="px-4 py-5 sm:px-6">
+          <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+            <div class="ml-4 mt-2">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Comments
+              </h3>
+            </div>
+          </div>
+
+          <div class="mt-4">
+
+              <ul>
+
+                  <li x-data="{ reply: false }" class="rounded mb-2 p-4 bg-gray-100">
+                      <div>
+                          <p class="text-indigo-500 font-semibold">@JohnnyPalec</p>
+                          <p class="text-gray-400 text-xs">at 2020.10.12</p>
+                      </div>
+                      <p class="text-gray-500">
+                          lorem ispus sipsum badad dipsum laradatsupm badadpusom
+                          lorem ispus sipsum badad dipsum laradatsupm badadpusom
+                          lorem ispus sipsum badad dipsum laradatsupm badadpusom
+                      </p>
+                      <div class="flex justify-end">
+                          <button
+                                  @click="reply = !reply"
+                                  class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700">Reply</button>
+                      </div>
+                      <div x-show.transition.in.duration.200.origin.top.right="reply">
+
+                          <div class="mt-4">
+                              <label class="block text-sm font-medium leading-5 text-gray-700">Reply</label>
+                              <div class="w-full flex rounded-md shadow-sm">
+                                  <textarea  required name="comment" rows="4" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                              </div>
+                              <p class="mt-2 text-sm text-gray-500">Supports Markdown</p>
+                          </div>
+
+                          <span class="mt-8 inline-flex rounded-md shadow-sm">
+                          <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                            Reply to Comment
+                          </button>
+                      </span>
+                      </div>
+                  </li>
+
+              </ul>
+
+          </div>
+
+
+          <div class="mt-4">
+                  <label for="content" class="block text-sm font-medium leading-5 text-gray-700">Comment</label>
+                  <div class="w-full flex rounded-md shadow-sm">
+                      <textarea  required name="comment" id="content" rows="4" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500">Supports Markdown</p>
+          </div>
+
+          <span class="mt-8 inline-flex rounded-md shadow-sm">
+              <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                Comment
+              </button>
+          </span>
+      </div>
+  </div>
+</div>
+
+    </main>
+{% endblock %}
