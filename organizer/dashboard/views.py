@@ -67,7 +67,13 @@ def note_detail(request, note_id):
                                                   "note": note}
     )
 
-
+@login_required
+def note_list(request):
+    notes = Note.objects.filter(resource__user=request.user)
+    return render(request, 'dashboard/dashboard_notes.html', {
+        'section': 'notes',
+        'notes': notes,
+    })
 @login_required
 def resources_list(request):
     tasks = Task.objects.filter(resource__user=request.user)

@@ -9,6 +9,7 @@ urlpatterns = [
     path("", views.dashboard, name="dashboard"),
     path('resources/', views.resources_list, name='resource_list'),
     path("resource/<int:rid>/", views.resource_detail, name="resource_details"),
+    path("notes/list/", views.note_list, name='note-list'),
     path("notes/new/", views.new_note, name='new_note'),
     path("notes/<int:note_id>/", views.note_detail, name="note_detail"),
     path("disscusion/", views.discussions, name='discussion_list'),
