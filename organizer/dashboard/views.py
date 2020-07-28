@@ -182,6 +182,7 @@ def add_learning_log(request):
         log.user = request.user
         log.save()
         messages.success(request, 'Learning achievement logged')
+        create_action(request.user, 'learned today:', log)
     else:
         messages.error(request, "Can't add to log")
     return redirect(reverse_lazy('dashboard:dashboard'))
