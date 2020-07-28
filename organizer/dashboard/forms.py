@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Resource, Note
+from .models import Resource, Post
 
 
 class AddResourceForm(forms.ModelForm):
@@ -10,3 +10,10 @@ class AddResourceForm(forms.ModelForm):
     class Meta:
         model = Resource
         fields = ("title", "subject", "resource_type", "url", "description")
+
+
+class AddDiscussionForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ("title", "content")

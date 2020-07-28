@@ -11,6 +11,8 @@ urlpatterns = [
     path("resource/<int:rid>/", views.resource_detail, name="resource_details"),
     path("notes/new/", views.new_note, name='new_note'),
     path("notes/<int:note_id>/", views.note_detail, name="note_detail"),
+    path("disscusion/", views.discussions, name='discussion_list'),
+    path('discussion/new/', views.add_discussion, name='new_discussion')
 
 ]
 

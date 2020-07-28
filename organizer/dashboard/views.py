@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.contrib import messages
 
-from .forms import AddResourceForm
-from .models import Note, Resource, Task, Subject
-
+from .forms import AddResourceForm, AddDiscussionForm
+from .models import Note, Resource, Task, Subject, Post
+from actions.models import Action
 
 @login_required
 def dashboard(request):
@@ -13,6 +14,10 @@ def dashboard(request):
         profile.first_login = False
         profile.save()
         return redirect(reverse_lazy('account:edit'))
+
+    # actions
+    actions = Action.objects.all()
+    actions = actions[:10]
 
     resources = Resource.objects.filter(user=request.user)
     tasks = Task.objects.filter(resource__user=request.user)
@@ -25,7 +30,8 @@ def dashboard(request):
             "resources": resources,
             "tasks": tasks,
             "form": AddResourceForm(),
-            "all_subjects": subjects
+            "all_subjects": subjects,
+            'actions': actions,
         },
     )
 
@@ -86,3 +92,31 @@ def resources_list(request):
             "all_subjects": Subject.objects.all()
         },
     )
+
+
+@login_required
+def discussions(request):
+    posts = Post.objects.all()
+    return render(request, 'dashboard/dashboard_discussion.html',{
+        'section': 'discussion',
+        'posts': posts,
+    })
+
+
+@login_required
+def add_discussion(request):
+    error = None
+    if request.method == "POST":
+        form = AddDiscussionForm(data=request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            messages.success(request, f'"{post.title}" added.')
+            return redirect(reverse_lazy('dashboard:discussion_list'))
+        else:
+            error = "Error adding post"
+    return render(request, 'dashboard/posts/new.html', {
+        'form': AddDiscussionForm(),
+        'error': error
+    })

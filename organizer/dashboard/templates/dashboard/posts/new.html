@@ -1,0 +1,62 @@
+{% extends "app_base.html" %}
+
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
+
+
+
+{% block app_content %}
+
+
+<main x-data="{ showSlideover: false }">
+  {% include "dashboard/slideover.html" %}
+  <div class="mx-auto sm:px-6 lg:px-8">
+  <div class="bg-white overflow-hidden sm:rounded-md mb-4">
+      <div class="px-4 py-5 sm:px-6">
+          <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+            <div class="ml-4 mt-2">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">
+                Add Discussion
+              </h3>
+            </div>
+          </div>
+          {% if error %}
+          <p class="text-red-400">{{ error }}</p>
+          {% endif %}
+          <form class="mt-8" action="{% url 'dashboard:new_discussion' %}" method="POST">
+              {% csrf_token %}
+          <div>
+              <div>
+                  <label for="title" class="block text-sm font-medium leading-5 text-gray-700">Post Title</label>
+                  <div class="mt-1 relative rounded-md shadow-sm">
+                    <input required id="title" name="title" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="Title">
+                  </div>
+              </div>
+              <div class="mt-4">
+                  <label for="content" class="block text-sm font-medium leading-5 text-gray-700">Content</label>
+                  <div class="w-full flex rounded-md shadow-sm">
+                      <textarea  required name="content" id="content" rows="10" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500">Supports Markdown</p>
+              </div>
+
+              <span class="mt-8 inline-flex rounded-md shadow-sm">
+                  <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
+                    Publish
+                  </button>
+              </span>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+    </main>
+{% endblock %}

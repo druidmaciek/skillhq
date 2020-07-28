@@ -1,0 +1,53 @@
+{% extends "app_base.html" %}
+
+{% load static %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
+
+
+
+{% block app_content %}
+
+
+
+
+<main x-data="{ showSlideover: false }">
+  {% include "dashboard/slideover.html" %}
+  <div class="mx-auto sm:px-6 lg:px-8">
+  <div class="bg-white overflow-hidden sm:rounded-md h-64 mb-4">
+      <ul>
+        <li>
+          <div class="bg-white px-4 py-5 sm:px-6">
+                  <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
+                    <div class="ml-4 mt-2">
+                      <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Recent Discussions
+                      </h3>
+                    </div>
+                    <div class="ml-4 mt-2 flex-shrink-0">
+                      <span class="inline-flex rounded-md shadow-sm">
+                        <a href="{% url 'dashboard:new_discussion' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                          Add Discussion Post
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+        </li>
+          {% for post in posts %}
+          <li>
+                {{ post.title }}
+          </li>
+          {% endfor %}
+      </ul>
+  </div>
+</div>
+
+    </main>
+{% endblock %}
