@@ -122,14 +122,31 @@ class Comment(models.Model):
                              on_delete=models.CASCADE,
                              related_name='comments')
     user = models.ForeignKey(User,
-                             on_delete=models.CASCADE,
-                             related_name='comments')
+                             on_delete=models.CASCADE)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ("-created",)
+        ordering = ("created",)
 
     def __str__(self):
         return f'Comment by {self.user.username}'
+
+
+class CommentReply(models.Model):
+    comment = models.ForeignKey(Comment,
+                                on_delete=models.CASCADE,
+                                related_name='replies')
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ("created",)
+
+    def __str__(self):
+        return f'Comment reply by {self.user.username}'
+

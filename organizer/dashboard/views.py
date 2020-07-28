@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.views.decorators.http import require_POST
 
-from .forms import AddResourceForm, AddDiscussionForm
-from .models import Note, Resource, Task, Subject, Post
+from .forms import AddResourceForm, AddDiscussionForm, AddCommentForm, AddCommentReplyForm
+from .models import Note, Resource, Task, Subject, Post, Comment
 from actions.models import Action
 
 @login_required
@@ -128,3 +129,35 @@ def post_detail(request, post_id):
     return render(request, 'dashboard/posts/detail.html', {
         'post': post
     })
+
+
+@login_required
+@require_POST
+def add_comment(request, post_id):
+    form = AddCommentForm(data=request.POST)
+    post = get_object_or_404(Post, pk=post_id)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user = request.user
+        comment.post = post
+        form.save()
+        messages.success(request, 'comment added.')
+    else:
+        messages.error(request, "Can't add comment.")
+    return redirect(reverse_lazy("dashboard:discussion_detail", args=(post.id,)))
+
+
+@login_required
+@require_POST
+def add_reply(request, comment_id):
+    form = AddCommentReplyForm(data=request.POST)
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if form.is_valid():
+        reply = form.save(commit=False)
+        reply.user = request.user
+        reply.comment = comment
+        form.save()
+        messages.success(request, 'comment added.')
+    else:
+        messages.error(request, "Can't add comment.")
+    return redirect(reverse_lazy("dashboard:discussion_detail", args=(comment.post.id,)))

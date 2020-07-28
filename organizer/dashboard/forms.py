@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Resource, Post
+from .models import Resource, Post, Comment, CommentReply
 
 
 class AddResourceForm(forms.ModelForm):
@@ -17,3 +17,19 @@ class AddDiscussionForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ("title", "content")
+
+
+class AddCommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('content',)
+
+
+class AddCommentReplyForm(forms.ModelForm):
+
+    class Meta:
+        model = CommentReply
+        fields = ('content',)
+
+
