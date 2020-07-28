@@ -111,7 +111,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ("-created",)
+        ordering = ("-updated",)
 
     def __str__(self):
         return self.title
