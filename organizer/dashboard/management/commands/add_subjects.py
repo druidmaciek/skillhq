@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from dashboard.models import Subject
 
-SUBJECTS = [
+SUBJECTS = {
     "Vue.js",
     "Alpine.js",
     "React",
@@ -39,7 +39,7 @@ SUBJECTS = [
     "Test Driven Development",
     "AWS",
     "Azure",
-]
+}
 
 
 class Command(BaseCommand):
