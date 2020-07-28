@@ -234,8 +234,8 @@
                 <li class="sidebar-option {% if section == 'resources' %}sidebar-option-selected{% endif %} px-2">
                   <a class="" href="{% url 'dashboard:resource_list' %}">Materials</a>
                 </li>
-                <li class="sidebar-option px-2">
-                  <a class="" href="#">Notes</a>
+                <li class="sidebar-option {% if section == 'notes' %}sidebar-option-selected{% endif %} px-2">
+                  <a class="" href="{% url 'dashboard:note_list' %}">Notes</a>
                 </li>
                 <li class="sidebar-option px-2">
                   <a class="" href="#">Tasks</a>
