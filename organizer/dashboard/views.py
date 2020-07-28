@@ -115,7 +115,7 @@ def add_discussion(request):
             post.user = request.user
             post.save()
             messages.success(request, f'"{post.title}" added.')
-            create_action(request.user, 'started', post)
+            create_action(request.user, 'started discussion', post)
             return redirect(reverse_lazy('dashboard:discussion_list'))
         else:
             error = "Error adding post"

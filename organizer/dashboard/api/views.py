@@ -72,8 +72,7 @@ class TaskViewSet(BaseViewSet):
         response = super(TaskViewSet, self).partial_update(request, pk)
         if response.status_code == 200:
             if request.data['status'] and request.data['status'] == 'completed':
-
-                create_action(request.user, 'completed task')
+                create_action(request.user, 'completed a task')
         return response
 
 

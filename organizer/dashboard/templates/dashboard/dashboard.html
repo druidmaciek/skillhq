@@ -54,7 +54,7 @@ Dashboard
 
 
 
-  <div class="bg-white overflow-hidden sm:rounded-md h-64 mb-4">
+  <div class="bg-white overflow-hidden sm:rounded-md mb-4">
       <ul>
         <li>
           <div class="bg-white px-4 py-5 sm:px-6">
@@ -74,10 +74,29 @@ Dashboard
                   </div>
                 </div>
         </li>
+        {% for action in actions %}
+          <li>
+              <div class="bg-gray-50 px-4 py-5 sm:px-6 m-4 flex items-center">
+
+                  <div>
+                      <div>
+                          <a href="" class="text-indigo-500 font-medium">@{{ action.user.username }}</a>
+                          <span>{{ action.verb }} {% if action.target %}<a class="text-indigo-500" href="{% url 'dashboard:discussion_detail' action.target.id %}">{{ action.target }}</a>{% endif %}</span>
+                      </div>
+                      <p class="text-gray-500 text-sm">{{ action.created }}</p>
+                  </div>
+                  <div>
+
+                  </div>
+
+
+              </div>
+          </li>
+        {% endfor %}
+
+
       </ul>
-      {% for action in actions %}
-      <p>{{ action.verb }} {% url 'dashboard:discussion_detail' action.target.id %}</p>
-      {% endfor %}
+
   </div>
 </div>
 
