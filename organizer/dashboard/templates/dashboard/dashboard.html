@@ -83,7 +83,7 @@ Dashboard
                           <a href="" class="text-indigo-500 font-medium">@{{ action.user.username }}</a>
                           <span>{{ action.verb }} {% if action.target %}<a class="text-indigo-500" href="{% url 'dashboard:discussion_detail' action.target.id %}">{{ action.target }}</a>{% endif %}</span>
                       </div>
-                      <p class="text-gray-500 text-sm">{{ action.created }}</p>
+                      <p class="text-gray-500 text-sm">{{ action.created|timesince }} ago</p>
                   </div>
                   <div>
 
