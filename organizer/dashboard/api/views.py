@@ -8,7 +8,7 @@ from ..models import Resource, Note, Task, Goal, Post, Comment, Subject
 from .serializers import ResourceSerializer, \
     TaskSerializer, NoteSerializer, GoalSerializer, \
     PostSerializer, CommentSerializer
-
+from actions.utils import create_action
 
 class BaseViewSet(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -67,6 +67,14 @@ class TaskViewSet(BaseViewSet):
     def get_queryset(self):
         user = self.request.user
         return Task.objects.filter(resource__user=user)
+
+    def partial_update(self, request, pk=None):
+        response = super(TaskViewSet, self).partial_update(request, pk)
+        if response.status_code == 200:
+            if request.data['status'] and request.data['status'] == 'completed':
+
+                create_action(request.user, 'completed task')
+        return response
 
 
 class NotesViewSet(BaseViewSet):
