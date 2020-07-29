@@ -63,7 +63,7 @@ class Task(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ("-created",)
+        ordering = ("created",)
 
     def __str__(self):
         return self.title
