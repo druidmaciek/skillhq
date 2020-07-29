@@ -16,6 +16,7 @@ def dashboard(request):
     if profile.first_login:
         profile.first_login = False
         profile.save()
+        create_action(request.user, 'joined SkillHQ')
         return redirect(reverse_lazy('account:edit'))
 
     # actions
