@@ -6,17 +6,16 @@ from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
 from .models import Profile
 
 
+
 def register(request):
     if request.method == "POST":
-        user_form = UserRegistrationForm(request.POST)
+        user_form = UserRegistrationForm(data=request.POST)
         profile_form = ProfileEditForm(data=request.POST, files=request.FILES)
         if user_form.is_valid(): #and profile_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data["password"])
             new_user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = new_user
-            profile.save()
+            Profile.objects.create(user=new_user)
             return render(request, "account/register_done.html", {"new_user": new_user})
     else:
         user_form = UserRegistrationForm()
