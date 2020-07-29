@@ -225,17 +225,21 @@
           <div class="bg-white sm:rounded-md px-4 py-5 text-gray-900 leading-8">
             <nav>
               <ul>
-                <li class="sidebar-option {% if section == 'dashboard' %}sidebar-option-selected{% endif %} px-2">
-                  <a href="{% url 'dashboard:dashboard' %}">Main Feed</a>
+                <li onclick="location.href='{% url 'dashboard:dashboard' %}'"
+                    class="sidebar-option {% if section == 'dashboard' %}sidebar-option-selected{% endif %} px-2">
+                  Main Fee
                 </li>
-                <li class="sidebar-option {% if section == 'discussion' %}sidebar-option-selected{% endif %} px-2">
-                  <a class="" href="{% url 'dashboard:discussion_list' %}">Discussion</a>
+                <li onclick="location.href='{% url 'dashboard:discussion_list' %}'"
+                        class="sidebar-option {% if section == 'discussion' %}sidebar-option-selected{% endif %} px-2">
+                  Discussion
                 </li>
-                <li class="sidebar-option {% if section == 'resources' %}sidebar-option-selected{% endif %} px-2">
-                  <a class="" href="{% url 'dashboard:resource_list' %}">Materials</a>
+                <li onclick="location.href='{% url 'dashboard:resource_list' %}'"
+                        class="sidebar-option {% if section == 'resources' %}sidebar-option-selected{% endif %} px-2">
+                  Materials
                 </li>
-                <li class="sidebar-option {% if section == 'notes' %}sidebar-option-selected{% endif %} px-2">
-                  <a class="" href="{% url 'dashboard:note_list' %}">Notes</a>
+                <li onclick="location.href='{% url 'dashboard:note_list' %}'"
+                        class="sidebar-option {% if section == 'notes' %}sidebar-option-selected{% endif %} px-2">
+                  Notes
                 </li>
                 <li class="sidebar-option px-2">
                   <a class="" href="#">Tasks</a>
