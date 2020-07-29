@@ -144,7 +144,6 @@ if not DEBUG:
     )
 
 
-
 if not DEBUG:
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_BUCKET")
