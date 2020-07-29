@@ -10,7 +10,7 @@ def register(request):
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
         profile_form = ProfileEditForm(data=request.POST, files=request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid(): #and profile_form.is_valid():
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data["password"])
             new_user.save()

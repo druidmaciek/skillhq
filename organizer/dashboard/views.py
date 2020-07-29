@@ -72,10 +72,19 @@ def note_detail(request, note_id):
 def note_list(request):
     notes = Note.objects.filter(resource__user=request.user)
     subjects = request.user.subjects.all()
+
+    subject_filter = request.GET.get('subject')
+    subject = None
+    if subject_filter:
+        subject = Subject.objects.get(name=subject_filter)
+        notes = notes.filter(resource__subject=subject.name)
+
+
     return render(request, 'dashboard/dashboard_notes.html', {
         'section': 'notes',
         'notes': notes,
-        'subjects': subjects
+        'subjects': subjects,
+        'selected_subject': subject.name if subject else None,
     })
 @login_required
 def resources_list(request):
@@ -89,7 +98,6 @@ def resources_list(request):
         resources = resources.filter(subject=subject.name)
 
     subjects = request.user.subjects.all()
-    print(subject.name if subject else None)
     return render(
         request,
         "dashboard/dashboard_resources.html",
