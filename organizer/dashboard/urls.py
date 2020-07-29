@@ -7,6 +7,7 @@ from . import views
 app_name = "dashboard"
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
+    path('profile/<str:username>/', views.profile, name='profile'),
     path('resources/', views.resources_list, name='resource_list'),
     path("resource/<int:rid>/", views.resource_detail, name="resource_details"),
     path("notes/list/", views.note_list, name='note_list'),

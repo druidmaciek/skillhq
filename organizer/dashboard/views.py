@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -186,3 +187,11 @@ def add_learning_log(request):
     else:
         messages.error(request, "Can't add to log")
     return redirect(reverse_lazy('dashboard:dashboard'))
+
+
+@login_required
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'dashboard/profile/profile.html', {
+        'user': user
+    })
