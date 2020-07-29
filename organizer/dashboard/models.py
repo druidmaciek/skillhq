@@ -45,6 +45,9 @@ class Subject(models.Model):
     users = models.ManyToManyField(User,
                                    related_name='subjects')
 
+    class Meta:
+        ordering = ("name",)
+
     def __str__(self):
         return self.name
 
