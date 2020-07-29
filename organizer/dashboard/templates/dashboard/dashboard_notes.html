@@ -31,7 +31,7 @@ Dashboard
                         Notes
                       </h3>
                     </div>
-                    <div class="ml-4 mt-2 flex-shrink-0">
+                    <div class="hidden ml-4 mt-2 flex-shrink-0">
                       <span class="inline-flex rounded-md shadow-sm">
                         <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
                           Add New Note
@@ -45,12 +45,13 @@ Dashboard
 
       <div class="p-4">
         <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {% for note in notes %}
           <li class="col-span-1 bg-white rounded-lg shadow">
             <div class="w-full flex items-center justify-between p-6 space-x-6">
               <div class="flex-1 truncate">
                 <div class="flex items-center space-x-3">
                   <h3 class="text-gray-900 text-sm leading-5 font-medium truncate">{{ note.title }}</h3>
-                  <span class="flex-shrink-0 inline-block px-2 py-0.5 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full">Admin</span>
+                  <span class="flex-shrink-0 inline-block px-2 py-0.5 text-teal-800 text-xs leading-4 font-medium bg-teal-100 rounded-full">{{ note.resource.subject }}</span>
                 </div>
                 <p class="mt-1 text-gray-500 text-sm leading-5 truncate">{{ note.resource.title }}</p>
               </div>
@@ -59,25 +60,23 @@ Dashboard
             <div class="border-t border-gray-200">
               <div class="-mt-px flex">
                 <div class="w-0 flex-1 flex border-r border-gray-200">
-                  <a href="#" class="group hover:bg-indigo-300 hover:text-indigo-700 relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-indigo-700" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
+                  <a href="{% url 'dashboard:note_detail' note.id %}" class="group hover:bg-indigo-300 hover:text-indigo-700 relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">
+
+                    <svg class="w-5 h-5 text-gray-400 group-hover:text-indigo-700"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                     <span class="ml-3">View</span>
                   </a>
                 </div>
-                <div class="-ml-px w-0 flex-1 flex">
-                  <a href="#" class="group hover:bg-red-300 hover:text-red-700 relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-red-700" viewBox="0 0 20 20" fill="currentColor">
-                      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                    </svg>
-                    <span class="ml-3">Delete</span>
-                  </a>
-                </div>
+<!--                <div class="-ml-px w-0 flex-1 flex">-->
+<!--                  <a href="#" class="group hover:bg-red-300 hover:text-red-700 relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10 transition ease-in-out duration-150">-->
+<!--                    <svg class="w-5 h-5 text-gray-400 group-hover:text-red-700"   fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>-->
+<!--                    <span class="ml-3">Delete</span>-->
+<!--                  </a>-->
+<!--                </div>-->
               </div>
             </div>
           </li>
+          {% endfor %}
 </ul>
 
       </div>
