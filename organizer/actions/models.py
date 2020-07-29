@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Action(models.Model):
-    user = models.ForeignKey('auth.User',
+    user = models.ForeignKey(User,
                              related_name='actions',
                              db_index=True,
                              on_delete=models.CASCADE)
@@ -20,6 +21,9 @@ class Action(models.Model):
     target = GenericForeignKey('target_ct', 'target_id')
     created = models.DateTimeField(auto_now_add=True,
                                    db_index=True)
+    users_like = models.ManyToManyField(User,
+                                        related_name='actions_liked',
+                                        blank=True)
 
     class Meta:
         ordering = ('-created',)
