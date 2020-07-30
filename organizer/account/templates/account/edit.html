@@ -8,7 +8,12 @@ Edit your Account
 {% block app_content %}
 
 
-<div class="bg-white shadow overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16 py-8 -mt-2">
+<div class="mx-auto sm:px-6 lg:px-8">
+  <div class="bg-white overflow-hidden sm:rounded-md mb-4">
+      <ul>
+        <li>
+          <div class="bg-white px-4 py-5 sm:px-6">
+                  <div class="bg-white overflow-hidden sm:rounded-lg max-w-7xl mx-auto sm:px-6 lg:px-8 mt-16 py-8 -mt-2">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
   <div>
@@ -339,6 +344,13 @@ Edit your Account
 
 
 </div>
+
+                </div>
+        </li>
+      </ul>
+  </div>
+</div>
+
 
 
 
