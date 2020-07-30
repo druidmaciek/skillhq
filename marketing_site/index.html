@@ -9,214 +9,490 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
 
-  <style>
-     .brand {
-       font-family: 'Bebas Neue', cursive;
-     }
-  </style>
-
 </head>
 <body>
-    <div x-data="{ showMobileMenu: false }" class="relative bg-white overflow-hidden">
-      <div class="relative pt-6 pb-16 md:pb-20 lg:pb-24 xl:pb-32">
-        <nav class="relative max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-6">
-          <div class="flex items-center flex-1">
+
+
+
+<div class="bg-gray-50">
+  <div class="relative overflow-hidden">
+    <div class="block absolute inset-y-0 h-full w-full">
+      <div class="relative h-full">
+        <svg class="absolute right-full transform translate-y-1/3 translate-x-1/4 md:translate-y-1/2 sm:translate-x-1/2 lg:translate-x-full" width="404" height="784" fill="none" viewBox="0 0 404 784">
+          <defs>
+            <pattern id="e229dbec-10e9-49ee-8ec3-0286ca089edf" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width="404" height="784" fill="url(#ad9a0a02-b58e-4a1d-8c36-1b649889af63)" />
+        </svg>
+        <svg class="absolute left-full transform -translate-y-3/4 -translate-x-1/4 sm:-translate-x-1/2 md:-translate-y-1/2 lg:-translate-x-3/4" width="404" height="784" fill="none" viewBox="0 0 404 784">
+          <defs>
+            <pattern id="d2a68204-c383-44b1-b99f-42ccff4e5365" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+            </pattern>
+          </defs>
+          <rect width="404" height="784" fill="url(#478e97d6-90df-4a89-8d63-30fdbb3c7e57)" />
+        </svg>
+      </div>
+    </div>
+
+    <div x-data="{ isOpen: false }" class="relative pt-6 pb-12 lg:pb-20">
+      <div class="max-w-screen-xl mx-auto px-4 sm:px-6">
+        <nav class="relative flex items-center justify-between sm:h-10 md:justify-center">
+          <div class="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
             <div class="flex items-center justify-between w-full md:w-auto">
               <a href="#" aria-label="Home">
                 <img class="h-8 w-auto sm:h-10" src="logo.svg" alt="Logo">
               </a>
               <div class="-mr-2 flex items-center md:hidden">
-                <button @click="showMobileMenu = !showMobileMenu" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" id="main-menu" aria-label="Main menu" aria-haspopup="true">
+                <button @click="isOpen = !isOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" id="main-menu" aria-label="Main menu" aria-haspopup="true">
                   <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
                 </button>
               </div>
             </div>
-            <div class="hidden md:block md:ml-10">
-              <a href="#product" class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Product</a>
-              <a href="#features" class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Features</a>
-              <a href="#pricing" class="ml-10 font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Pricing</a>
-            </div>
           </div>
-          <div class="hidden md:block text-right">
-            <span class="inline-flex rounded-md shadow-md">
-              <span class="inline-flex rounded-md shadow-xs">
-                <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-pink-600 bg-white hover:bg-gray-50 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink transition duration-150 ease-in-out">
-                  Log in
-                </a>
-              </span>
-            </span>
-            <span class="inline-flex rounded-md shadow-md">
-              <span class="inline-flex rounded-md shadow-xs">
-                <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-pink-500 hover:bg-pink-700 focus:outline-none focus:border-pink-300 focus:shadow-outline-pink transition duration-150 ease-in-out">
-                  Sign Up
-                </a>
-              </span>
+          <div class="hidden md:flex md:space-x-10">
+            <a href="#product" class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Product</a>
+            <a href="#features" class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Features</a>
+            <a href="#pricing" class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Pricing</a>
+            <a href="#faq" class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">FAQ</a>
+          </div>
+          <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
+            <span class="inline-flex rounded-md shadow">
+              <a href="https://app.skillhq.io/account/register/" class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out">
+                Sign Up
+              </a>
             </span>
           </div>
         </nav>
+      </div>
 
-        <!--
-          Mobile menu, show/hide based on menu open state.
+      <!--
+        Mobile menu, show/hide based on menu open state.
 
-          Entering: "duration-150 ease-out"
-            From: "opacity-0 scale-95"
-            To: "opacity-100 scale-100"
-          Leaving: "duration-100 ease-in"
-            From: "opacity-100 scale-100"
-            To: "opacity-0 scale-95"
-        -->
-        <div x-show="showMobileMenu"
-             x-transition:enter="duration-150 ease-out"
-             x-transition:enter-start="opacity-0 scale-95"
-             x-transition:enter-end="opacity-100 scale-100"
-             x-transition:leave:="duration-100 ease-in"
-             x-transition:leave-start="opacity-100 scale-100"
-             x-transition:leave-end="opacity-0 scale-95"
-                class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
-          <div class="rounded-lg shadow-md">
-            <div class="rounded-lg bg-white shadow-xs overflow-hidden" role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
-              <div class="px-5 pt-4 flex items-center justify-between">
-                <div>
-                  <img class="h-8 w-auto" src="logo.svg" alt="">
-                </div>
-                <div class="-mr-2">
-                  <button @click="showMobileMenu = !showMobileMenu" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Close menu">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div class="px-2 pt-2 pb-3">
-                <a href="#product" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">Product</a>
-                <a href="#features" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">Features</a>
-                <a href="#pricing" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">Pricing</a>
-              </div>
+        Entering: "duration-150 ease-out"
+          From: "opacity-0 scale-95"
+          To: "opacity-100 scale-100"
+        Leaving: "duration-100 ease-in"
+          From: "opacity-100 scale-100"
+          To: "opacity-0 scale-95"
+      -->
+      <div x-show="isOpen"
+           x-transition:enter="duration-150 ease-out"
+           x-transition:enter-start="opacity-0 scale-95"
+           x-transition:enter-end="opacity-100 scale-100"
+           x-transition:leave="duration-100 scale-100"
+           x-transition:leave-start="opacity-100 scale-100"
+           x-transition:leave-end="opacity-0 scale-95"
+           class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+        <div class="rounded-lg shadow-md">
+          <div class="rounded-lg bg-white shadow-xs overflow-hidden" role="menu" aria-orientation="vertical" aria-labelledby="main-menu">
+            <div class="px-5 pt-4 flex items-center justify-between">
               <div>
-                <a href="#" class="block w-full px-5 py-3 text-center font-medium text-pink-600 bg-gray-50 hover:bg-gray-100 hover:text-pink-700 focus:outline-none focus:bg-gray-100 focus:text-pink-700 transition duration-150 ease-in-out" role="menuitem">
-                  Log in
+                <img class="h-8 w-auto" src="logo.svg" alt="">
+              </div>
+              <div class="-mr-2">
+                <button @click="isOpen = !isOpen"  type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Close menu">
+                  <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="px-2 pt-2 pb-3">
+              <a href="#product" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">Product</a>
+              <a href="#features" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">Features</a>
+              <a href="#pricing" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">Pricing</a>
+              <a href="#faq" class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out" role="menuitem">FAQ</a>
+            </div>
+            <div>
+              <a href="https://app.skillhq.io/account/register/" class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700 focus:outline-none focus:bg-gray-100 focus:text-indigo-700 transition duration-150 ease-in-out" role="menuitem">
+                Sign Up
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="product" class="mt-10 mx-auto max-w-screen-xl px-4 sm:px-6 md:mt-16 lg:mt-20">
+        <div class="text-center">
+          <h2 class="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
+            Organise your
+            <br>
+            <span class="text-indigo-600">self-learning</span>
+          </h2>
+          <p class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+            Organise all your learning resources in one place, set tasks, and share what you learned.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="absolute inset-0 flex flex-col">
+        <div class="flex-1"></div>
+        <div class="flex-1 w-full bg-gray-800"></div>
+      </div>
+      <div class="max-w-screen-xl mx-auto px-4 sm:px-6">
+        <img class="relative rounded-lg shadow-lg" src="ss1.png" alt="App screenshot">
+      </div>
+    </div>
+  </div>
+  <div class="bg-gray-800">
+    <div class="max-w-screen-xl mx-auto pt-16 pb-20 px-4 sm:px-6 md:pb-24 lg:px-8">
+      <h3 class="text-center text-gray-400 text-sm font-semibold uppercase tracking-wide">Keep yourself motivated by setting tasks and sharing what you learnt</h3>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="features" class="py-12 bg-white">
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="lg:text-center">
+      <p class="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Organiser</p>
+      <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+        Organise your self-learning materials
+      </h3>
+      <p class="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
+        There are so many places we can have our learning materials, some physical books, some on your computer's disk some on websties like Udemy, Pluralsight, etc.
+        Keep track of all of them in one place.
+      </p>
+    </div>
+
+    <div class="mt-10">
+      <ul class="md:grid md:grid-cols-2 md:col-gap-8 md:row-gap-10">
+        <li>
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Organise Materials</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                Add your matetiarals, tag them with subjects, type of resource, optional url and description.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="mt-10 md:mt-0">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Set Tasks</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                Set Tasks for your learning materials, to keep yourself on track, to complete chapters, exercises, and sideprojects.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="mt-10 md:mt-0">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Add Notes</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                Create notes in markdown formats on your materials, and export them to files.
+              </p>
+            </div>
+          </div>
+        </li>
+        <li class="mt-10 md:mt-0">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                </svg>
+              </div>
+            </div>
+            <div class="ml-4">
+              <h4 class="text-lg leading-6 font-medium text-gray-900">Sort through your materials, tasks and notes</h4>
+              <p class="mt-2 text-base leading-6 text-gray-500">
+                Sort your materials/tasks/notes by subject or type to quickly see related resources.
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="bg-gray-50 overflow-hidden">
+  <div class="relative max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <svg class="absolute top-0 left-full transform -translate-x-1/2 -translate-y-3/4 lg:left-auto lg:right-full lg:translate-x-2/3 lg:translate-y-1/4" width="404" height="784" fill="none" viewBox="0 0 404 784">
+      <defs>
+        <pattern id="8b1b5f72-e944-4457-af67-0c6d15a99f38" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+        </pattern>
+      </defs>
+      <rect width="404" height="784" fill="url(#8b1b5f72-e944-4457-af67-0c6d15a99f38)" />
+    </svg>
+
+    <div class="relative lg:grid lg:grid-cols-3 lg:col-gap-8">
+      <div class="lg:col-span-1">
+        <p class="text-base leading-6 text-indigo-600 font-semibold tracking-wide uppercase">Community</p>
+        <h3 class="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
+          Keep yourself motivated and accountable
+        </h3>
+      </div>
+      <div class="mt-10 sm:grid sm:grid-cols-2 sm:col-gap-8 sm:row-gap-10 lg:col-span-2 lg:mt-0">
+        <div>
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <div class="mt-5">
+            <h4 class="text-lg leading-6 font-medium text-gray-900">Learning Log</h4>
+            <p class="mt-2 text-base leading-6 text-gray-500">
+              Share with other members what your learned each day, and see what others are learning.
+            </p>
+          </div>
+        </div>
+        <div class="mt-10 sm:mt-0">
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+            </svg>
+          </div>
+          <div class="mt-5">
+            <h4 class="text-lg leading-6 font-medium text-gray-900">Public Profiles</h4>
+            <p class="mt-2 text-base leading-6 text-gray-500">
+              See, what others are up too, and follow your favorite people.
+            </p>
+          </div>
+        </div>
+        <div class="mt-10 sm:mt-0">
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div class="mt-5">
+            <h4 class="text-lg leading-6 font-medium text-gray-900">Discussions</h4>
+            <p class="mt-2 text-base leading-6 text-gray-500">
+              Participate in community discussions.
+            </p>
+          </div>
+        </div>
+        <div class="mt-10 sm:mt-0">
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="mt-5">
+            <h4 class="text-lg leading-6 font-medium text-gray-900">Community Blog</h4>
+            <p class="mt-2 text-base leading-6 text-gray-500">
+              Read curated community content
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="pricing" class="bg-gray-900">
+  <div class="pt-12 sm:pt-16 lg:pt-24">
+    <div class="max-w-screen-xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto lg:max-w-none">
+        <h2 class="text-lg leading-6 font-semibold text-gray-300 uppercase tracking-wider">
+          Pricing
+        </h2>
+        <p class="mt-2 text-3xl leading-9 font-extrabold text-white sm:text-4xl sm:leading-10 lg:text-5xl lg:leading-none">
+          Chose the right price for you
+        </p>
+        <p class="mt-2 text-xl leading-7 text-gray-300">
+          Community features are free, organiser is a premium feature.
+          Choose a monthly or a annual plan.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="mt-8 pb-12 bg-gray-50 sm:mt-12 sm:pb-16 lg:mt-16 lg:pb-24">
+    <div class="relative">
+      <div class="absolute inset-0 h-3/4 bg-gray-900"></div>
+      <div class="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md mx-auto lg:max-w-5xl lg:grid lg:grid-cols-2 lg:gap-5">
+          <div class="rounded-lg shadow-lg overflow-hidden">
+            <div class="px-6 py-8 bg-white sm:p-10 sm:pb-6">
+              <div>
+                <h3 class="inline-flex px-4 py-1 rounded-full text-sm leading-5 font-semibold tracking-wide uppercase bg-indigo-100 text-indigo-600" id="tier-standard">
+                  Monthly
+                </h3>
+              </div>
+              <div class="mt-4 flex items-baseline text-6xl leading-none font-extrabold">
+                $7
+                <span class="ml-1 text-2xl leading-8 font-medium text-gray-500">
+                  /mo
+                </span>
+              </div>
+              <p class="mt-5 text-lg leading-7 text-gray-500">
+                Pay Every Month
+              </p>
+            </div>
+            <div class="px-6 pt-6 pb-8 bg-gray-50 sm:p-10 sm:pt-6">
+              <ul>
+                <li class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    Free 7 day Trial
+                  </p>
+                </li>
+                <li class="mt-4 flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    Community Features
+                  </p>
+                </li>
+                <li class="mt-4 flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    Materials Organizer
+                  </p>
+                </li>
+                <li class="mt-4 flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    30 day money back guarantee
+                  </p>
+                </li>
+              </ul>
+              <div class="mt-6 rounded-md shadow">
+                <a href="https://app.skillhq.io/account/register/?plan=monthly" class="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" aria-describedby="tier-standard">
+                  Start your free Trial
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 rounded-lg shadow-lg overflow-hidden lg:mt-0">
+            <div class="px-6 py-8 bg-white sm:p-10 sm:pb-6">
+              <div>
+                <h3 class="inline-flex px-4 py-1 rounded-full text-sm leading-5 font-semibold tracking-wide uppercase bg-indigo-100 text-indigo-600" id="tier-enterprise">
+                  Annual
+                </h3>
+              </div>
+              <div class="mt-4 flex items-baseline text-6xl leading-none font-extrabold">
+                $59
+                <span class="ml-1 text-2xl leading-8 font-medium text-gray-500">
+                  /mo
+                </span>
+              </div>
+              <p class="mt-5 text-lg leading-7 text-gray-500">
+                Pay once a year
+              </p>
+            </div>
+            <div class="px-6 pt-6 pb-8 bg-gray-50 sm:p-10 sm:pt-6">
+              <ul>
+                <li class="flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    Free 7 day Trial
+                  </p>
+                </li>
+                <li class="mt-4 flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    Community Features
+                  </p>
+                </li>
+                <li class="mt-4 flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    Materials Organizer
+                  </p>
+                </li>
+                <li class="mt-4 flex items-start">
+                  <div class="flex-shrink-0">
+                    <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p class="ml-3 text-base leading-6 text-gray-700">
+                    30 day money back guarantee
+                  </p>
+                </li>
+              </ul>
+              <div class="mt-6 rounded-md shadow">
+                <a href="https://app.skillhq.io/account/register/?plan=annual" class="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-900 hover:bg-gray-800 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out" aria-describedby="tier-enterprise">
+                  Start your free Trial
                 </a>
               </div>
             </div>
           </div>
         </div>
-
-        <main class="mt-8 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-20 xl:mt-24">
-          <div class="lg:grid lg:grid-cols-12 lg:gap-8">
-            <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-              <div class="text-sm font-semibold uppercase tracking-wide text-pink-400 sm:text-base lg:text-sm xl:text-base">
-                Coming soon
-              </div>
-              <h2 class="mt-1 text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:leading-none sm:text-6xl lg:text-5xl xl:text-6xl">
-                The Best Way for Self-Learners to
-                <br class="hidden md:inline">
-                <span id="headline" class="text-pink-600">Get Structure</span>
-              </h2>
-              <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                When you are self-learning many skills online, sooner or later you will encounter this problem.
-                  Too many courses, tutorials, eBooks, email courses, pdfs, and each one on a different platform.
-                  Bring structure to online learning chaos, and stay motivated.
-              </p>
-              <div class="mt-5 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-                <p class="text-base font-medium text-gray-900">
-                  Sign up to get notified when it’s ready.
-                </p>
-                <form action="#" method="POST" class="mt-3 sm:flex">
-                  <input aria-label="Email" class="appearance-none block w-full px-3 py-3 border border-gray-300 text-base leading-6 rounded-md placeholder-gray-500 shadow-sm focus:outline-none focus:placeholder-gray-400 focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:flex-1" placeholder="Enter your email">
-                  <button type="submit" class="mt-3 w-full px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-gray-800 shadow-sm hover:bg-gray-700 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray active:bg-gray-900 transition duration-150 ease-in-out sm:mt-0 sm:ml-3 sm:flex-shrink-0 sm:inline-flex sm:items-center sm:w-auto">
-                    Notify me
-                  </button>
-                </form>
-                <p class="mt-3 text-sm leading-5 text-gray-500">
-                  We care about the protection of your data. Read our
-                  <a href="#" class="font-medium text-gray-900 underline">Privacy Policy</a>.
-                </p>
-              </div>
+      </div>
+    </div>
+    <div class="mt-4 relative max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 lg:mt-5">
+      <div class="max-w-md mx-auto lg:max-w-5xl">
+        <div class="rounded-lg bg-gray-100 px-6 py-8 sm:p-10 lg:flex lg:items-center">
+          <div class="flex-1">
+            <div>
+              <h3 class="inline-flex px-4 py-1 rounded-full text-sm leading-5 font-semibold tracking-wide uppercase bg-white text-gray-800">
+                Free Account
+              </h3>
             </div>
-            <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-              <div class="relative mx-auto w-full rounded-lg shadow-lg lg:max-w-md">
-                <button type="button" class="relative block w-full rounded-lg overflow-hidden focus:outline-none focus:shadow-outline">
-                  <img class="w-full" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" alt="Woman making a sale">
-                  <div class="absolute inset-0 w-full h-full flex items-center justify-center">
-                    <svg class="h-20 w-20 text-pink-500" fill="currentColor" viewBox="0 0 84 84">
-                      <circle opacity="0.9" cx="42" cy="42" r="42" fill="white" />
-                      <path d="M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z" />
-                    </svg>
-                  </div>
-                </button>
-              </div>
+            <div class="mt-4 text-lg leading-7 text-gray-600">
+              Get full access to all of the community features to start sharing your learning progress for free and upgrade anytime you want.
             </div>
           </div>
-
-
-
-
-        </main>
-          <div id="product" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mt-48 mb-16 bg-pink-100 rounded border-2 border-pink-300 shadow-lg">
-              <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
-              <div class="max-w-3xl mx-auto prose text-gray-900">
-                  <!-- Content goes here -->
-                  <!-- start slipsum code -->
-
-                <img class="h-8 w-auto sm:h-10 float-right" src="logo.svg" alt="Logo">
-                <p class="text-3xl text-pink-500 font-black">We happy?</p>
-                  <p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass. </p>
-
-                  <p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
-
-                  <p>You think water moves fast? You should see ice. It moves like it has a mind. Like it knows it killed the world once and got a taste for murder. After the avalanche, it took us a week to climb out. Now, I don't know exactly when we turned on each other, but I know that seven of us survived the slide... and only five made it out. Now we took an oath, that I'm breaking now. We said we'd say it was the snow that killed the other two, but it wasn't. Nature is lethal but it doesn't hold a candle to man. </p>
-
-                  <p>Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be? He's the exact opposite of the hero. And most times they're friends, like you and me! I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass. </p>
-
-                  <!-- end slipsum code -->
-              </div>
+          <div class="mt-6 rounded-md shadow lg:mt-0 lg:ml-10 lg:flex-shrink-0">
+            <a href="https://app.skillhq.io/account/register/" class="flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-gray-900 bg-white hover:text-gray-700 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+              Create a Free Account
+            </a>
           </div>
-
-
-
-        <div class="py-12 bg-white" id="features">
-  <div class="max-w-xl mx-auto px-4 sm:px-6 lg:max-w-screen-xl lg:px-8">
-    <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-      <div>
-        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-          </svg>
-        </div>
-        <div class="mt-5">
-          <h5 class="text-lg leading-6 font-medium text-gray-900">Organize your resources</h5>
-          <p class="mt-2 text-base leading-6 text-gray-500">
-              Organize all your learning resources, and notes about them.
-
-          </p>
-        </div>
-      </div>
-      <div class="mt-10 lg:mt-0">
-        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-          </svg>
-        </div>
-        <div class="mt-5">
-          <h5 class="text-lg leading-6 font-medium text-gray-900">Stay Motivated</h5>
-          <p class="mt-2 text-base leading-6 text-gray-500">
-            Stay motivated, and on track by setting tasks and goals.
-          </p>
-        </div>
-      </div>
-      <div class="mt-10 lg:mt-0">
-        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-pink-500 text-white">
-          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
-        <div class="mt-5">
-          <h5 class="text-lg leading-6 font-medium text-gray-900">Export to CSV</h5>
-          <p class="mt-2 text-base leading-6 text-gray-500">
-            This is just placeholder option, till i come up with something better.
-          </p>
         </div>
       </div>
     </div>
@@ -224,265 +500,71 @@
 </div>
 
 
-      </div>
-    </div>
 
-
-<div class="bg-gray-900" id="pricing">
-  <div class="pt-12 px-4 sm:px-6 lg:px-8 lg:pt-20">
-    <div class="text-center">
-      <h2 class="text-lg leading-6 font-semibold text-gray-300 uppercase tracking-wider">
-        Pricing
+<div id="faq" class="bg-gray-50">
+  <div class="max-w-screen-xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-center text-3xl leading-9 font-extrabold text-gray-900 sm:text-4xl sm:leading-10">
+        Frequently asked questions
       </h2>
-      <p class="mt- text-3xl leading-9 font-extrabold text-white sm:text-4xl sm:leading-10 lg:text-5xl lg:leading-none">
-        The right price for you, whoever you are
-      </p>
-      <p class="mt-3 max-w-4xl mx-auto text-xl leading-7 text-gray-300 sm:mt-5 sm:text-2xl sm:leading-8">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit numquam eligendi quos odit doloribus molestiae voluptatum.
-      </p>
-    </div>
-  </div>
+      <div class="mt-6 border-t-2 border-gray-200 pt-6">
+        <dl>
+          <div x-data="{ isOpen: false }">
+            <dt class="text-lg leading-7">
+              <!-- Expand/collapse question button -->
+              <button @click="isOpen = !isOpen" class="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none focus:text-gray-900">
+                <span class="font-medium text-gray-900">
+                  What's the best thing about Switzerland?
+                </span>
+                <span class="ml-6 h-7 flex items-center">
+                  <!--
+                    Expand/collapse icon, toggle classes based on question open state.
 
-  <div class="mt-16 bg-white pb-12 lg:mt-20 lg:pb-20">
-    <div class="relative z-0">
-      <div class="absolute inset-0 h-5/6 bg-gray-900 lg:h-2/3"></div>
-      <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="relative lg:grid lg:grid-cols-7">
-          <div class="mx-auto max-w-md lg:mx-0 lg:max-w-none lg:col-start-1 lg:col-end-3 lg:row-start-2 lg:row-end-3">
-            <div class="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-l-lg">
-              <div class="flex-1 flex flex-col">
-                <div class="bg-white px-6 py-10">
-                  <div>
-                    <h3 class="text-center text-2xl leading-8 font-medium text-gray-900" id="tier-hobby">
-                      Monthly
-                    </h3>
-                    <div class="mt-4 flex items-center justify-center">
-                      <span class="px-3 flex items-start text-6xl leading-none tracking-tight text-gray-900">
-                        <span class="mt-2 mr-2 text-4xl font-medium">
-                          $
-                        </span>
-                        <span class="font-extrabold">
-                          9
-                        </span>
-                      </span>
-                      <span class="text-xl leading-7 font-medium text-gray-500">
-                        /month
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
-                  <ul>
-                    <li class="flex items-start">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                        Cancel Anytime
-                      </p>
-                    </li>
-                    <li class="mt-4 flex items-start">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                        30 Day Money Back Guarantee
-                      </p>
-                    </li>
-                    <li class="mt-4 flex items-start">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                        Another Benefit!
-                      </p>
-                    </li>
-                  </ul>
-                  <div class="mt-8">
-                    <div class="rounded-lg shadow-md">
-                      <a href="#" class="block w-full text-center rounded-lg border border-transparent bg-white px-6 py-3 text-base leading-6 font-medium text-pink-600 hover:text-pink-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150" aria-describedby="tier-hobby">
-                        Start your trial
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    Open: "-rotate-180", Closed: "rotate-0"
+                  -->
+                  <svg :class="{ '-rotate-180': isOpen, 'rotate-0': !isOpen }" class="h-6 w-6 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <dd :class="{ 'hidden': !isOpen, 'block': isOpen }" class="mt-2 pr-12">
+              <p class="text-base leading-6 text-gray-500">
+                I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+              </p>
+            </dd>
           </div>
-          <div class="mt-10 max-w-lg mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-start-3 lg:col-end-6 lg:row-start-1 lg:row-end-4">
-            <div class="relative z-10 rounded-lg shadow-xl">
-              <div class="pointer-events-none absolute inset-0 rounded-lg border-2 border-pink-600"></div>
-              <div class="absolute inset-x-0 top-0 transform translate-y-px">
-                <div class="flex justify-center transform -translate-y-1/2">
-                  <span class="inline-flex rounded-full bg-pink-600 px-4 py-1 text-sm leading-5 font-semibold tracking-wider uppercase text-white">
-                    Limited Deal
-                  </span>
-                </div>
-              </div>
-              <div class="bg-white rounded-t-lg px-6 pt-12 pb-10">
-                <div>
-                  <h3 class="text-center text-3xl leading-9 font-semibold text-gray-900 sm:-mx-6" id="tier-growth">
-                    Lifetime
-                  </h3>
-                  <div class="mt-4 flex items-center justify-center">
-                    <span class="px-3 flex items-start text-6xl leading-none tracking-tight text-gray-900 sm:text-6xl">
-                      <span class="mt-2 mr-2 text-4xl font-medium">
-                        $
-                      </span>
-                      <span class="font-extrabold">
-                        149
-                      </span>
-                    </span>
-                    <span class="text-2xl leading-8 font-medium text-gray-500">
-                      /month
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="border-t-2 border-gray-100 rounded-b-lg pt-10 pb-8 px-6 bg-gray-50 sm:px-10 sm:py-10">
-                <ul>
-                  <li class="flex items-start">
-                    <div class="flex-shrink-0">
-                      <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <p class="ml-3 text-base leading-6 font-bold text-gray-600">
-                      Lifetime Access
-                    </p>
-                  </li>
-                  <li class="mt-4 flex items-start">
-                    <div class="flex-shrink-0">
-                      <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                      Cancel Anytime
-                    </p>
-                  </li>
-                  <li class="mt-4 flex items-start">
-                    <div class="flex-shrink-0">
-                      <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                      30 Day Money Back Guarantee
-                    </p>
-                  </li>
-                  <li class="mt-4 flex items-start">
-                    <div class="flex-shrink-0">
-                      <svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                      Another Benefit!
-                    </p>
-                  </li>
-                </ul>
-                <div class="mt-10">
-                  <div class="rounded-lg shadow-md">
-                    <a href="#" class="block w-full text-center rounded-lg border border-transparent bg-pink-600 px-6 py-4 text-xl leading-6 font-medium text-white hover:bg-pink-500 focus:outline-none focus:border-pink-700 focus:shadow-outline-pink transition ease-in-out duration-150" aria-describedby="tier-growth">
-                      Start your trial
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div x-data="{ isOpen: false }" class="mt-6 border-t border-gray-200 pt-6">
+            <dt class="text-lg leading-7">
+              <!-- Expand/collapse question button -->
+              <button @click="isOpen = !isOpen" class="text-left w-full flex justify-between items-start text-gray-400 focus:outline-none focus:text-gray-900">
+                <span class="font-medium text-gray-900">
+                  What's the best thing about Switzerland?
+                </span>
+                <span class="ml-6 h-7 flex items-center">
+                  <!--
+                    Expand/collapse icon, toggle classes based on question open state.
+
+                    Open: "-rotate-180", Closed: "rotate-0"
+                  -->
+                  <svg :class="{ '-rotate-180': isOpen, 'rotate-0': !isOpen }" class="h-6 w-6 transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <dd :class="{ 'hidden': !isOpen, 'block': isOpen }" class="mt-2 pr-12">
+              <p class="text-base leading-6 text-gray-500">
+                I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.
+              </p>
+            </dd>
           </div>
-          <div class="mt-10 mx-auto max-w-md lg:m-0 lg:max-w-none lg:col-start-6 lg:col-end-8 lg:row-start-2 lg:row-end-3">
-            <div class="h-full flex flex-col rounded-lg shadow-lg overflow-hidden lg:rounded-none lg:rounded-r-lg">
-              <div class="flex-1 flex flex-col">
-                <div class="bg-white px-6 py-10">
-                  <div>
-                    <h3 class="text-center text-2xl leading-8 font-medium text-gray-900" id="tier-scale">
-                      Yearly
-                    </h3>
-                    <div class="mt-4 flex items-center justify-center">
-                      <span class="px-3 flex items-start text-6xl leading-none tracking-tight text-gray-900">
-                        <span class="mt-2 mr-2 text-4xl font-medium">
-                          $
-                        </span>
-                        <span class="font-extrabold">
-                          89
-                        </span>
-                      </span>
-                      <span class="text-xl leading-7 font-medium text-gray-500">
-                        /month
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
-                  <ul>
-                    <li class="flex items-start">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                        Cancel Anytime
-                      </p>
-                    </li>
-                    <li class="mt-4 flex items-start">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                        30 Day Money Back Guarantee
-                      </p>
-                    </li>
-                    <li class="mt-4 flex items-start">
-                      <div class="flex-shrink-0">
-                        <svg class="h-6 w-6 text-green-500" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <p class="ml-3 text-base leading-6 font-medium text-gray-500">
-                        Another Benefit!
-                      </p>
-                    </li>
-                  </ul>
-                  <div class="mt-8">
-                    <div class="rounded-lg shadow-md">
-                      <a href="#" class="block w-full text-center rounded-lg border border-transparent bg-white px-6 py-3 text-base leading-6 font-medium text-pink-600 hover:text-pink-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150" aria-describedby="tier-scale">
-                        Start your trial
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </dl>
       </div>
     </div>
-      <p class="text-center mt-4 text-gray-500 text-xs">Payments processed by <span class="font-medium">Stripe</span> under the company Maciej Janowski Dev</p>
   </div>
 </div>
 
-
-
-
-
-<div class="bg-gray-900">
-  <div class="max-w-screen-xl mx-auto py-4 px-4 sm:px-6 lg:py-4 lg:px-8">
-      <p class="mt-8 text-center leading-6 text-gray-400">
-        &copy; 2020 SkillHQ
-      </p>
-  </div>
-</div>
 
 
 
