@@ -1,14 +1,19 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.views.generic import TemplateView
 
 from .forms import AddResourceForm, AddDiscussionForm, AddCommentForm, AddCommentReplyForm, AddLearningLogForm
 from .models import Note, Resource, Task, Subject, Post, Comment, LearningLog
 from actions.models import Action
 from actions.utils import create_action
+
 
 @login_required
 def dashboard(request):
@@ -69,6 +74,7 @@ def note_detail(request, note_id):
                                                   "note": note}
     )
 
+
 @login_required
 def note_list(request):
     notes = Note.objects.filter(resource__user=request.user)
@@ -80,13 +86,14 @@ def note_list(request):
         subject = Subject.objects.get(name=subject_filter)
         notes = notes.filter(resource__subject=subject.name)
 
-
     return render(request, 'dashboard/dashboard_notes.html', {
         'section': 'notes',
         'notes': notes,
         'subjects': subjects,
         'selected_subject': subject.name if subject else None,
     })
+
+
 @login_required
 def resources_list(request):
     tasks = Task.objects.filter(resource__user=request.user)
@@ -98,13 +105,21 @@ def resources_list(request):
         subject = Subject.objects.get(name=subject_filter)
         resources = resources.filter(subject=subject.name)
 
+    resources_paused = resources.filter(status='Not Started/On Hold')
+    resources_in_progress = resources.filter(status='In Progress')
+    resources_completed = resources.filter(status="Completed")
+
+
+
     subjects = request.user.subjects.all()
     return render(
         request,
         "dashboard/dashboard_resources.html",
         {
             "section": "resources",
-            "resources": resources,
+            "resources_paused": resources_paused,
+            "resources_in_progress": resources_in_progress,
+            "resources_completed": resources_completed,
             "tasks": tasks,
             "form": AddResourceForm(),
             'subjects': subjects,
@@ -117,7 +132,7 @@ def resources_list(request):
 @login_required
 def discussions(request):
     posts = Post.objects.all()
-    return render(request, 'dashboard/dashboard_discussion.html',{
+    return render(request, 'dashboard/dashboard_discussion.html', {
         'section': 'discussion',
         'posts': posts,
     })

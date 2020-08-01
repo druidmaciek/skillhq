@@ -13,12 +13,18 @@ urlpatterns = [
     path("notes/list/", views.note_list, name='note_list'),
     path("notes/new/", views.new_note, name='new_note'),
     path("notes/<int:note_id>/", views.note_detail, name="note_detail"),
-    path("disscusion/", views.discussions, name='discussion_list'),
+    path("discussion/", views.discussions, name='discussion_list'),
     path('discussion/new/', views.add_discussion, name='new_discussion'),
     path('discussion/<int:post_id>/newComment/', views.add_comment, name='add_comment'),
     path('discussion/<int:comment_id>/reply/', views.add_reply, name='add_reply'),
     path('discussion/<int:post_id>/', views.post_detail, name='discussion_detail'),
     path('learningLog/new/', views.add_learning_log, name='add_log'),
+
+    # stripe
+    # path('config/', views.stripe_config),
+    # path('create-checkout-session/', views.create_checkout_session),
+    # path('success/', views.SuccessView.as_view()),
+    # path('cancelled/', views.CancelledView.as_view()),
 ]
 
 if settings.DEBUG:
