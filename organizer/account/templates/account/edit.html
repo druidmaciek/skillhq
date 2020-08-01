@@ -1,7 +1,13 @@
 {% extends "app_base.html" %}
 
+{% load static %}
+
 {% block title %}
 Edit your Account
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}
 
 
@@ -123,208 +129,59 @@ Edit your Account
       </div>
     </div>
 
-<!--    <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">-->
-<!--      <div>-->
-<!--        <h3 class="text-lg leading-6 font-medium text-gray-900">-->
-<!--          Personal Information-->
-<!--        </h3>-->
-<!--        <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">-->
-<!--          Use a permanent address where you can receive mail.-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="mt-6 sm:mt-5">-->
-<!--        <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="first_name" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            First name-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">-->
-<!--              <input id="first_name" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+            Current Plan: Free
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <span class="ml-3 inline-flex rounded-md shadow-sm">
 
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="last_name" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            Last name-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">-->
-<!--              <input id="last_name" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+          <button class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out">
+            Billing
+          </button>
+      </span>
+          </div>
+        </div>
+      
+      <div x-data="{ showConfirm: false }">
+      <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+          <label class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">
+            Delete Account
+          </label>
+          <div class="mt-1 sm:mt-0 sm:col-span-2">
+            <span class="ml-3 inline-flex rounded-md shadow-sm">
 
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="email" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            Email address-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm">-->
-<!--              <input id="email" type="email" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
+          <button type="button" @click="showConfirm = !showConfirm" class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition duration-150 ease-in-out">
+            Delete
+          </button>
+      </span>
+          </div>
+        </div>
 
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="country" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            Country / Region-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">-->
-<!--              <select id="country" class="block form-select w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--                <option>United States</option>-->
-<!--                <option>Canada</option>-->
-<!--                <option>Mexico</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="street_address" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            Street address-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm">-->
-<!--              <input id="street_address" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="city" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            City-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">-->
-<!--              <input id="city" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="state" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            State / Province-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">-->
-<!--              <input id="state" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-
-<!--        <div class="mt-6 sm:mt-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <label for="zip" class="block text-sm font-medium leading-5 text-gray-700 sm:mt-px sm:pt-2">-->
-<!--            ZIP / Postal-->
-<!--          </label>-->
-<!--          <div class="mt-1 sm:mt-0 sm:col-span-2">-->
-<!--            <div class="max-w-lg rounded-md shadow-sm sm:max-w-xs">-->
-<!--              <input id="zip" class="form-input block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+        <div x-show="showConfirm" class="bg-white shadow sm:rounded-lg">
+          <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              Delete your account
+            </h3>
+            <div class="mt-2 max-w-xl text-sm leading-5 text-gray-500">
+              <p>
+                Once you delete your account, you will lose all data associated with it.
+              </p>
+            </div>
+            <div class="mt-5">
+              <a href="{% url 'account:delete' %}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:bg-red-200 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                Delete account
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
-<!--    <div class="mt-8 border-t border-gray-200 pt-8 sm:mt-5 sm:pt-10">-->
-<!--      <div>-->
-<!--        <h3 class="text-lg leading-6 font-medium text-gray-900">-->
-<!--          Notifications-->
-<!--        </h3>-->
-<!--        <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">-->
-<!--          We'll always let you know about important changes, but you pick what else you want to hear about.-->
-<!--        </p>-->
-<!--      </div>-->
-<!--      <div class="mt-6 sm:mt-5">-->
-<!--        <div class="sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <div role="group" aria-labelledby="label-email">-->
-<!--            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">-->
-<!--              <div>-->
-<!--                <div class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700" id="label-email">-->
-<!--                  By Email-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="mt-4 sm:mt-0 sm:col-span-2">-->
-<!--                <div class="max-w-lg">-->
-<!--                  <div class="relative flex items-start">-->
-<!--                    <div class="flex items-center h-5">-->
-<!--                      <input id="comments" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">-->
-<!--                    </div>-->
-<!--                    <div class="ml-3 text-sm leading-5">-->
-<!--                      <label for="comments" class="font-medium text-gray-700">Comments</label>-->
-<!--                      <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="mt-4">-->
-<!--                    <div class="relative flex items-start">-->
-<!--                      <div class="flex items-center h-5">-->
-<!--                        <input id="candidates" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">-->
-<!--                      </div>-->
-<!--                      <div class="ml-3 text-sm leading-5">-->
-<!--                        <label for="candidates" class="font-medium text-gray-700">Candidates</label>-->
-<!--                        <p class="text-gray-500">Get notified when a candidate applies for a job.</p>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  <div class="mt-4">-->
-<!--                    <div class="relative flex items-start">-->
-<!--                      <div class="flex items-center h-5">-->
-<!--                        <input id="offers" type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">-->
-<!--                      </div>-->
-<!--                      <div class="ml-3 text-sm leading-5">-->
-<!--                        <label for="offers" class="font-medium text-gray-700">Offers</label>-->
-<!--                        <p class="text-gray-500">Get notified when a candidate accepts or rejects an offer.</p>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="mt-6 sm:mt-5 sm:border-t sm:border-gray-200 sm:pt-5">-->
-<!--          <div role="group" aria-labelledby="label-notifications">-->
-<!--            <div class="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">-->
-<!--              <div>-->
-<!--                <div class="text-base leading-6 font-medium text-gray-900 sm:text-sm sm:leading-5 sm:text-gray-700" id="label-notifications">-->
-<!--                  Push Notifications-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="sm:col-span-2">-->
-<!--                <div class="max-w-lg">-->
-<!--                  <p class="text-sm leading-5 text-gray-500">These are delivered via SMS to your mobile phone.</p>-->
-<!--                  <div class="mt-4">-->
-<!--                    <div class="flex items-center">-->
-<!--                      <input id="push_everything" name="form-input push_notifications" type="radio" class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">-->
-<!--                      <label for="push_everything" class="ml-3">-->
-<!--                        <span class="block text-sm leading-5 font-medium text-gray-700">Everything</span>-->
-<!--                      </label>-->
-<!--                    </div>-->
-<!--                    <div class="mt-4 flex items-center">-->
-<!--                      <input id="push_email" name="form-input push_notifications" type="radio" class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">-->
-<!--                      <label for="push_email" class="ml-3">-->
-<!--                        <span class="block text-sm leading-5 font-medium text-gray-700">Same as email</span>-->
-<!--                      </label>-->
-<!--                    </div>-->
-<!--                    <div class="mt-4 flex items-center">-->
-<!--                      <input id="push_nothing" name="form-input push_notifications" type="radio" class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">-->
-<!--                      <label for="push_nothing" class="ml-3">-->
-<!--                        <span class="block text-sm leading-5 font-medium text-gray-700">No push notifications</span>-->
-<!--                      </label>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
 
+      </div>
+    </div>
 
-  </div>
   <div class="mt-8 border-t border-gray-200 pt-5">
     <div class="flex justify-end">
       <span class="inline-flex rounded-md shadow-sm">

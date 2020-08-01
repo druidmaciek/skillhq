@@ -17,3 +17,19 @@ const deletePost = async (postId) => {
         console.error(e);
     }
 };
+
+// Delete Comment
+const deleteComment = async (commentId) => {
+    const csrftoken = getToken();
+    try {
+        const res = await axios.delete('/api/comments/'+ String(commentId) + '/',
+            { headers: { 'X-CSRFToken': csrftoken }}
+            );
+        const response = res.data;
+        // Todo remove from dom
+        location.reload();
+        return response;
+    } catch (e) {
+        console.error(e);
+    }
+};

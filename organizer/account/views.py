@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
 
 from .forms import ProfileEditForm, UserEditForm, UserRegistrationForm
 from .models import Profile
@@ -44,3 +45,9 @@ def edit(request):
         "account/edit.html",
         {"user_form": user_form, "profile_form": profile_form},
     )
+
+
+@login_required()
+def delete(request):
+    request.user.delete()
+    return render(request, 'account/delete_confirm.html')

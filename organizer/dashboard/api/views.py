@@ -102,6 +102,11 @@ class PostsViewSet(BaseViewSet):
         user = self.request.user
         return Post.objects.filter(user=user)
 
+    def destroy(self, request, *args, **kwargs):
+        response = super(PostsViewSet, self).destroy(request, *args, **kwargs)
+        messages.success(request, 'Post Deleted.')
+        return response
+
 
 class CommentsViewSet(BaseViewSet):
     queryset = Comment.objects.all()
@@ -110,3 +115,8 @@ class CommentsViewSet(BaseViewSet):
     def get_queryset(self):
         user = self.request.user
         return Comment.objects.filter(user=user)
+
+    def destroy(self, request, *args, **kwargs):
+        response = super(CommentsViewSet, self).destroy(request, *args, **kwargs)
+        messages.success(request, 'Comment Deleted.')
+        return response
