@@ -50,10 +50,6 @@ class ResourceViewSet(BaseViewSet):
             return Response(
                 status=201, data={"msg": "created", "data": serializer.data}
             )
-        # TODO show exact error message
-        print(serializer.error_messages)
-        print(serializer.errors)
-
         error_msg = ""
         for field in serializer.errors:
             error_msg += f'{serializer.errors[field][0]}\n'
