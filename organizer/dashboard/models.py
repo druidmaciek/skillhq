@@ -33,7 +33,7 @@ class Resource(models.Model):
     description = models.TextField(max_length=455, null=True, blank=True)
 
     class Meta:
-        ordering = ("-created",)
+        ordering = ("updated",)
 
     def __str__(self):
         return self.title
