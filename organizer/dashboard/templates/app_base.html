@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<div x-data="{ showMobileMenu: false }" class="min-h-screen bg-gray-100">
+<div x-data="{ showMobileMenu: false, section: '{{ section }}' }" class="min-h-screen bg-gray-100">
   <nav class="bg-white shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
@@ -15,18 +15,22 @@
               </a>
           </div>
           <div class="hidden sm:ml-6 sm:flex">
-            <a href="{% url 'dashboard:dashboard' %}" class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-              Dashboard
+            <a href="{% url 'dashboard:dashboard' %}" class="nav-option"
+               :class="{ 'nav-option-selected': section == 'dashboard' }">
+              Main Feed
             </a>
-            <a href="#" class="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+            <a href="{% url 'dashboard:discussion_list' %}" class="ml-8 nav-option"
+            :class="{ 'nav-option-selected': section == 'discussion' }">
+              Discussion
+            </a>
+            <a href="{% url 'dashboard:resource_list' %}" class="ml-8 nav-option"
+            :class="{ 'nav-option-selected': section == 'resources' }">
+              Materials
+            </a>
+            <a href="{% url 'dashboard:note_list' %}" class="ml-8 nav-option"
+            :class="{ 'nav-option-selected': section == 'notes' }">
               Notes
             </a>
-            <a href="#" class="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-              Help
-            </a>
-<!--            <a href="#" class="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">-->
-<!--              Calendar-->
-<!--            </a>-->
           </div>
         </div>
         <div class="hidden sm:ml-6 sm:flex sm:items-center">
@@ -93,9 +97,19 @@
     -->
     <div x-show="showMobileMenu" class="sm:hidden">
       <div class="pt-2 pb-3">
-        <a href="{% url 'dashboard:dashboard' %}" class="block pl-3 pr-4 py-2 border-l-4 border-indigo-500 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out">Dashboard</a>
-        <a href="#" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Notes</a>
-        <a href="#" class="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Help</a>
+        <a href="{% url 'dashboard:dashboard' %}"
+           :class="{ 'mnav-option-selected': section == 'dashboard' }"
+           class="mnav-option">Main Feed</a>
+        <a href="{% url 'dashboard:discussion_list' %}"
+           :class="{ 'mnav-option-selected': section == 'discussion' }"
+           class="mt-1 mnav-option">Discussion</a>
+        <a href="{% url 'dashboard:resource_list' %}"
+           :class="{ 'mnav-option-selected': section == 'resources' }"
+           class="mt-1 mnav-option">Materials</a>
+        <a href="{% url 'dashboard:note_list' %}"
+           :class="{ 'mnav-option-selected': section == 'notes' }"
+           class="mt-1 mnav-option">Notes</a>
+
       </div>
       <div class="pt-4 pb-3 border-t border-gray-200">
         <div class="flex items-center px-4">
@@ -242,9 +256,9 @@
                         class="sidebar-option {% if section == 'notes' %}sidebar-option-selected{% endif %} px-2">
                   Notes
                 </li>
-                <li class="sidebar-option px-2">
-                  <a class="" href="#">Tasks</a>
-                </li>
+<!--                <li class="sidebar-option px-2">-->
+<!--                  <a class="" href="#">Tasks</a>-->
+<!--                </li>-->
               </ul>
             </nav>
           </div>
