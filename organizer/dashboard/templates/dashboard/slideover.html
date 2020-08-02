@@ -114,7 +114,7 @@
               <div class="mt-4">
                   <label for="new-res__type" class="block text-sm leading-5 font-medium text-gray-700">Type</label>
                   <select required name="resource_type" id="new-res__type" class="mt-1 form-select block w-full pl-3 pr-10 py-2 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                    <option selected>Resource Type...</option>
+                    <option disabled>Resource Type...</option>
                     {% for tup in form.resource_type.field.choices %}
                     <option value="{{ tup.0 }}"> {{ tup.1 }}</option>
                     {% endfor %}

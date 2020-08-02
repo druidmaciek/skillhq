@@ -95,7 +95,7 @@ const deleteResource = async (resourceId) => {
     const deleted = res.data;
     console.log(`Resource deleted!`, deleted);
     // TODO replace refresh with adding dynamically
-    location.href = '/';
+    location.href = "/resources/";
     return deleted;
       } catch (e) {
         console.error(e);
