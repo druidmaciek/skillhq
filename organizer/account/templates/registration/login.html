@@ -22,6 +22,24 @@ LogIn
             Create a new account
             <!--            start your 7-day free trial-->
           </a>
+          <div class="text-center text-red-400 mt-2">
+           {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <p>{{ error|escape|linebreaks }}</p>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <p>{{ error|escape|linebreaks }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+
+
         </p>
       </div>
 
