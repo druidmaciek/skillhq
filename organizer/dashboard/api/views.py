@@ -51,7 +51,13 @@ class ResourceViewSet(BaseViewSet):
                 status=201, data={"msg": "created", "data": serializer.data}
             )
         # TODO show exact error message
-        messages.error(request, f'Error occurred.')
+        print(serializer.error_messages)
+        print(serializer.errors)
+
+        error_msg = ""
+        for field in serializer.errors:
+            error_msg += f'{serializer.errors[field][0]}\n'
+        messages.error(request, f'Error occurred: ' + error_msg)
         return Response(status=400, data={"msg": serializer.error_messages})
 
     def destroy(self, request, *args, **kwargs):
