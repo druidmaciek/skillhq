@@ -83,7 +83,9 @@ Dashboard
                               <span>{{ action.verb }} {% if action.target %}
                               {% if action.verb == 'started discussion' %}<a class="text-indigo-500" href="{% url 'dashboard:discussion_detail' action.target.id %}">{{ action.target }}</a>{% endif %}
                               {% if action.verb == 'learned today:' %}<span class="text-gray-500">{{ action.target }}</span>{% endif %}
-                              {% if action.verb == 'completed a task' %}<span class="text-gray-500">{{ action.target }}</span>{% endif %}
+                              {% if action.verb == 'completed a task' %}
+<!--                                  <span class="text-gray-500">{{ action.target }}</span>-->
+                                  {% endif %}
                               {% endif %}</span>
                           </div>
                           <p class="text-gray-500 text-sm">{{ action.created|timesince }} ago</p>
