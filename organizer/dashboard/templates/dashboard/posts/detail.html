@@ -108,9 +108,9 @@
                               <p class="text-gray-400 text-xs">{{ comment.created }}</p>
                           </div>
                       </div>
-                      <p class="text-gray-800">
-                          {{ comment.content|linebreaks }}
-                      </p>
+                      <div class="prose">
+                          {{ comment.content|markdown }}
+                      </div>
 
 
 
@@ -125,9 +125,9 @@
                                               <p class="text-gray-400 text-xs">{{ reply.created }}</p>
                                           </div>
                                       </div>
-                                      <p class="text-gray-800">
-                                      {{ reply.content|linebreaks }}
-                                  </p>
+                                      <div class="prose">
+                                      {{ reply.content|markdown }}
+                                  </div>
                                 </div>
                             </li>
                             {% endfor %}
