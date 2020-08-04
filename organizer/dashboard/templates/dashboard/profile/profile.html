@@ -25,36 +25,50 @@ Dashboard
       <ul>
         <li>
           <div class="bg-white px-4 py-5 sm:px-6">
-                  <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
-                    <div class="ml-16 mt-2">
 
-                        {% if not user.profile.photo %}
-                        <span class="inline-block h-36 w-36 my-8 rounded-full bg-gray-100">
-                            <svg class="h-full w-full text-gray-300 rounded-full" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </span>
-                        {% else %}
-                      <img class="inline-block object-cover h-36 w-36 my-8 rounded-full"
-                             src="{{ user.profile.photo.url }}"
-                             alt="{{ user.username }}'s profile photo">
-                        {% endif %}
-                      <h3 class="text-lg leading-6 font-medium text-gray-900 text-center">
-                        {{ user.username }}
-                      </h3>
-                    </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                {% if not user.profile.photo %}
+                                    <span class="inline-block h-36 w-36 my-8 rounded-full bg-gray-100">
+                                        <svg class="h-full w-full text-gray-300 rounded-full" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                        </svg>
+                                    </span>
+                                    {% else %}
+                                  <img class="border-4 border-indigo-500 inline-block object-cover object-center h-36 w-36 my-8 rounded-full"
+                                         src="{{ user.profile.photo.url }}"
+                                         alt="{{ user.username }}'s profile photo">
+                                    {% endif %}
+                                  <h3 class="text-lg leading-6 font-medium text-gray-900 text-center">
+                                    {{ user.username }}
+                                  </h3>
+                            </div>
+                            <div class="prose">
+                                <p>{{ user.profile.about }}</p>
+                            </div>
+                        </div>
+
+
+
+
+
+
 
 
                     <div class="bg-gray-100 p-8 text-left">
-                        <p class="text-gray-700">
-                          <span class="font-semibold">Learning:</span> {{ user.subjects.all|join:',' }}
-                          </p>
+                        <div class="prose">
+                            <ul>
+                                <b>Learning:</b>
+                                {% for subject in user.subjects.all %}
 
+                                <li>{{ subject }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
 
 
                     </div>
 
-                  </div>
                 </div>
         </li>
 
