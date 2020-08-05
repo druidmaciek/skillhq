@@ -44,7 +44,7 @@ Dashboard
                     </div>
                   </div>
               <div class="mt-2">
-                  <form action="{% url 'dashboard:add_log' %}" method="POST">
+                  <form id="log-form" action="{% url 'dashboard:add_log' %}" method="POST">
                       {% csrf_token %}
                   <div class="mt-1 relative rounded-md shadow-sm">
                     <input name="text" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="What did you learn today?">
@@ -84,6 +84,7 @@ Dashboard
                 </div>
         </li>
         {% for action in actions %}
+          {% if action.verb != "joined SkillHQ" %}
           <li>
               <div class="bg-gray-50 px-4 py-5 sm:px-6 m-4 flex items-center justify-between">
 
@@ -100,25 +101,38 @@ Dashboard
                       <div>
                           <div>
                               <a href="{% url 'dashboard:profile' action.user.username %}" class="text-indigo-500 font-medium">@{{ action.user.username }}</a>
-                              <span>{{ action.verb }} {% if action.target %}
-                              {% if action.verb == 'started discussion' %}<a class="text-indigo-500" href="{% url 'dashboard:discussion_detail' action.target.id %}">{{ action.target }}</a>{% endif %}
-                              {% if action.verb == 'learned today:' %}<span class="text-gray-500">{{ action.target }}</span>{% endif %}
-                              {% if action.verb == 'completed a task' %}
-<!--                                  <span class="text-gray-500">{{ action.target }}</span>-->
+                              <span>{{ action.verb }}
+                                  {% if action.target %}
+                                    {% if action.verb == 'started discussion' %}<a class="text-indigo-500" href="{% url 'dashboard:discussion_detail' action.target.id %}">{{ action.target }}</a>{% endif %}
+                                    {% if action.verb == 'learned today:' %}<span class="text-gray-500">{{ action.target }}</span>{% endif %}
+                                    {% if action.verb == 'completed a task' %}<span class="text-gray-500">{{ action.target }}</span>{% endif %}
                                   {% endif %}
-                              {% endif %}</span>
+                              </span>
                           </div>
                           <p class="text-gray-500 text-sm">{{ action.created|timesince }} ago</p>
                       </div>
                   </div>
-                  <div>
-<!--                      <button class="rounded p-2 shadow bg-white hover:bg-gray-100 active:bg-gray-200">-->
-<!--                          <svg class="h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>-->
-<!--                      </button>-->
-                  </div>
-
+                   {% with total_likes=action.users_like.count  %}
+                    <div x-data="{ totalLikes: '{{ total_likes }}', actionId: '{{ action.id }}', action: '{% if request.user in action.users_like.all  %}un{% endif %}like'}">
+                        <button @click="likeAction(actionId, action);
+                        if ( action == 'like' ) {
+                         action = 'unlike';
+                           totalLikes = String(parseInt(totalLikes)+1)} else {
+                          action = 'like';
+                           totalLikes = String(parseInt(totalLikes)-1)};"
+                                class="group cursor-pointer flex items-center rounded shadow-sm p-1 hover:bg-indigo-100 active:bg-indigo-500">
+                            <span x-text="totalLikes" class="group-hover:text-indigo-300 text-gray-500 text-sm"
+                            :class="{ 'text-gray-400': action == 'unlike' }"></span>
+                            <span class="ml-2">
+                                <svg class="h-6 w-6 text-gray-300 group-hover:text-indigo-300" :class="{ 'text-indigo-400': action == 'unlike' }" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd"></path></svg>
+                            </span>
+                        </button>
+                    </div>
+                  {% endwith %}
               </div>
+
           </li>
+        {% endif %}
         {% endfor %}
 
 

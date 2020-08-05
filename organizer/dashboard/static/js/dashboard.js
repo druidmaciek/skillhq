@@ -17,6 +17,21 @@ function loadSubjects() {
     };
   }
 
+// like action POST request
+const likeAction = async (actionId, action) => {
+    const csrftoken = document.querySelector('#log-form > input').value;
+  try {
+    const res = await axios.post('/actions/like/?id=' + actionId + '&action=' + action, {},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    const data = res.data;
+    console.log(data);
+    //location.reload();
+    return data;
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 
 // example GET request
