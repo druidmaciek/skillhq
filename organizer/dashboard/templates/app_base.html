@@ -118,12 +118,11 @@
         <a href="{% url 'dashboard:note_list' %}"
            :class="{ 'mnav-option-selected': section == 'notes' }"
            class="mt-1 mnav-option">Notes</a>
-
       </div>
       <div class="pt-4 pb-3 border-t border-gray-200">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
-            {% if request.user.profile.phote %}
+            {% if request.user.profile.photo %}
             <img class="border-2 border-indigo-500 h-10 w-10 rounded-full object-cover" src="{{ request.user.profile.photo.url }}" alt="{{ request.user.username}} profile photo">
             {% else %}
             <span class="inline-block h-10 w-10 rounded-full bg-gray-100 border-2 border-indigo-500">
@@ -252,7 +251,6 @@
 
     <div class="grid grid-cols-4 md:gap-2 max-w-7xl mx-auto">
       <div class="hidden sm:block col-span-1">
-
         <div class="mx-auto sm:px-6 lg:px-8">
           <div class="bg-white sm:rounded-md px-4 py-5 text-gray-900 leading-8">
             <nav>
@@ -278,6 +276,19 @@
 <!--                </li>-->
               </ul>
             </nav>
+            <form method="POST" action="{% url 'dashboard:feedback' %}" class="mt-4">
+              {% csrf_token %}
+              <p class="text-gray-700 text-sm font-semibold">Have Feedback? Bug report or feature request? Let us know!</p>
+              <div class="mt-1 sm:mt-0 sm:col-span-2">
+                <div class="max-w-lg flex rounded-md shadow-sm">
+                  <textarea name="feedback" id="about" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                </div>
+                <p class="mt-2 text-sm text-gray-500">We will review your message soon!</p>
+              </div>
+              <div>
+                <button type="submit" class="w-full rounded-md shadow-sm px-4 py-2 text-sm border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">Send Feedback</button>
+              </div>
+            </form>
           </div>
         </div>
 

@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 
-from .forms import AddResourceForm, AddDiscussionForm, AddCommentForm, AddCommentReplyForm, AddLearningLogForm
+from .forms import AddResourceForm, AddDiscussionForm, AddCommentForm, AddCommentReplyForm, AddLearningLogForm, AddFeedbackForm
 from .models import Note, Resource, Task, Subject, Post, Comment, LearningLog
 from actions.models import Action
 from actions.utils import create_action
@@ -26,11 +26,12 @@ def dashboard(request):
 
     # actions
     actions = Action.objects.all()
-    actions = actions[:10]
+    actions = actions[:100]
 
     resources = Resource.objects.filter(user=request.user)
     tasks = Task.objects.filter(resource__user=request.user)
     subjects = Subject.objects.all()
+    recent_posts = Post.objects.all()[:5]
     return render(
         request,
         "dashboard/dashboard.html",
@@ -41,6 +42,7 @@ def dashboard(request):
             "form": AddResourceForm(),
             "all_subjects": subjects,
             'actions': actions,
+            'recent_posts': recent_posts,
         },
     )
 
@@ -219,3 +221,17 @@ def profile(request, username):
     return render(request, 'dashboard/profile/profile.html', {
         'user': user
     })
+
+
+@login_required
+@require_POST
+def add_feedback(request):
+    form = AddFeedbackForm(data=request.POST)
+    if form.is_valid():
+        feedback = form.save(commit=False)
+        feedback.user = request.user
+        feedback.save()
+        messages.success(request, 'Feedback submitted! Thank you!')
+    else:
+        messages.error(request, 'Error while submitting feedback.')
+    return redirect(reverse_lazy('dashboard:dashboard'))

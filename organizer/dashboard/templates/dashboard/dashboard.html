@@ -10,11 +10,23 @@ Dashboard
   <script src="{% static 'js/dashboard.js' %}"></script>
 {% endblock %}
 
-
+{% block sidebar %}
+<div class="mt-4 bg-white sm:rounded-md px-4 py-5 text-gray-900 leading-8">
+<p>Recent Discussions</p>
+    <ul>
+        {% for post in recent_posts %}
+        <li class="text-xs">
+            <a class="text-indigo-600 hover:text-indigo-400" href="{% url 'dashboard:discussion_detail' post.id %}">{{ post.title }}</a>
+            <div class="-mt-4">
+                <small>{{ post.comments.count }} Comments</small>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
 
 {% block app_content %}
-
-
 
 
 <main x-data="{ showSlideover: false }">

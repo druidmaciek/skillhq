@@ -19,6 +19,7 @@ urlpatterns = [
     path('discussion/<int:comment_id>/reply/', views.add_reply, name='add_reply'),
     path('discussion/<int:post_id>/', views.post_detail, name='discussion_detail'),
     path('learningLog/new/', views.add_learning_log, name='add_log'),
+    path('feedback/', views.add_feedback, name='feedback'),
 
     # stripe
     # path('config/', views.stripe_config),

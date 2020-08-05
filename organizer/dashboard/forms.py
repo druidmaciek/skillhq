@@ -1,7 +1,11 @@
 from django import forms
 
-from .models import Resource, Post, Comment, CommentReply, LearningLog
+from .models import Resource, Post, Comment, CommentReply, LearningLog, Feedback
 
+class AddFeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ('feedback',)
 
 class AddResourceForm(forms.ModelForm):
 

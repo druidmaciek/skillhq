@@ -28,7 +28,15 @@
           <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-no-wrap">
             <div class="ml-4 mt-2">
                 <div class="flex items-center">
+                    {% if post.user.profile.photo %}
                     <img class="mr-4 border-2 border-indigo-500 inline-block h-12 w-12 rounded-full" src="{{ post.user.profile.photo.url }}" alt="{{ post.user.username}}'s profile picture">
+                    {% else %}
+                      <span class="mr-4 inline-block h-12 w-12 rounded-full bg-gray-100 border-2 border-indigo-500">
+                        <svg class="h-full w-full text-gray-300 rounded-full" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      </span>
+                    {% endif %}
                     <div>
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
                             {{ post.title }}
@@ -102,7 +110,15 @@
                   <li x-data="{ reply: false }" class="rounded mb-2 p-4 bg-gray-100">
 
                       <div class="flex items-center">
+                          {% if comment.user.profile.photo %}
                           <img class="mr-2 border-2 border-indigo-500 inline-block h-8 w-8 rounded-full" src="{{ comment.user.profile.photo.url }}" alt="{{ comment.user.username}}'s profile picture">
+                          {% else %}
+                          <span class="mr-2 inline-block h-8 w-8 rounded-full bg-gray-100 border-2 border-indigo-500">
+                            <svg class="h-full w-full text-gray-300 rounded-full" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                          </span>
+                          {% endif %}
                           <div>
                               <p class="text-indigo-500 font-semibold">@{{ comment.user.username }}</p>
                               <p class="text-gray-400 text-xs">{{ comment.created }}</p>
@@ -119,7 +135,15 @@
                             <li>
                                 <div class="px-8 py-4 bg-gray-100 mt-8 border-t">
                                       <div class="flex items-center">
+                                          {% if reply.user.profile.photo %}
                                           <img class="mr-2 border-2 border-indigo-500 inline-block h-8 w-8 rounded-full" src="{{ reply.user.profile.photo.url }}" alt="{{ reply.user.username}}'s profile picture">
+                                          {% else %}
+                                          <span class="mr-2 inline-block h-8 w-8 rounded-full bg-gray-100 border-2 border-indigo-500">
+                                            <svg class="h-full w-full text-gray-300 rounded-full" fill="currentColor" viewBox="0 0 24 24">
+                                              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                                            </svg>
+                                          </span>
+                                          {% endif %}
                                           <div>
                                               <p class="text-indigo-500 font-semibold">@{{ reply.user.username }}</p>
                                               <p class="text-gray-400 text-xs">{{ reply.created }}</p>
