@@ -280,8 +280,8 @@
               {% csrf_token %}
               <p class="text-gray-700 text-sm font-semibold">Have Feedback? Bug report or feature request? Let us know!</p>
               <div class="mt-1 sm:mt-0 sm:col-span-2">
-                <div class="max-w-lg flex rounded-md shadow-sm">
-                  <textarea name="feedback" id="about" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
+                <div x-data="{ clicked: false }" class="max-w-lg flex rounded-md shadow-sm">
+                  <textarea x-show="!clicked" name="feedback" id="about" @click="document.getElementById('about').rows='10';" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"></textarea>
                 </div>
                 <p class="mt-2 text-sm text-gray-500">We will review your message soon!</p>
               </div>

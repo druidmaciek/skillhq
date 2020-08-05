@@ -173,7 +173,7 @@ class Feedback(models.Model):
     user = models.ForeignKey(User,
                              on_delete=models.CASCADE,
                              related_name='feedback')
-    feedback = models.CharField(max_length=250)
+    feedback = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
