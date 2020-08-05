@@ -16,7 +16,6 @@ def action_like(request):
             if action_str == 'like':
                 action.users_like.add(request.user)
             elif action_str == 'unlike':
-                messages.success(request, 'Unliked...')
                 action.users_like.remove(request.user)
 
             return JsonResponse({'status': 'ok'})
