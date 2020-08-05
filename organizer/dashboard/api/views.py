@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -73,8 +74,9 @@ class TaskViewSet(BaseViewSet):
     def partial_update(self, request, pk=None):
         response = super(TaskViewSet, self).partial_update(request, pk)
         if response.status_code == 200:
+            task = get_object_or_404(Task, id=request.data['id'])
             if request.data['status'] and request.data['status'] == 'completed':
-                create_action(request.user, 'completed a task')
+                create_action(request.user, 'completed a task', target=task)
         return response
 
 

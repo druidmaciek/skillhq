@@ -23,5 +23,6 @@ urlpatterns = [
     path("account/", include("account.urls", namespace="account")),
     path("", include("dashboard.urls", namespace="dashboard")),
     path("api/", include("dashboard.api.urls", namespace="api")),
+    path('actions/', include('actions.urls', namespace='actions')),
     path("ping/", views.ping, name="ping"),
 ]
