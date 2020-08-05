@@ -26,7 +26,7 @@ def dashboard(request):
 
     # actions
     actions = Action.objects.all()
-    actions = actions[:100]
+    actions = actions[:300]
 
     resources = Resource.objects.filter(user=request.user)
     tasks = Task.objects.filter(resource__user=request.user)

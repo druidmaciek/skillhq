@@ -14,11 +14,8 @@ def action_like(request):
         try:
             action = Action.objects.get(id=action_id)
             if action_str == 'like':
-                print('action is like adding user')
                 action.users_like.add(request.user)
-                messages.success(request, 'Liked...')
             elif action_str == 'unlike':
-                print('action is unlike removing user')
                 messages.success(request, 'Unliked...')
                 action.users_like.remove(request.user)
 
