@@ -174,6 +174,7 @@ class Feedback(models.Model):
                              on_delete=models.CASCADE,
                              related_name='feedback')
     feedback = models.TextField()
+    resolved = models.BooleanField(default=False, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
@@ -181,4 +182,4 @@ class Feedback(models.Model):
         ordering = ("-created",)
 
     def __str__(self):
-        return f"{self.user.username}'s feedback"
+        return  f"{'[RESOLVED] ' if self.resolved else ''}{self.user.username}'s feedback"
