@@ -20,6 +20,7 @@ urlpatterns = [
     path('discussion/<int:post_id>/', views.post_detail, name='discussion_detail'),
     path('learningLog/new/', views.add_learning_log, name='add_log'),
     path('feedback/', views.add_feedback, name='feedback'),
+    path('changelog/', views.changelog, name='changelog'),
 
     # stripe
     # path('config/', views.stripe_config),

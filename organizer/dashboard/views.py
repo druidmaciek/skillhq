@@ -241,3 +241,7 @@ def add_feedback(request):
     else:
         messages.error(request, 'Error while submitting feedback.')
     return redirect(reverse_lazy('dashboard:dashboard'))
+
+
+def changelog(request):
+    return render(request, 'info/changelog.html')
