@@ -24,8 +24,11 @@ def dashboard(request):
         create_action(request.user, 'joined SkillHQ')
         return redirect(reverse_lazy('account:edit'))
 
-    # actions
-    actions = Action.objects.all()
+
+    if request.user.profile.private:
+        actions = Action.objects.filter(user=request.user)
+    else:
+        actions = Action.public.all()
     actions = actions[:300]
 
     resources = Resource.objects.filter(user=request.user)
@@ -218,9 +221,12 @@ def add_learning_log(request):
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
+    if user.profile.private and request.user != user:
+        return redirect(reverse_lazy('dashboard:dashboard'))
     return render(request, 'dashboard/profile/profile.html', {
         'user': user
     })
+
 
 
 @login_required
