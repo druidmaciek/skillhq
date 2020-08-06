@@ -4,6 +4,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 
+class PublicManager(models.Manager):
+    def get_queryset(self):
+        return super(PublicManager,
+                     self).get_queryset()\
+    .filter(user__profile__private=False)
+
+
 class Action(models.Model):
     user = models.ForeignKey(User,
                              related_name='actions',
@@ -24,6 +31,9 @@ class Action(models.Model):
     users_like = models.ManyToManyField(User,
                                         related_name='actions_liked',
                                         blank=True)
+
+    objects = models.Manager()
+    public = PublicManager()
 
     class Meta:
         ordering = ('-created',)

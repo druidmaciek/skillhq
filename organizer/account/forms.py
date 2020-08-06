@@ -26,6 +26,7 @@ class UserEditForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    private = forms.CharField(max_length=2, required=True)
     class Meta:
         model = Profile
-        fields = ("photo", "cover", "about", "private")
+        fields = ("photo", "cover", "about")
